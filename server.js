@@ -1,11 +1,36 @@
-var express = require(‘express’);
-var mongoose = require(‘mongoose’);
-var bodyParser = require(‘body-parser’);
-
+//GENERAL CONFIGS
+var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var router = express.Router();
-
 var port = process.env.API_PORT || 3000;
+
+
+//MONGO CONFIG
+var mongoose = require('mongoose');
+var dbConfig = require('./db.js');
+mongoose.connect(dbConfig.url);
+
+
+//PASSPORT CONFIG
+var passport = require('passport');
+var expressSession = require('express-session');
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+//passport serialize/deserialize
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -28,7 +53,7 @@ router.get(‘/’, function(req, res) {
  res.json({ message: ‘API Initialized!’});
 });
 //Use our router configuration when we call /api
-app.use(‘/api’, router);
+app.use(‘/’, router);
 
 
 app.listen(port, function() {
