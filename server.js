@@ -1,61 +1,80 @@
-//GENERAL CONFIGS
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var router = express.Router();
-var port = process.env.API_PORT || 3000;
+import express from 'express';
+import path from 'path';
+import open from 'open';
+import webpack from 'webpack';
+import config from './webpack.config';
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+//const flash    = require('connect-flash');
+
+const port = 3000;
+const app = express();
+const compiler = webpack(config);
 
 
-//MONGO CONFIG
-var mongoose = require('mongoose');
-var dbConfig = require('./db.js');
-mongoose.connect(dbConfig.url);
+//mongoose config
+import mongoose from 'mongoose';
+mongoose.connect('mongodb://localhost/passport');
 
 
-//PASSPORT CONFIG
+//passport config
 var passport = require('passport');
-var expressSession = require('express-session');
-app.use(expressSession({secret: 'mySecretKey'}));
+var session = require('express-session');
+
+require('./config/passport.js')(passport);
+app.use(session({
+  secret: 'mySecretKey',
+  resave: false,
+  saveUninitialized: false
+} ));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//passport serialize/deserialize
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
-});
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-
-
+app.use(cookieParser()); // read cookies (needed for auth)
+// required for passport
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//To prevent errors from Cross Origin Resource Sharing, we will set
-//our headers to allow CORS with middleware like so:
-app.use(function(req, res, next) {
- res.setHeader(‘Access-Control-Allow-Origin’, ‘*’);
- res.setHeader(‘Access-Control-Allow-Credentials’, ‘true’);
- res.setHeader(‘Access-Control-Allow-Methods’, ‘GET,HEAD,OPTIONS,POST,PUT,DELETE’);
- res.setHeader(‘Access-Control-Allow-Headers’, ‘Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers’);
 
-//remove cacheing
- res.setHeader(‘Cache-Control’, ‘no-cache’);
- next();
-});
+//route
+const routes = require('./routes/routes.js');
+app.use('/', routes);
 
 
-router.get(‘/’, function(req, res) {
- res.json({ message: ‘API Initialized!’});
-});
-//Use our router configuration when we call /api
-app.use(‘/’, router);
+//webpack config
+// app.use(require('webpack-dev-middleware')(compiler, {
+//     noInfo: true,
+//     publicPath: config.output.publicPath
+// }));
 
 
-app.listen(port, function() {
- console.log(`api running on port ${port}`);
+if(process.env.NODE_ENV === 'development') {
+  const webpackMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const middleware = webpackMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    contentBase: 'src',
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false,
+    }
+  })
+  app.use(middleware)
+  app.use(webpackHotMiddleware(compiler))
+};
+
+
+
+app.listen(port, function (error) {
+    if(error) {
+        console.log(error);
+    } else {
+        open(`http://localhost:${port}`);
+        console.log('Listening on port 3000');
+    }
 });
