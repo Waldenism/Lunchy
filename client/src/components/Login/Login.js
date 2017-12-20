@@ -1,21 +1,59 @@
 import React from 'react'
+import axios from 'axios'
 // import './Login.css'
 
-const Login = props =>
-  <div>
-    <h1> Log In! </h1>
-      <form action="/login" method="post">
-        <div class="form-group">
-            <label>Username</label>
-            <input type="text" class="form-control" name="username"></input>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password" class="form-control" name="password"></input>
-        </div>
+class Login extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      password: ''
+    }
 
-        <button type="submit" class="btn btn-warning btn-lg">Login</button>
-      </form>
-  </div>
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  handleSubmit(e) {
+    
+    axios.post('/login', {
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((er) => {
+      console.log(er)
+    })
+    e.preventDefault()
+  }
+
+  render() {
+    return (
+      <div>
+        <h1> Log In! </h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+                <label>Username</label>
+                <input name="username" type="text" className="form-control" onChange={this.handleChange} value={this.state.username}></input>
+            </div>
+            <div className="form-group">
+                <label>Password</label>
+                <input name="password" type="password" className="form-control" onChange={this.handleChange} value={this.state.password}></input>
+            </div>
+
+            <input type="submit" value='Submit' className="btn btn-warning btn-lg"></input>
+          </form>
+      </div>
+    )
+  }
+}
 
 export default Login

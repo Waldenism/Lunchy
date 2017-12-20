@@ -5,16 +5,16 @@ const Signup = props =>
   <div>
     <h1> Sign Up! </h1>
     <form action="/signup" method="post">
-        <div class="form-group">
+        <div className="form-group">
           <label>Username</label>
-          <input type="text" class="form-control" name="username"></input>
+          <input type="text" className="form-control" name="username"></input>
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label>Password</label>
-          <input type="password" class="form-control" name="password"></input>
+          <input type="password" className="form-control" name="password"></input>
         </div>
 
-        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        <button type="submit" className="btn btn-warning btn-lg">Signup</button>
     </form>
   </div>
 
