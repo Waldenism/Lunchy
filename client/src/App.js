@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
+// import logo from './logo.svg'
 import Signup from './components/Signup'
 import Login from './components/Login'
 import Wrapper from './components/Wrapper'
