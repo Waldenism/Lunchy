@@ -1,21 +1,64 @@
 import React from 'react'
+import axios from 'axios'
 // import './Signup.css'
 
-const Signup = props =>
-  <div>
-    <h1> Sign Up! </h1>
-    <form action="/signup" method="post">
-        <div className="form-group">
-          <label>Username</label>
-          <input type="text" className="form-control" name="username"></input>
-        </div>
-        <div className="form-group">
-          <label>Password</label>
-          <input type="password" className="form-control" name="password"></input>
-        </div>
+class Signup extends React.Component {
+  constructor(props) {
+    super(props)
+    this. state = {
+      username: '',
+      password: ''
+    }
 
-        <button type="submit" className="btn btn-warning btn-lg">Signup</button>
-    </form>
-  </div>
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleChange(e) {
+    const { name, value } = e.target
+    this.setState({
+      [name]: value
+    })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+
+    const { handler } = this.props
+
+    axios.post('/signup', {
+      username: this.state.username,
+      password: this.state.password
+    })
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((er) => {
+      console.log(er)
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Sign Up!</h1>
+        <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <label>Username</label>
+              <input type="text" className="form-control" name="username" onChange={this.handleChange} value={this.state.username}></input>
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input type="password" className="form-control" name="password" onChange={this.handleChange} value={this.state.password}></input>
+            </div>
+
+            <input type="submit" value='Submit' className="btn btn-warning btn-lg"></input>
+
+            
+        </form>
+      </div>
+    )
+  }
+}
 
 export default Signup

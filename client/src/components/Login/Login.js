@@ -15,24 +15,27 @@ class Login extends React.Component {
   }
 
   handleChange(e) {
+    const { name, value } = e.target
     this.setState({
-      [e.target.name]: e.target.value
-    });
+      [name]: value
+    })
   }
 
   handleSubmit(e) {
-    
+    e.preventDefault()
+
+    const { handler } = this.props
+
     axios.post('/login', {
       username: this.state.username,
       password: this.state.password
     })
     .then((res) => {
-      console.log(res)
+      handler(res.data.user)
     })
     .catch((er) => {
       console.log(er)
     })
-    e.preventDefault()
   }
 
   render() {

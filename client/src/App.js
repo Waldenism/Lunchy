@@ -8,16 +8,40 @@ import Navbar from './components/Navbar'
 
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: null,
+      loggedIn: false
+    }
+
+    this.handleLogIn = this.handleLogIn.bind(this)
+  }
   
 
+  handleLogIn(user) {
+    this.setState({
+      user,
+      loggedIn: true 
+    })
+  }
   
   render() {
+
+    let { loggedIn, user } = this.state
+
     return (
       <div>
         
         <Wrapper>
-          
-          <Login />
+        <Signup />
+        { !loggedIn ? 
+          <Login 
+            handler = { this.handleLogIn }
+          /> : 
+          <h1>Hello {user}!</h1>
+        }
         </Wrapper>
 
       </div>
