@@ -5,26 +5,30 @@ export default {
     devtool: 'inline-source-map',
 
     entry: [
-        path.resolve(__dirname, 'src/index.js')
+        path.resolve(__dirname, 'client/src/index.js')
     ],
 
     output: {
-        path: path.resolve(__dirname, 'src'),
+        path: path.resolve(__dirname, 'client/public/'),
         publicPath: '/',
         filename: 'bundle.js'
     },
 
     module: {
         rules: [
-        {
-            test: /.jsx?$/,
-            loader: 'babel-loader',
-            query: {
-                presets: ['es2015', 'react'],
-                compact: false
+            {
+                test: /.jsx?$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'react'],
+                    compact: false
+                }
+            },
+            {
+                test:/\.css$/,
+                loader: "style-loader!css-loader"
             }
-        }
-        ]
+        ],
     },
 
     resolve: {

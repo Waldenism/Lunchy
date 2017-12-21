@@ -8,13 +8,13 @@ import path from 'path';
 router.get('/', function(req, res) {
   // Display flash message, if any
   console.log('home: ', req.body);
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
 //Login Page
-router.get('/login', function(req, res) {
-    res.sendFile(path.join(__dirname, '../src/index.html'));
-});
+// router.get('/login', function(req, res) {
+//     res.sendFile(path.join(__dirname, '../src/index.html'));
+// });
 
 
 //Login
@@ -25,6 +25,12 @@ router.post('/login', passport.authenticate('login', {
         res.redirect('/');
     }
 );
+
+//TESTING FRONTEND
+// router.post('/login', (req, res) => {
+//   console.log('Login')
+//   res.json({ user: 'Chris' })
+// })
 
 //Signup page
 router.get('/signup', function(req, res) {

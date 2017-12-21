@@ -1,21 +1,52 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+// import logo from './logo.svg'
+import Signup from './components/Signup'
+import Login from './components/Login'
+import Wrapper from './components/Wrapper'
+import Navbar from './components/Navbar'
+// import './App.css'
+
 
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      user: null,
+      loggedIn: false
+    }
+
+    this.handleLogIn = this.handleLogIn.bind(this)
+  }
+  
+
+  handleLogIn(user) {
+    this.setState({
+      user,
+      loggedIn: true 
+    })
+  }
+  
   render() {
+
+    let { loggedIn, user } = this.state
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        
+        <Wrapper>
+        <Signup />
+        { !loggedIn ? 
+          <Login 
+            handler = { this.handleLogIn }
+          /> : 
+          <h1>Hello {user}!</h1>
+        }
+        </Wrapper>
+
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

@@ -54,7 +54,7 @@ if(process.env.NODE_ENV === 'development') {
   const webpackHotMiddleware = require('webpack-hot-middleware');
   const middleware = webpackMiddleware(compiler, {
     publicPath: config.output.publicPath,
-    contentBase: 'src',
+    contentBase: 'public',
     stats: {
       colors: true,
       hash: false,
@@ -66,9 +66,13 @@ if(process.env.NODE_ENV === 'development') {
   })
   app.use(middleware)
   app.use(webpackHotMiddleware(compiler))
-};
+}
 
-
+app.use(express.static(path.join(__dirname, "/public")))
+// app.use(express.static(path.join(__dirname + "src"))
+app.get('*', function(request, response){
+  response.sendFile(path.resolve(__dirname + '/client/public', 'index.html'))
+})
 
 app.listen(port, function (error) {
     if(error) {
@@ -77,4 +81,4 @@ app.listen(port, function (error) {
         open(`http://localhost:${port}`);
         console.log('Listening on port 3000');
     }
-});
+})
