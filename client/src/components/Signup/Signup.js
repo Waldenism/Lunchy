@@ -31,10 +31,18 @@ class Signup extends React.Component {
       password: this.state.password
     })
     .then((res) => {
-      console.log(res)
+      console.log('--------------------------');
+      console.log(res);
+      console.log('--------------------------');
+      console.log('signed up!');
+      console.log('--------------------------');
     })
     .catch((er) => {
-      console.log(er)
+      console.log('--------------------------');
+      console.log(er);
+      console.log('--------------------------');
+      console.log('ERROR!');
+      console.log('--------------------------');
     })
   }
 
@@ -54,7 +62,7 @@ class Signup extends React.Component {
 
             <input type="submit" value='Submit' className="btn btn-warning btn-lg"></input>
 
-            
+
         </form>
       </div>
     )

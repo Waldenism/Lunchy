@@ -11,12 +11,6 @@ router.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
-//Login Page
-// router.get('/login', function(req, res) {
-//     res.sendFile(path.join(__dirname, '../src/index.html'));
-// });
-
-
 //Login
 router.post('/login', passport.authenticate('login', {
   failureRedirect: '/login'
@@ -26,15 +20,9 @@ router.post('/login', passport.authenticate('login', {
     }
 );
 
-//TESTING FRONTEND
-// router.post('/login', (req, res) => {
-//   console.log('Login')
-//   res.json({ user: 'Chris' })
-// })
-
 //Signup page
 router.get('/signup', function(req, res) {
-    res.sendFile(path.join(__dirname, '../src/index.html'));
+    res.sendFile(path.join(__dirname, '../client/src/index.html'));
 });
 
 //Signup
