@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 // import logo from './logo.svg'
+import { BrowserRouter as Router, Route } from "react-router-dom"
 import Signup from './components/Signup'
 import Scraper from './components/Scraper'
 import Login from './components/Login'
 import Wrapper from './components/Wrapper'
 import Navbar from './components/Navbar'
-import Menu from './components/Menu'
+import Footer from './components/Footer'
 // import './App.css'
 
 
@@ -42,23 +43,18 @@ class App extends Component {
     let { loggedIn, user } = this.state
 
     return (
-      <div>
+      <Router>
+        <div>
+          <Navbar />
+          <Wrapper>
+            <div> text </div>
+            
+            
+          </Wrapper>
+          <Footer />
 
-        <Wrapper>
-        <Signup />
-        { !loggedIn ?
-          <Login
-            handler = { this.handleLogIn }
-          /> :
-          <h1>Hello {user}!</h1>
-        }
-        <Scraper
-          handler = { this.handleScraper}
-        />
-        <Menu />
-        </Wrapper>
-
-      </div>
+        </div>
+      </Router>
     )
   }
 }
