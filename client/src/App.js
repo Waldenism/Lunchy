@@ -5,6 +5,7 @@ import Signup from './components/Signup'
 import Login from './components/Login'
 import Wrapper from './components/Wrapper'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 // import './App.css'
 
 
@@ -35,12 +36,10 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navabar />
+          <Navbar />
           <Wrapper>
             <div> text </div>
-            <Route exact path="/" component={Login} />
-            <Route path='/form' component={Form} />
-            <Route path='/order' component={Order} />
+            
             
           </Wrapper>
           <Footer />
