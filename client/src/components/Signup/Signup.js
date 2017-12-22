@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-// import './Signup.css'
 
 class Signup extends React.Component {
   constructor(props) {
@@ -31,10 +30,14 @@ class Signup extends React.Component {
       password: this.state.password
     })
     .then((res) => {
-      console.log(res)
+      console.log('--------------------------');
+      console.log('Signed Up!');
+      console.log('--------------------------');
     })
     .catch((er) => {
-      console.log(er)
+      console.log('ERROR!');
+      console.log('--------------------------');
+      console.log(er);
     })
   }
 
@@ -54,7 +57,7 @@ class Signup extends React.Component {
 
             <input type="submit" value='Submit' className="btn btn-warning btn-lg"></input>
 
-            
+
         </form>
       </div>
     )
