@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import Login from "../Login"
 import "./Navbar.css"
 
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
@@ -15,7 +16,6 @@ const Navbar = props =>
 
       <ul className="nav navbar-nav">
 
-
         <li
           className={
             window.location.pathname === "/" ||
@@ -29,13 +29,15 @@ const Navbar = props =>
         <li
           className={window.location.pathname === "" ? "active" : ""}
         >
-          <Link to="/"> Account Balance </Link>
+          <Link to="/order"> Account Balance </Link>
         </li>
         <li className={window.location.pathname === "" ? "active" : ""}>
           <Link to="/"> Tab </Link>
         </li>
 
       </ul>
+
+      <Login />
 
 
     </div>
