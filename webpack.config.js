@@ -35,5 +35,11 @@ export default {
         //extensions that should be used to resolve modules
         extensions: ['.js', '.jsx','.css'],
         modules: ['node_modules']
+    },
+
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
     }
 }

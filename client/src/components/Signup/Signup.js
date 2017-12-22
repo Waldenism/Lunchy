@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-// import './Signup.css'
 
 class Signup extends React.Component {
   constructor(props) {
@@ -32,17 +31,13 @@ class Signup extends React.Component {
     })
     .then((res) => {
       console.log('--------------------------');
-      console.log(res);
-      console.log('--------------------------');
-      console.log('signed up!');
+      console.log('Signed Up!');
       console.log('--------------------------');
     })
     .catch((er) => {
-      console.log('--------------------------');
-      console.log(er);
-      console.log('--------------------------');
       console.log('ERROR!');
       console.log('--------------------------');
+      console.log(er);
     })
   }
 
