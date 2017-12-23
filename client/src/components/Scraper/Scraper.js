@@ -47,9 +47,12 @@ class Scraper extends React.Component {
         </form>
 
         <ul>
-          {this.state.menu.map(function(item) {
-            return <li>{item}</li>
-          })}
+          {this.state.menu.map(item =>
+            <div>
+              <li>{item.name}</li>
+              <img src={item.image} />
+            </div>
+          )}
         </ul>
       </div>
     )

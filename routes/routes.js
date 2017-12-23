@@ -15,11 +15,6 @@ router.get('/', function(req, res) {
 
 //API routes
 router.use("/api", apiRoutes);
-// router.post('/api', function(req, res) {
-//       console.log('da log ');
-//       res.redirect('/');
-//     }
-// );
 
 
 //Login
