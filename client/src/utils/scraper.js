@@ -1,20 +1,34 @@
 import cheerio from 'cheerio';
 import request from 'request';
 
-let scraper = new Promise(function(resolve, reject) {
-    request.get('http://www.subway.com/en-us/menunutrition/menu/all',
-        function(error, response, body) {
+const restaurants = {
+    subway: {
+        menu: 'http://www.subway.com/en-us/menunutrition/menu/all',
+        element:'.menu-cat-prod-title'
+    },
+    burgerking: {
+        menu: 'http://www.bk.com/menu/burgers',
+        element:'.title'
+    }
+}
 
-            const $ = cheerio.load(body);
+const scraper = function(selection) {
 
-            let results = [];
-            let menu = $('.menu-cat-prod-title').each(function(i, element) {
-                let name = $(element).text();
-                results.push(name);
-            });
-            resolve(results);
-        }
-    );
-})
+    return new Promise(function(resolve, reject) {
+        request.get(restaurants[selection].menu,
+            function(error, response, body) {
+
+                const $ = cheerio.load(body);
+
+                let results = [];
+                let menu = $(restaurants[selection].element).each(function(i, element) {
+                    let name = $(element).text();
+                    results.push(name);
+                });
+                resolve(results);
+            }
+        );
+    })
+}
 
 module.exports = scraper;
