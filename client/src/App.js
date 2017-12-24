@@ -48,11 +48,11 @@ class App extends Component {
           <Navbar />
           <Wrapper>
             <div> text </div>
-            
-            
           </Wrapper>
           <Footer />
-
+          <Scraper
+            handler = { this.handleScraper }
+          />
         </div>
       </Router>
     )
