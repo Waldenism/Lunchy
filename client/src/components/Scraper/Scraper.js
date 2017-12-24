@@ -9,16 +9,18 @@ class Scraper extends React.Component {
       value: 'subway'
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
+
+  handleChange(event) {
 
     const { handler } = this.props
+    const {value} = event.target;
 
-    axios.post('/api/scraper/subway', {value: this.state.value})
+    this.setState({value});
+
+    axios.post('/api/scraper', {value})
     .then((res) => {
       handler(res.data)
       this.setState({
@@ -30,21 +32,14 @@ class Scraper extends React.Component {
     })
   }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <select value={this.state.value} onChange={this.handleChange} className="menu-selection">
-            <option value='subway'>Subway</option>
-            <option value='burgerking'>Burger King</option>
-          </select>
-          <input type="submit" value='Submit' className="btn btn-warning btn-lg"></input>
-        </form>
+        <select value={this.state.value} onChange={this.handleChange} className="menu-selection">
+          <option value='subway'>Subway</option>
+          <option value='dairyqueen'>Dairy Queen</option>
+        </select>
 
         <ul>
           {this.state.menu.map(item =>

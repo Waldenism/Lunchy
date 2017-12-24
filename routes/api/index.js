@@ -1,9 +1,11 @@
 const router = require("express").Router();
-const scraperRoutes = require("./scraper.js");
+const scraper = require("../../client/src/utils/scraper.js");
 
-
-// Scraper routes
-router.use("/scraper", scraperRoutes);
+// Scraper route
+router.use("/scraper", function(req, res) {
+    scraper(req.body.value).then(data => res.send(data)
+    );
+});
 
 
 module.exports = router;

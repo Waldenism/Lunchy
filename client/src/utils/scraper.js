@@ -13,6 +13,12 @@ const restaurants = {
         item:'.title',
         image: '.imgWrap',
         attr: 'data-cfsrc'
+    },
+    dairyqueen: {
+        menu: 'https://www.dairyqueen.com/us-en/Menu/Food/',
+        item: '.menu-list',
+        image: '.item-container',
+        attr: 'src'
     }
 }
 
@@ -28,11 +34,22 @@ const scraper = function(selection) {
 
             let menu = $(item).each(function(i, element) {
                 let couple = {};
+                let name = $(element).text();
+                let pic = $(image).find('img').attr(attr);
+
+                //make object of menu item name and link to image
                 couple.name = $(element).text();
                 couple.image = $(image).find('img').attr(attr);
+
+                //specificy scraping based on restaurant
                 if (selection === 'subway') {
                     couple.image = 'http://www.subway.com/' + couple.image
+                } else if (selection === 'dairyqueen') {
+                    couple.name = $(element).find('a').attr('title');
+                    couple.image = 'http://www.dairyqueen.com' + couple.image
                 }
+
+                //push object to array
                 results.push(couple);
             });
             resolve(results);
