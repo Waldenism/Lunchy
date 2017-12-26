@@ -6,7 +6,9 @@ class Signup extends React.Component {
     super(props)
     this. state = {
       username: '',
-      password: ''
+      password: '',
+      group: '',
+      admin: false
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -27,16 +29,15 @@ class Signup extends React.Component {
 
     axios.post('/signup', {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      group: this.state.group,
+      admin: this.state.admin
     })
     .then((res) => {
-      console.log('--------------------------');
-      console.log('Signed Up!');
-      console.log('--------------------------');
+      handler(res.data.user);
     })
     .catch((er) => {
       console.log('ERROR!');
-      console.log('--------------------------');
       console.log(er);
     })
   }
@@ -53,6 +54,11 @@ class Signup extends React.Component {
             <div className="form-group">
               <label>Password</label>
               <input type="password" className="form-control" name="password" onChange={this.handleChange} value={this.state.password}></input>
+            </div>
+            <div className="form-group">
+              <label>Group</label>
+              <input type="text" className="form-control" name="group" onChange={this.handleChange} value={this.state.group}></input>
+              <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input> Group Admin
             </div>
 
             <input type="submit" value='Submit' className="btn btn-warning btn-lg"></input>
