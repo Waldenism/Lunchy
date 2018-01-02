@@ -1,14 +1,14 @@
-const router = require("express").Router();
-const scraperRoutes = require("./scraper.js");
+// const router = require("express").Router();
+// const scraperRoutes = require("./scraper.js");
 
 
-// Scraper routes
-router.use("/scraper", scraperRoutes);
+// // Scraper routes
+// router.use("/scraper", scraperRoutes);
 
-// router.post('/scraper', function(req, res) {
-//     console.log('in scraper');
-//     res.redirect('/');
-// });
+// // router.post('/scraper', function(req, res) {
+// //     console.log('in scraper');
+// //     res.redirect('/');
+// // });
 
 
-module.exports = router;
+// module.exports = router;

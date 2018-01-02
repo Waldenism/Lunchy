@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const apiRoutes = require("./api");
+// const apiRoutes = require("./api");
 import path from 'path';
 
 
@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
 
 //API routes
-router.use("/api", apiRoutes);
+// router.use("/api", apiRoutes);
 // router.post('/api', function(req, res) {
 //       console.log('da log ');
 //       res.redirect('/');
