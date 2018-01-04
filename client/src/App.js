@@ -49,15 +49,20 @@ class App extends Component {
           <Navbar />
           <Wrapper>
             <div> text </div>
+<<<<<<< HEAD
             {/*<Route exact path="/" component={Home} />
             <Route path="/my-order" component={Order} />
             <Route path="/balance" component={Balance} />
             <Route path="/group-order" component={Search} />*/}
             
             
+=======
+>>>>>>> d2ec718a664592ff49c6d96b7a83d2022cff4dc8
           </Wrapper>
           <Footer />
-
+          <Scraper
+            handler = { this.handleScraper }
+          />
         </div>
       </Router>
     )
