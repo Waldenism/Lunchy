@@ -1,0 +1,27 @@
+.hamContainer{
+    margin: 48px;
+}
+
+.line{
+    width: 48px;
+    height: 6px;
+    margin: 6px 0;
+    background: black;
+
+    border-radius: 4px;
+}
+
+.hamContainer:hover > .line{
+    background: teal;
+    transition: 0.4s  ease-out;
+}
+
+.clicked > .line{
+    transform: rotateZ(30deg);
+    transition: 0.3s ease-in;
+}
+
+#ham {
+  float:right;
+
+}
