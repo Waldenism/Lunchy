@@ -8,4 +8,4 @@ router.use("/scraper", function(req, res) {
     );
 });
 
-// module.exports = router;
+module.exports = router;

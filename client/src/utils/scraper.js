@@ -1,23 +1,6 @@
-// import cheerio from 'cheerio';
-// import request from 'request';
+import cheerio from 'cheerio';
+import request from 'request';
 
-<<<<<<< HEAD
-// let scraper = new Promise(function(resolve, reject) {
-//     request.get('http://www.subway.com/en-us/menunutrition/menu/all',
-//         function(error, response, body) {
-
-//             const $ = cheerio.load(body);
-
-//             let results = [];
-//             let menu = $('.menu-cat-prod-title').each(function(i, element) {
-//                 let name = $(element).text();
-//                 results.push(name);
-//             });
-//             resolve(results);
-//         }
-//     );
-// })
-=======
 const restaurants = {
     subway: {
         menu: 'http://www.subway.com/en-us/menunutrition/menu/all',
@@ -73,6 +56,5 @@ const scraper = function(selection) {
         });
     })
 }
->>>>>>> d2ec718a664592ff49c6d96b7a83d2022cff4dc8
 
-// module.exports = scraper;
+module.exports = scraper;

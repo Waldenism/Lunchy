@@ -1,0 +1,11 @@
+.wrapperSmall {
+  padding-top: 20px;
+  background: #ECEFF1;
+  height: 100%;
+  /*display: flex;*/
+  /*flex-flow: row wrap;*/
+  /*padding: 10px;*/
+  /*justify-content: space-around;*/
+  /*align-content: flex-start;*/
+  overflow: auto;
+}
