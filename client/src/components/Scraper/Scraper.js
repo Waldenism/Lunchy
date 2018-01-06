@@ -46,6 +46,7 @@ class Scraper extends React.Component {
             <div>
               <li>{item.name}</li>
               <img src={item.image} />
+              
             </div>
           )}
         </ul>

@@ -28,7 +28,6 @@ class App extends Component {
     }
 
     this.handleLogIn = this.handleLogIn.bind(this)
-    this.handleScraper = this.handleScraper.bind(this)
   }
 
 
@@ -39,11 +38,7 @@ class App extends Component {
     })
   }
 
-  handleScraper(menu) {
-    this.setState({
-      menu: menu
-    })
-  }
+  
 
   render() {
 
@@ -57,8 +52,9 @@ class App extends Component {
           </WrapperSmall>
           
           <WrapperBig>
-            {/*<Route exact path="/" component={Home} />
-
+            <Route exact path="/" component={Home} />
+            
+            {/*
             
             <Route path="/my-order" component={Order} />
             <Route path="/balance" component={Balance} />
@@ -67,9 +63,7 @@ class App extends Component {
 
           </WrapperBig>
           <Footer />
-          <Scraper
-            handler = { this.handleScraper }
-          />
+          
         </div>
       </Router>
     )
