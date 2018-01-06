@@ -7,7 +7,8 @@ class Login extends React.Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      group: ''
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,7 +29,8 @@ class Login extends React.Component {
 
     axios.post('/login', {
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      group: this.state.group
     })
     .then((res) => {
       handler(res.data.user)
@@ -49,6 +51,10 @@ class Login extends React.Component {
             <div className="">
                 <label>Password</label>
                 <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
+            </div>
+            <div className="">
+                <label>Group</label>
+                <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
             </div>
 
             <input type="submit" value='Submit' className=""></input>

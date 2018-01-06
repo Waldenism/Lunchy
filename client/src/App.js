@@ -31,6 +31,13 @@ class App extends Component {
     this.handleScraper = this.handleScraper.bind(this)
   }
 
+  handleSignUp(user) {
+    this.setState({
+      user,
+      loggedIn: true
+    })
+  }
+
 
   handleLogIn(user) {
     this.setState({
@@ -69,6 +76,9 @@ class App extends Component {
           <Footer />
           <Scraper
             handler = { this.handleScraper }
+          />
+          <Signup
+            handler = { this.handleSignUp }
           />
         </div>
       </Router>

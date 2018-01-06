@@ -10,10 +10,12 @@ class Scraper extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
 
 
   handleChange(event) {
+    event.preventDefault()
 
     const { handler } = this.props
     const { value } = event.target;
@@ -27,6 +29,18 @@ class Scraper extends React.Component {
         menu: res.data
       })
     })
+    .catch((er) => {
+      console.log(er)
+    })
+  };
+
+
+  addItem(event) {
+    event.preventDefault()
+
+    const {value} = event.target.item;
+
+    axios.post('/api/add', {value})
     .catch((er) => {
       console.log(er)
     })
@@ -44,8 +58,14 @@ class Scraper extends React.Component {
         <ul>
           {this.state.menu.map(item =>
             <div>
-              <li>{item.name}</li>
               <img src={item.image} />
+              <li>{item.name}</li>
+              <form onSubmit={this.addItem}>
+                <div className="form-group">
+                  <input type="hidden" className="form-control" name="item" value={item.name}></input>
+                  <input type="submit" value='Add Item' className="btn btn-warning btn-md"></input>
+                </div>
+              </form>
             </div>
           )}
         </ul>
