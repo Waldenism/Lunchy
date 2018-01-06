@@ -14,7 +14,7 @@ const compiler = webpack(config);
 
 //mongoose config
 import mongoose from 'mongoose';
-mongoose.connect('mongodb://localhost/passport');
+mongoose.connect('mongodb://localhost/lunchy');
 
 
 //passport config
