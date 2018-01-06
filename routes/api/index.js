@@ -7,5 +7,13 @@ router.use("/scraper", function(req, res) {
     );
 });
 
+// Add Item route
+router.use("/add", function(req, res) {
+    console.log(req.body.value);
+
+    // scraper(req.body.value).then(data => console.log(data)
+    // );
+});
+
 
 module.exports = router;
