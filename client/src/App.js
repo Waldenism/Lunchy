@@ -1,13 +1,20 @@
+
+//dependencies 
 import React, { Component } from 'react'
-// import logo from './logo.svg'
 import { BrowserRouter as Router, Route } from "react-router-dom"
+
+//components
 import Signup from './components/Signup'
 import Scraper from './components/Scraper'
 import Login from './components/Login'
-import Wrapper from './components/Wrapper'
+import WrapperSmall from './components/WrapperSmall'
+import WrapperBig from './components/WrapperBig'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-// import './App.css'
+import './App.css'
+
+//pages
+import Home from './pages/Home'
 
 
 class App extends Component {
@@ -52,10 +59,20 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navbar />
-          <Wrapper>
-            <div> text </div>
-          </Wrapper>
+          <WrapperSmall>
+            <Navbar />
+          </WrapperSmall>
+          
+          <WrapperBig>
+            {/*<Route exact path="/" component={Home} />
+
+            
+            <Route path="/my-order" component={Order} />
+            <Route path="/balance" component={Balance} />
+            <Route path="/group-order" component={Search} />*/}
+            
+
+          </WrapperBig>
           <Footer />
           <Scraper
             handler = { this.handleScraper }

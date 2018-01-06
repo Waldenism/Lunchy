@@ -18,7 +18,7 @@ class Scraper extends React.Component {
     event.preventDefault()
 
     const { handler } = this.props
-    const {value} = event.target;
+    const { value } = event.target;
 
     this.setState({value});
 

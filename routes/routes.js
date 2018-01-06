@@ -14,8 +14,8 @@ router.get('/', function(req, res) {
 
 
 //API routes
-router.use("/api", apiRoutes);
 
+router.use("/api", apiRoutes);
 
 //Login
 router.post('/login', passport.authenticate('login', {
