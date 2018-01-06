@@ -59,6 +59,9 @@ class Scraper extends React.Component {
           {this.state.menu.map(item =>
             <div>
               <img src={item.image} />
+<<<<<<< HEAD
+              
+=======
               <li>{item.name}</li>
               <form onSubmit={this.addItem}>
                 <div className="form-group">
@@ -66,6 +69,7 @@ class Scraper extends React.Component {
                   <input type="submit" value='Add Item' className="btn btn-warning btn-md"></input>
                 </div>
               </form>
+>>>>>>> 2d92085721933df6957b7afb466a464213cf0d3d
             </div>
           )}
         </ul>

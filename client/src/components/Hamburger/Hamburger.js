@@ -1,36 +1,27 @@
 import React from "react"
+import { slide as Menu } from 'react-burger-menu'
+
+
 
 class Hamburger extends React.Component {
 
-  constructor(props) {
-    super(props)
-
-    this.handleClick = this.handleClick.bind(this)
-
-    // this.handleLogIn = this.handleLogIn.bind(this)
-
-    this.state = {
-      isOpen: false
-    }
-  }
-
-  handleClick (e) {
-    console.log(e.target)
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+  showSettings (event) {
+    event.preventDefault();
+    
   }
 
   render () {
     return (
-      <div className={this.state.isOpen ? 'hamburger active' : 'hamburger'} onClick={ this.handleClick }>
-        <div className="line"></div> 
-        <div className="line"></div> 
-        <div className="line"></div> 
-      </div>
-    )
+      <Menu isOpen={ true } >
+        
+      </Menu>
+    );
   }
 
+
+
+
+  
 }
 
 export default Hamburger

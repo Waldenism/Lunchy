@@ -1,36 +1,47 @@
-// //dependencies
-// import React from 'react'
+//dependencies
+import React from 'react'
 
-// //components
-// import Hero from '../components/Hero'
-// import Container from '../components/Container'
-// import Row from '../components/Row'
-// import Col from '../components/Col'
+//components
+import Hero from '../components/Hero'
+import Container from '../components/Container'
+import Row from '../components/Row'
+import Col from '../components/Col'
 
-// const Home = () =>
+import Scraper from '../components/Scraper'
 
-//   <div>
-//     <Hero backgroundImage=''>
-//       <h1>Lunchy</h1>
-//       <h2> Ordering lunch made easy </h2>
-//     </Hero>
+class Home extends React.Component {
 
-//     <Row>
-//       <Col size="xs-12">
-//         {!this.state.recipes.length ? (
-//           <h1 className="text-center">No Recipes to Display</h1>
-//         ) : (
-//           <RecipeList>
-            
-//                 <RecipeListItem
-//                 />
-              
-//           </RecipeList>
-//         )}
-//       </Col>
-//     </Row>
+  constructor(props) {
+    super(props)
+    this.state = {
+      menu: []
+    }
 
-//   </div>
+    this.handleScraper = this.handleScraper.bind(this)
+  }
 
+  handleScraper(menu) {
+    this.setState({
+      menu: menu
+    })
+  }
 
-// export default Home;
+  render() {
+    return(
+      <div>
+        
+          <h1>Lunchy</h1>
+          <h2> Please Select the Restaurant and menu item you would like to order </h2>
+        
+
+        <Scraper 
+          handler = { this.handleScraper }
+        />
+        
+
+      </div>
+    )
+  }
+}
+
+export default Home;
