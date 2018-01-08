@@ -2,14 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var OrderSchema = new Schema ({
-    userid: Number,
+    userid: String,
     order: Number,
-    group: Number
+    group: String,
     date:  {
         type: Date,
         default: Date.now
     },
-    restaurant: Number,
+    item: String,
+    restaurant: String,
     balance: Number,
     paid: Boolean
 });

@@ -29,6 +29,7 @@ module.exports = function(passport){
                 if (user) {
                     console.log('User already exists with username: '+ username);
                     return done(null, false);
+
                 } else {
                     // if there is no user with that email, create the user
                     var newUser = new User();
@@ -85,7 +86,10 @@ module.exports = function(passport){
 
                     // Username does not exist, log the error and redirect back
                     if (!user){
+                        console.log('*********************************');
                         console.log('User Not Found with username '+username);
+                        console.log('*********************************');
+
                         return done(null, false, req.flash('message', 'User Not found.'));
                     }
 

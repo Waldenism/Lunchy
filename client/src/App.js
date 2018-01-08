@@ -1,5 +1,5 @@
 
-//dependencies 
+//dependencies
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
@@ -47,7 +47,7 @@ class App extends Component {
     })
   }
 
-  
+
 
   render() {
 
@@ -59,12 +59,11 @@ class App extends Component {
           <WrapperSmall>
             <Navbar />
           </WrapperSmall>
-          
+
           <WrapperBig>
             <Route exact path="/" component={Home} />
             <Route path="/balance" component={Balance} />
             <Route path="/group-order" component={GroupOrder} />
-            
 
           </WrapperBig>
           <Footer />
