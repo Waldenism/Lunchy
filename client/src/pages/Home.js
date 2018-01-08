@@ -38,10 +38,9 @@ class Home extends React.Component {
           handler = { this.handleScraper }
         />
         
-
       </div>
     )
   }
 }
 
-export default Home;
+export default Home

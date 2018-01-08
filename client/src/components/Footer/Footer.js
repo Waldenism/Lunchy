@@ -3,7 +3,7 @@ import "./Footer.css";
 
 const Footer = () =>
   <footer className="sticky-footer">
-      <span>Lunchy 2017</span> 
+      <span>Lunchy 2018</span> 
   </footer>
 
 export default Footer;
