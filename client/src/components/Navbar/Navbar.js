@@ -14,9 +14,9 @@ const Navbar = props =>
       <div className="col-sm-11">
 
         <div className="navbar-header">
-          <Link className="navbar-brand" to="/">
+          <h1 className="navbar-brand" to="">
             Lunchy
-          </Link>
+          </h1>
         </div>
 
 
@@ -30,7 +30,7 @@ const Navbar = props =>
                 : ""
             }
           >
-            <Link to="/my-order"> My Order </Link>
+            <Link to="/"> Order </Link>
           </li>
           <li
             className={window.location.pathname === "" ? "active" : ""}

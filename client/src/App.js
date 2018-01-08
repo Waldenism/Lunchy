@@ -15,6 +15,8 @@ import './App.css'
 
 //pages
 import Home from './pages/Home'
+import Balance from './pages/Balance'
+import GroupOrder from './pages/GroupOrder'
 
 
 class App extends Component {
@@ -60,12 +62,8 @@ class App extends Component {
           
           <WrapperBig>
             <Route exact path="/" component={Home} />
-            
-            {/*
-            
-            <Route path="/my-order" component={Order} />
             <Route path="/balance" component={Balance} />
-            <Route path="/group-order" component={Search} />*/}
+            <Route path="/group-order" component={GroupOrder} />
             
 
           </WrapperBig>

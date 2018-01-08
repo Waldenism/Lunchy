@@ -1,27 +1,67 @@
-.hamContainer{
-    margin: 48px;
+/*.line {
+  width: 48px;
+  height: 6px;
+  margin: 6px 0;
+  background: black;
+  border-radius: 4px;
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
 
-.line{
-    width: 48px;
-    height: 6px;
-    margin: 6px 0;
-    background: black;
-
-    border-radius: 4px;
+.hamburger {
+  
+  background-color: #eceff1;
 }
 
-.hamContainer:hover > .line{
-    background: teal;
-    transition: 0.4s  ease-out;
+.hamburger.active > .line {
+  background-color: teal;
+  transform: rotateZ(-30deg);
 }
 
-.clicked > .line{
-    transform: rotateZ(30deg);
-    transition: 0.3s ease-in;
+*/
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  right: 36px;
+  top: 36px;
 }
 
-#ham {
-  float:right;
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: #373a47;
+}
 
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
 }
