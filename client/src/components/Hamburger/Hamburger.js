@@ -52,14 +52,9 @@ class Hamburger extends React.Component {
         </Menu>
         
       </div>
-      
 
     )
   }
-
-
-
-
   
 }
 

@@ -45,7 +45,7 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <h1>Sign Up!</h1>
+        <h3>Sign Up!</h3>
         <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label>Username</label>
