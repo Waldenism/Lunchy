@@ -7,7 +7,7 @@ import Container from '../components/Container'
 import Row from '../components/Row'
 import Col from '../components/Col'
 
-class GroupsOrder extends React.Component {
+class GroupOrder extends React.Component {
 
   constructor(props) {
     super(props)
@@ -17,15 +17,16 @@ class GroupsOrder extends React.Component {
 
   }
 
-  componentDidMount() {
-    this.loadOrders()
-  }
+  // componentDidMount() {
+  //   this.loadOrders()
+  // }
   
   // loadOrders = () => {
   //   //get orders
   //   axios.get()
   //     .then((res) => {
   //       console.log(res)
+  //        setState
   //     })
   //     .catch((er) => {
   //       console.log(er)
@@ -44,4 +45,4 @@ class GroupsOrder extends React.Component {
   }
 }
 
-export default GroupsOrder
+export default GroupOrder
