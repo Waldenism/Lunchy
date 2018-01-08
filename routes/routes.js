@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const apiRoutes = require("./api");
+const group = require("../config/groups")
 import path from 'path';
 
 
@@ -30,7 +31,13 @@ router.post('/login', passport.authenticate('login', {
 router.post('/signup', passport.authenticate('signup', {
     failureRedirect: '/signup'
 }), function(req, res) {
+      let { admin, name } = req.user.group;
       console.log('signup: ', req.body);
+
+      if (admin) {
+        group.newGroup(req.user, name);
+      }
+
       res.redirect('/');
     }
 );

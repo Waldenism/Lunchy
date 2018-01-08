@@ -1,6 +1,6 @@
-
 const router = require("express").Router();
 const scraper = require("../../client/src/utils/scraper.js");
+const order = require("../../middlewares/orders.js");
 
 // Scraper route
 router.use("/scraper", function(req, res) {
@@ -10,10 +10,11 @@ router.use("/scraper", function(req, res) {
 
 // Add Item route
 router.use("/add", function(req, res) {
-    console.log(req.body.value);
+    order.newOrder(req.user, req.body);
 
-    // scraper(req.body.value).then(data => console.log(data)
-    // );
+     console.log(req.body);
+    // console.log("--------------------------");
+    // console.log(req.user);
 });
 
 

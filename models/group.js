@@ -2,9 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var GroupSchema = new Schema ({
-    groupid: Number,
     groupname: String,
-    adminid: Number,
+    adminid: String,
     datecreated:  {
         type: Date,
         default: Date.now
@@ -13,6 +12,6 @@ var GroupSchema = new Schema ({
     paid: Boolean
 });
 
-var User = mongoose.model('User', UserSchema);
+var Group = mongoose.model('Group', GroupSchema);
 
-module.exports = User;
+module.exports = Group;

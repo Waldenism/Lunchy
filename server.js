@@ -14,6 +14,7 @@ const compiler = webpack(config);
 
 //mongoose config
 import mongoose from 'mongoose';
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/lunchy');
 
 
@@ -42,11 +43,6 @@ const routes = require('./routes/routes.js');
 app.use('/', routes);
 
 
-//webpack config
-// app.use(require('webpack-dev-middleware')(compiler, {
-//     noInfo: true,
-//     publicPath: config.output.publicPath
-// }));
 
 
 if(process.env.NODE_ENV === 'development') {

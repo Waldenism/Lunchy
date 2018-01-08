@@ -17,7 +17,7 @@ class Scraper extends React.Component {
   handleChange(event) {
     event.preventDefault()
 
-    const { handler } = this.props
+    const { handler } = this.props;
     const { value } = event.target;
 
     this.setState({value});
@@ -39,8 +39,9 @@ class Scraper extends React.Component {
     event.preventDefault()
 
     const {value} = event.target.item;
+    let restaurant = this.state.value;
 
-    axios.post('/api/add', {value})
+    axios.post('/api/add', {value, restaurant})
     .catch((er) => {
       console.log(er)
     })
