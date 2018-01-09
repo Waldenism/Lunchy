@@ -6,6 +6,9 @@ import Hero from '../components/Hero'
 import Container from '../components/Container'
 import Row from '../components/Row'
 import Col from '../components/Col'
+// import MenuList from '../components/MenuList'
+// import MenuListItem from '../components/MenuList '
+import { MenuList, MenuListItem } from "../components/MenuList"
 
 class Balance extends React.Component {
 
