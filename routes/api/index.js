@@ -10,11 +10,9 @@ router.use("/scraper", function(req, res) {
 
 // Add Item route
 router.use("/add", function(req, res) {
-    order.newOrder(req.user, req.body);
-
-     console.log(req.body);
-    // console.log("--------------------------");
-    // console.log(req.user);
+    order.newOrder(req.user, req.body, function(data) {
+        res.send(data);
+    });
 });
 
 

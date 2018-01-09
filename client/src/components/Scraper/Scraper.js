@@ -6,7 +6,9 @@ class Scraper extends React.Component {
     super(props);
     this.state = {
       menu: [],
-      value: 'subway'
+      value: 'subway',
+      cart: [],
+      balance: 0
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -42,6 +44,16 @@ class Scraper extends React.Component {
     let restaurant = this.state.value;
 
     axios.post('/api/add', {value, restaurant})
+    .then((res) => {
+      let { paid, balance } = res.data;
+
+      this.state.cart.push(res.data)
+      this.setState({ cart: this.state.cart });
+
+      if (!paid) {
+        this.setState({ balance: this.state.balance + balance })
+      }
+    })
     .catch((er) => {
       console.log(er)
     })
@@ -51,6 +63,16 @@ class Scraper extends React.Component {
   render() {
     return (
       <div>
+        <ol>
+          {this.state.cart.map(item =>
+            <div>
+              <li>{item.item}</li>
+            </div>
+          )}
+          <b>Balance: {this.state.balance}</b>
+        </ol>
+
+
         <select value={this.state.value} onChange={this.handleChange} className="menu-selection">
           <option value='subway'>Subway</option>
           <option value='dairyqueen'>Dairy Queen</option>

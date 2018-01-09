@@ -1,7 +1,7 @@
 var Orders = require('../models/orders');
 
 const Order = {
-    newOrder: (user, data) => {
+    newOrder: (user, data, callback) => {
 
         if (!user) {
             console.log('not logged in');
@@ -25,11 +25,17 @@ const Order = {
                     console.log('Error in Saving item: '+err);
                     throw err;
                 }
-                console.log('Item added to Database');
-                console.log("****add item*****")
+                console.log('');
+                console.log("**** Item added to Database *****");
                 console.log(addItem);
+
+                callback(addItem);
             });
         }
+    },
+
+    findOrder: (user) => {
+
     }
 }
 
