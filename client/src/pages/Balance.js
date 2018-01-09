@@ -12,24 +12,50 @@ class Balance extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      //balance
+      balance: []
     }
 
   }
 
-  componentDidMount() {
-    //axios get balance
-    //then set state
-  }
+  // componentDidMount() {
+  //   this.loadBalance()
+  // }
 
-  
+  // loadBalance = () => {
+  //   //get balance
+  //   axios.get('./balance')
+  //    .then((res) => {
+  //      console.log(res)
+  //      this.setState({ balance: res.data })
+  //    })
+  //    .catch((er) => {
+  //      console.log(er)
+  //    })
+  // }
 
   render() {
     return(
       <div>
         
           <h1> Balance of all my orders </h1>
-          <h2> test </h2>        
+
+          <br /><br />BALANCE BREAK<br /><br />
+
+
+
+          {this.state.balance.length ? (
+            <MenuList>
+              {this.state.balance.map(balance => (
+                <MenuListItem key={balance._id}>
+                  <a href={'' + balance._id}>
+                    {/* LODASH function to add all the items in the array together*/}
+                  </a>
+                </MenuListItem>
+              ))}  
+            </MenuList>
+          ) : (
+            <h3> No Results to Display</h3>
+          )}        
 
       </div>
     )
