@@ -9,7 +9,10 @@ import path from 'path';
 //homepage
 router.get('/', function(req, res) {
   // Display flash message, if any
-  console.log('home: ', req.body, ', user: ', req.user);
+
+  let { body, user } = req;
+  console.log('home: ', body, ', user: ', user);
+
   res.sendFile(path.join(__dirname, '../client/public/index.html'));
 });
 
@@ -23,7 +26,7 @@ router.post('/login', passport.authenticate('login', {
   failureRedirect: '/login'
 }), function(req, res) {
       console.log('login: ', req.body);
-      res.redirect('/');
+      res.send(req.user);
     }
 );
 

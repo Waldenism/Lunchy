@@ -1,6 +1,4 @@
 import React from "react"
-import { Link } from "react-router-dom"
-import Login from "../Login"
 import Hamburger from "../Hamburger"
 import "./Navbar.css"
 
@@ -18,34 +16,6 @@ const Navbar = props =>
             Lunchy
           </h1>
         </div>
-
-
-        <ul className="nav navbar-nav">
-
-          <li
-            className={
-              window.location.pathname === "/" ||
-              window.location.pathname === ""
-                ? "active"
-                : ""
-            }
-          >
-            <Link to="/"> Order </Link>
-          </li>
-          <li
-            className={window.location.pathname === "" ? "active" : ""}
-          >
-            <Link to="/balance"> Account Balance </Link>
-          </li>
-
-          <li className={window.location.pathname === "" ? "active" : ""}>
-            <Link to="/group-order"> Group's Order </Link>
-          </li>
-
-        </ul>
-
-        {/*<Login />*/}
-
 
       </div>
 

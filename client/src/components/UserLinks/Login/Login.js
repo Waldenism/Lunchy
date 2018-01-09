@@ -33,7 +33,7 @@ class Login extends React.Component {
       group: this.state.group
     })
     .then((res) => {
-      handler(res.data.user)
+      handler()
     })
     .catch((er) => {
       console.log(er)

@@ -34,7 +34,7 @@ class Signup extends React.Component {
       admin: this.state.admin
     })
     .then((res) => {
-      handler(res.data.user);
+      handler();
     })
     .catch((er) => {
       console.log('ERROR!');

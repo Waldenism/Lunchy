@@ -4,9 +4,6 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
 //components
-import Signup from './components/Signup'
-import Scraper from './components/Scraper'
-import Login from './components/Login'
 import WrapperSmall from './components/WrapperSmall'
 import WrapperBig from './components/WrapperBig'
 import Navbar from './components/Navbar'
