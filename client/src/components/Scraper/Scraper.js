@@ -16,19 +16,21 @@ class Scraper extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
   }
- componentDidMount() {
+
+  componentDidMount() {
     this.menus();
   }
-menus()
-{ axios.post('/api/scraper', {value: 'subway'})
-    .then((res) => {
-      this.setState({
-        menu: res.data
+
+  menus() { 
+    axios.post('/api/scraper', {value: 'subway'})
+      .then((res) => {
+        this.setState({
+          menu: res.data
+        })
       })
-    })
-    .catch((er) => {
-      console.log(er)
-    })
+      .catch((er) => {
+        console.log(er)
+      })
   }
 
 
@@ -74,7 +76,6 @@ menus()
     })
   };
 
-
   addItem(event) {
     event.preventDefault()
 
@@ -87,6 +88,7 @@ menus()
 
       this.state.cart.push(res.data)
       this.setState({ cart: this.state.cart });
+      this.props.addItem2(this.state.cart)
 
       if (!paid) {
         this.setState({ balance: this.state.balance + balance })
@@ -97,24 +99,15 @@ menus()
     })
   }
 
-
   render() {
-    console.log(this.state.menu)
-    console.log(this.state.car)
+    // console.log(this.state.menu)
+    // console.log(this.state.cart)
 
 
     return (
       <div>
 
-        <ol>
-          {this.state.cart.map(item =>
-            <div>
-              <li>{item.item}</li>
-            </div>
-          )}
-          <b>Balance: {this.state.balance}</b>
-        </ol>
-
+        
 
         <select value={this.state.value}  onClick={this.handleClick} onChange={this.handleChange} className="menu-selection">
           <option onClick={this.handleClick} value='subway'>Subway</option>
@@ -124,12 +117,14 @@ menus()
 
 
         <ul>
-          {this.state.menu.map((item,index) =>
+          {this.state.menu.map(item =>
             <div>
+
+
             
-              <img key={index} src={item.image} />
+              <img  src={item.image} />
             
-              <li key={index}>{item.name}</li>
+              <li >{item.name}</li>
               <form onSubmit={this.addItem}>
                 <div className="form-group">
                   <input type="hidden" className="form-control" name="item" value={item.name}></input>

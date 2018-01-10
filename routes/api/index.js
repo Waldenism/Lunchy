@@ -36,6 +36,10 @@ router.use("/status", function(req, res) {
 
 //CRUD
 
+router.get('/my-order', function(req, res) {
+    console.log(req.query)
+})
+
 router.get('/group-order', function(req, res) {
     console.log("group order get")
     res.json({one: 1})
