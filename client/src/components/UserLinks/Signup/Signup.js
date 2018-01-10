@@ -53,7 +53,7 @@ class Signup extends React.Component {
                   <p className="subtitle has-text-grey">Create Account</p>
                   <hr />
                   
-                  <form>
+                  <form onSubmit={this.handleSubmit}>
                     
                     <div className="field">
                       <div className="control">
