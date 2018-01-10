@@ -1,17 +1,8 @@
 nav.navbar.navbar-default {
   padding: 10px;
-  /*margin: 10;*/
-  /*margin-bottom: 10;*/
 }
 
-li {
-  /*width: 20%;*/
+h1 {
+  font-family: 'Shrikhand', cursive;
+  font-size: 4.0em;
 }
-
-.nav.navbar-nav {
-  /*border: solid black 3px;*/
-}
-
-/*.navUl {
-  border: solid black 3px;
-}*/

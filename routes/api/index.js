@@ -23,6 +23,7 @@ router.use("/status", function(req, res) {
     console.log('body ' + req.body)
 });
 
+
 //User API routes
 router.use("/user", userRoutes);
 
