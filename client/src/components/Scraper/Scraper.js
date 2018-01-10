@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import MenuList from '../MenuList'
+import MenuListItem from '../MenuList'
 
 class Scraper extends React.Component {
   constructor(props) {
@@ -61,8 +63,13 @@ class Scraper extends React.Component {
 
 
   render() {
+    console.log(this.state.menu)
+    console.log(this.state.car)
+
+
     return (
       <div>
+
         <ol>
           {this.state.cart.map(item =>
             <div>
@@ -78,12 +85,15 @@ class Scraper extends React.Component {
           <option value='dairyqueen'>Dairy Queen</option>
         </select>
 
-        <ul>
-          {this.state.menu.map(item =>
-            <div>
-              <img src={item.image} />
 
-              <li>{item.name}</li>
+
+        <ul>
+          {this.state.menu.map((item,index) =>
+            <div>
+            
+              <img key={index} src={item.image} />
+            
+              <li key={index}>{item.name}</li>
               <form onSubmit={this.addItem}>
                 <div className="form-group">
                   <input type="hidden" className="form-control" name="item" value={item.name}></input>
@@ -93,7 +103,8 @@ class Scraper extends React.Component {
 
             </div>
           )}
-        </ul>
+        </ul>     
+
       </div>
     )
   }
