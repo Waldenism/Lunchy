@@ -8,7 +8,7 @@ class Scraper extends React.Component {
     super(props);
     this.state = {
       menu: [],
-      value: 'subway',
+      value: '',
       cart: [],
       balance: 0
     };

@@ -34,6 +34,18 @@ router.use("/status", function(req, res) {
     // }
 });
 
+//CRUD
+
+router.get('/group-order', function(req, res) {
+    console.log("group order get")
+    res.json({one: 1})
+
+    console.log(req.query)
+    //group name
+    //date
+    //group members
+    //order for that date
+})
 
 module.exports = router;
 
