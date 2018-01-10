@@ -7,9 +7,9 @@ import Container from '../components/Container'
 import Row from '../components/Row'
 import Col from '../components/Col'
 import DeleteBtn from '../components/DeleteBtn'
-import { MenuList } from '../components/MenuList'
-import { MenuListItem } from '../components/MenuList'
+import { MenuList, MenuListItem } from '../components/MenuList'
 import axios from 'axios'
+
 
 
 class GroupOrder extends React.Component {
@@ -45,7 +45,8 @@ class GroupOrder extends React.Component {
 
   // loadOrders = () => {
   //   //get orders
-  //   axios.get('./orders')
+
+  //   axios.get('/group-order')
   //     .then((res) => {
   //       console.log(res)
   //       this.setState({ orders: res.data })
@@ -60,6 +61,7 @@ class GroupOrder extends React.Component {
     return(
 
       <div>
+
         <h1> Final Group Order </h1>
         <h2> every users order compiled </h2>
 
@@ -72,6 +74,7 @@ class GroupOrder extends React.Component {
             </MenuListItem>
           )}
         </MenuList>
+
       </div>
     )
   }

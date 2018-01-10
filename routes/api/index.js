@@ -10,7 +10,7 @@ router.use("/scraper", function(req, res) {
 });
 
 // Add Item route
-router.use("/add", function(req, res) {
+router.post("/add", function(req, res) {
     order.newOrder(req.user, req.body, function(data) {
         res.send(data);
     });
@@ -26,6 +26,4 @@ router.use("/status", function(req, res) {
 //User API routes
 router.use("/user", userRoutes);
 
-
 module.exports = router;
-

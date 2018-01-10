@@ -73,10 +73,53 @@ class Signup extends React.Component {
               <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input> Group Admin
             </div>
 
-            <input type="submit" value='Submit' className="btn btn-warning btn-lg"></input>
 
+        <section>
+          <div>
+                <div className='box'>
+                  <h3 className="title has-text-grey">Lunchy</h3>
+                  <p className="subtitle has-text-grey">Create Account</p>
+                  <hr />
+                  
+                  <form onSubmit={this.handleSubmit}>
+                    
+                    <div className="field">
+                      <div className="control">
+                        <label for="inputPassword">Username
+                          <input name="username" type="text" className="" onChange={this.handleChange} value={this.state.username}></input>
+                        </label>
+                      </div>
+                    </div>
 
-        </form>
+                    
+                    <div className="field">
+                      <div className="control">
+                        <label for="inputPassword">Password
+                          <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className="field">
+                      <div className="control">
+                        <label for="group">Group
+                        <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
+                        <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input> Group Admin
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className="field is-grouped">
+                      <div className="control">
+                          <input type="submit" value='Submit' className=""></input>
+                      </div>
+                    </div>
+                  </form>
+
+            </div>
+          </div>
+        </section>
+
       </div>
     )
   }

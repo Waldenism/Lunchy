@@ -1,18 +1,34 @@
 import React from 'react'
 import axios from 'axios'
+import MenuList from '../MenuList'
+import MenuListItem from '../MenuList'
 
 class Scraper extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       menu: [],
-      value: 'subway',
+      value: '',
       cart: [],
       balance: 0
     };
-
+    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
+  }
+ componentDidMount() {
+    this.menus();
+  }
+menus()
+{ axios.post('/api/scraper', {value: 'subway'})
+    .then((res) => {
+      this.setState({
+        menu: res.data
+      })
+    })
+    .catch((er) => {
+      console.log(er)
+    })
   }
 
 
@@ -30,6 +46,28 @@ class Scraper extends React.Component {
       this.setState({
         menu: res.data
       })
+      console.log(res.data)
+    })
+    .catch((er) => {
+      console.log(er)
+    })
+  };
+
+  handleClick(event) {
+   event.preventDefault()
+
+    const { handler } = this.props;
+    const { value } = event.target;
+
+    this.setState({value});
+
+    axios.post('/api/scraper', {value})
+    .then((res) => {
+      handler(res.data)
+      this.setState({
+        menu: res.data
+      })
+      console.log(res.data)
     })
     .catch((er) => {
       console.log(er)
@@ -61,8 +99,13 @@ class Scraper extends React.Component {
 
 
   render() {
+    console.log(this.state.menu)
+    console.log(this.state.car)
+
+
     return (
       <div>
+
         <ol>
           {this.state.cart.map(item =>
             <div>
@@ -73,17 +116,20 @@ class Scraper extends React.Component {
         </ol>
 
 
-        <select value={this.state.value} onChange={this.handleChange} className="menu-selection">
-          <option value='subway'>Subway</option>
+        <select value={this.state.value}  onClick={this.handleClick} onChange={this.handleChange} className="menu-selection">
+          <option onClick={this.handleClick} value='subway'>Subway</option>
           <option value='dairyqueen'>Dairy Queen</option>
         </select>
 
-        <ul>
-          {this.state.menu.map(item =>
-            <div>
-              <img src={item.image} />
 
-              <li>{item.name}</li>
+
+        <ul>
+          {this.state.menu.map((item,index) =>
+            <div>
+            
+              <img key={index} src={item.image} />
+            
+              <li key={index}>{item.name}</li>
               <form onSubmit={this.addItem}>
                 <div className="form-group">
                   <input type="hidden" className="form-control" name="item" value={item.name}></input>
@@ -93,7 +139,8 @@ class Scraper extends React.Component {
 
             </div>
           )}
-        </ul>
+        </ul>     
+
       </div>
     )
   }
