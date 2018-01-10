@@ -61,8 +61,6 @@ class Hamburger extends React.Component {
       <div>
         <Menu
           right
-          isOpen={this.state.menuOpen}
-          onStateChange={(state) => this.handleMenuStateChange}
         >
 
         {links}
