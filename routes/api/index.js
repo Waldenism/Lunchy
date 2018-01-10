@@ -9,7 +9,7 @@ router.use("/scraper", function(req, res) {
 });
 
 // Add Item route
-router.use("/add", function(req, res) {
+router.post("/add", function(req, res) {
     order.newOrder(req.user, req.body, function(data) {
         res.send(data);
     });
@@ -34,6 +34,18 @@ router.use("/status", function(req, res) {
     // }
 });
 
+//CRUD
+
+router.get('/group-order', function(req, res) {
+    console.log("group order get")
+    res.json({one: 1})
+
+    console.log(req.query)
+    //group name
+    //date
+    //group members
+    //order for that date
+})
 
 module.exports = router;
 

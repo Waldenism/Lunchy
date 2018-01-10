@@ -26,7 +26,7 @@ class Balance extends React.Component {
 
   // loadBalance = () => {
   //   //get balance
-  //   axios.get('./balance')
+  //   axios.get('')
   //    .then((res) => {
   //      console.log(res)
   //      this.setState({ balance: res.data })
