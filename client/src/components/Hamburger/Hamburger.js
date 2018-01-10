@@ -14,11 +14,19 @@ class Hamburger extends React.Component {
     this.state = {
       menuOpen: false,
       isLoggedIn: false,
-      admin: false
+      admin: false,
+      auth: 'login'
     }
 
     this.openLinks = this.openLinks.bind(this)
     this.removeLinks = this.removeLinks.bind(this)
+    this.handleAuth = this.handleAuth.bind(this)
+  }
+
+  handleAuth( ) {
+    this.setState({
+      auth: 'signup'
+    })
   }
 
   handleMenuStateChange (state) {
@@ -43,9 +51,7 @@ class Hamburger extends React.Component {
     this.setState({
       isLoggedIn: false
     })
-  }
-
-
+  } 
 
   render () {
     let links;
@@ -53,7 +59,14 @@ class Hamburger extends React.Component {
     if (this.state.isLoggedIn) {
       links = <Links handler={ this.removeLinks } />
     } else {
-      links = <div><Login handler={ this.openLinks } /> <Signup handler={ this.openLinks } /></div>
+        if(this.state.auth === 'login') {
+          links = <Login handler={ this.openLinks } action={ this.handleAuth } />
+        } else {
+          links = <Signup handler={ this.openLinks } />
+        }
+
+       
+
     }
 
 

@@ -20,7 +20,8 @@ class Links extends React.Component {
     // }
 
     return (
-      <div> <ul className="nav navbar-nav">
+      <div> 
+        <ul className="nav navbar-nav">
 
           <li
             className={
@@ -32,6 +33,7 @@ class Links extends React.Component {
           >
             <Link to="/"> Order </Link>
           </li>
+          
           <li
             className={window.location.pathname === "" ? "active" : ""}
           >
@@ -40,7 +42,8 @@ class Links extends React.Component {
 
           {link}
 
-        </ul> </div>
+        </ul>
+      </div>
     )
   }
 }
