@@ -1,6 +1,7 @@
 .wrapperBig {
   padding-top: 50px;
-  background: #ECEFF1;
+  /*background: #ECEFF1;*/
+  background: #f4f8ff;
   height: 100%;
   display: flex;
   flex-flow: row wrap;

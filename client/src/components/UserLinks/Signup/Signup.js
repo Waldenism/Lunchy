@@ -7,6 +7,8 @@ class Signup extends React.Component {
     this. state = {
       username: '',
       password: '',
+      first: '',
+      last: '',
       group: '',
       admin: false
     }
@@ -30,6 +32,8 @@ class Signup extends React.Component {
     axios.post('/signup', {
       username: this.state.username,
       password: this.state.password,
+      first: this.state.first,
+      last: this.state.last,
       group: this.state.group,
       admin: this.state.admin
     })
@@ -54,6 +58,14 @@ class Signup extends React.Component {
             <div className="form-group">
               <label>Password</label>
               <input type="password" className="form-control" name="password" onChange={this.handleChange} value={this.state.password}></input>
+            </div>
+            <div className="form-group">
+              <label>First Name</label>
+              <input type="text" className="form-control" name="first" onChange={this.handleChange} value={this.state.first}></input>
+            </div>
+            <div className="form-group">
+              <label>Last Name</label>
+              <input type="text" className="form-control" name="last" onChange={this.handleChange} value={this.state.last}></input>
             </div>
             <div className="form-group">
               <label>Group</label>

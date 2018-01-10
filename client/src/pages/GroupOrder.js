@@ -6,6 +6,11 @@ import Hero from '../components/Hero'
 import Container from '../components/Container'
 import Row from '../components/Row'
 import Col from '../components/Col'
+import DeleteBtn from '../components/DeleteBtn'
+import { MenuList } from '../components/MenuList'
+import { MenuListItem } from '../components/MenuList'
+import axios from 'axios'
+
 
 class GroupOrder extends React.Component {
 
@@ -17,16 +22,33 @@ class GroupOrder extends React.Component {
 
   }
 
+  componentWillMount() {
+    axios.get('/api/user/group-orders')
+    .then((res) => {
+      this.setState({
+        orders: res.data
+      })
+    })
+    .catch((er) => {
+      console.log(er)
+    })
+  }
+
+  // deleteOrder = id => {
+  //   axios.post('', {id: id})
+  //   .then(res => this.setState({orders: res}))
+  // }
+
   // componentDidMount() {
   //   this.loadOrders()
   // }
-  
+
   // loadOrders = () => {
   //   //get orders
-  //   axios.get()
+  //   axios.get('./orders')
   //     .then((res) => {
   //       console.log(res)
-  //        setState
+  //       this.setState({ orders: res.data })
   //     })
   //     .catch((er) => {
   //       console.log(er)
@@ -34,15 +56,26 @@ class GroupOrder extends React.Component {
   // }
 
   render() {
+    console.log(this.state.orders);
     return(
-      <div>
-        
-          <h1> Final Group Order </h1>
-          <h2> every users order compiled </h2>        
 
+      <div>
+        <h1> Final Group Order </h1>
+        <h2> every users order compiled </h2>
+
+        <br /><br /><br /><br /><br />
+
+        <MenuList>
+          {this.state.orders.map(item =>
+            <MenuListItem key={item.userid}>
+                {item.item}
+            </MenuListItem>
+          )}
+        </MenuList>
       </div>
     )
   }
 }
+
 
 export default GroupOrder

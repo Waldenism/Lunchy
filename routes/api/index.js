@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const scraper = require("../../client/src/utils/scraper.js");
 const order = require("../../middlewares/orders.js");
+const userRoutes = require("./user.js");
 
 // Scraper route
 router.use("/scraper", function(req, res) {
@@ -20,19 +21,10 @@ router.use("/status", function(req, res) {
     res.send(req.body);
 
     console.log('body ' + req.body)
-
-
-    // let { body } =  req
-
-    // console.log('body ' + body)
-
-    // if (req.user) {
-    //     let { user } =  req
-    //     res.send(user, body);
-    // } else {
-    //     res.send(body);
-    // }
 });
+
+//User API routes
+router.use("/user", userRoutes);
 
 
 module.exports = router;
