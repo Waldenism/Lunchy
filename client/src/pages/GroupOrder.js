@@ -7,8 +7,9 @@ import Container from '../components/Container'
 import Row from '../components/Row'
 import Col from '../components/Col'
 import DeleteBtn from '../components/DeleteBtn'
-import MenuList from '../components/MenuList'
-import MenuListItem from '../components/MenuList'
+import { MenuList, MenuListItem } from '../components/MenuList'
+import axios from 'axios'
+
 
 
 class GroupOrder extends React.Component {
@@ -21,6 +22,18 @@ class GroupOrder extends React.Component {
 
   }
 
+  componentWillMount() {
+    axios.get('/api/user/group-orders')
+    .then((res) => {
+      this.setState({
+        orders: res.data
+      })
+    })
+    .catch((er) => {
+      console.log(er)
+    })
+  }
+
   // deleteOrder = id => {
   //   axios.post('', {id: id})
   //   .then(res => this.setState({orders: res}))
@@ -29,9 +42,10 @@ class GroupOrder extends React.Component {
   // componentDidMount() {
   //   this.loadOrders()
   // }
-  
+
   // loadOrders = () => {
   //   //get orders
+
   //   axios.get('/group-order')
   //     .then((res) => {
   //       console.log(res)
@@ -43,32 +57,28 @@ class GroupOrder extends React.Component {
   // }
 
   render() {
+    console.log(this.state.orders);
     return(
+
       <div>
-        
-          <h1> Final Group Order </h1>
-          <h2> every users order compiled </h2>
 
-          <br /><br /><br /><br /><br />
+        <h1> Final Group Order </h1>
+        <h2> every users order compiled </h2>
 
-          {this.state.orders.length ? (
-            <MenuList>
-              {this.state.orders.map(orders => (
-                <MenuListItem key={order._id}>
-                  <a href={'' + orders._id}>
-                    {orders}
-                  </a>
-                  <DeleteBtn onClick={() => this.deleteOrder(order._id)} />
-                </MenuListItem>
-              ))}  
-            </MenuList>
-          ) : (
-            <h3> No Results to Display</h3>
+        <br /><br /><br /><br /><br />
+
+        <MenuList>
+          {this.state.orders.map(item =>
+            <MenuListItem key={item.userid}>
+                {item.item}
+            </MenuListItem>
           )}
-                
+        </MenuList>
+
       </div>
     )
   }
 }
+
 
 export default GroupOrder
