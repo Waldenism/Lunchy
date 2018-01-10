@@ -10,17 +10,31 @@ class Links extends React.Component {
         }
     }
 
+    componentDidMount() {
+      axios.get('/api/user/current').then(res => {
+        let { admin } = res.data.group;
+        if (admin) {
+          this.setState({
+            admin: true
+          })
+        }
+      })
+    }
+
   render() {
     let link;
 
-    // if (admin) {
-    //   let link = <li className={window.location.pathname === "" ? "active" : ""}>
-    //     <Link to="/group-order"> Group's Order </Link>
-    //   </li>
-    // }
+    console.log("*******************************")
+    console.log(this.state.admin)
+    console.log("*******************************")
+
+    if (this.state.admin) {
+      link = <li className={window.location.pathname === "" ? "active" : ""}>
+      <Link to="/group-order"> Group's Order </Link></li>;
+    }
 
     return (
-      <div> 
+      <div>
         <ul className="nav navbar-nav">
 
           <li
@@ -33,7 +47,7 @@ class Links extends React.Component {
           >
             <Link to="/"> Order </Link>
           </li>
-          
+
           <li
             className={window.location.pathname === "" ? "active" : ""}
           >

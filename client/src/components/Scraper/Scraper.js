@@ -46,7 +46,6 @@ menus()
       this.setState({
         menu: res.data
       })
-      console.log(res.data)
     })
     .catch((er) => {
       console.log(er)
@@ -67,7 +66,6 @@ menus()
       this.setState({
         menu: res.data
       })
-      console.log(res.data)
     })
     .catch((er) => {
       console.log(er)
@@ -99,10 +97,6 @@ menus()
 
 
   render() {
-    console.log(this.state.menu)
-    console.log(this.state.car)
-
-
     return (
       <div>
 
@@ -126,9 +120,9 @@ menus()
         <ul>
           {this.state.menu.map((item,index) =>
             <div>
-            
+
               <img key={index} src={item.image} />
-            
+
               <li key={index}>{item.name}</li>
               <form onSubmit={this.addItem}>
                 <div className="form-group">
@@ -139,7 +133,7 @@ menus()
 
             </div>
           )}
-        </ul>     
+        </ul>
 
       </div>
     )

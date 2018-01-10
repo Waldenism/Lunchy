@@ -3,7 +3,6 @@ import { slide as Menu } from 'react-burger-menu'
 import Login from '../UserLinks/Login'
 import Signup from '../UserLinks/Signup'
 import Links from '../UserLinks/Links'
-import MyOrder from '../MyOrder'
 
 import './Hamburger.css'
 
@@ -52,7 +51,7 @@ class Hamburger extends React.Component {
     this.setState({
       isLoggedIn: false
     })
-  } 
+  }
 
   render () {
     let links;
@@ -66,10 +65,7 @@ class Hamburger extends React.Component {
           links = <Signup handler={ this.openLinks } />
         }
 
-       
-
     }
-
 
     return (
       <div>
@@ -78,8 +74,6 @@ class Hamburger extends React.Component {
         >
 
           {links}
-
-          <MyOrder />
 
         </Menu>
 

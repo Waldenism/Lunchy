@@ -16,13 +16,6 @@ router.post("/add", function(req, res) {
     });
 });
 
-// Check Login Status
-router.use("/status", function(req, res) {
-    res.send(req.body);
-
-    console.log('body ' + req.body)
-});
-
 
 //User API routes
 router.use("/user", userRoutes);
