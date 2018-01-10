@@ -1,4 +1,5 @@
 var Orders = require('../models/orders');
+var Users = require('../models/users');
 
 const Order = {
     newOrder: (user, data, callback) => {
@@ -13,7 +14,7 @@ const Order = {
 
             let addItem = new Orders()
             addItem.userid = _id;
-            addItem.group = group.name;
+            addItem.group = group.id;
             addItem.item = value;
             addItem.restaurant = restaurant;
             addItem.balance = 10;
@@ -34,8 +35,14 @@ const Order = {
         }
     },
 
-    findOrder: (user) => {
-
+    getOrders: (id, callback) => {
+        Orders.find({ 'group': id, 'paid': false }, function(err, res) {
+            if (err) { console.log(err) };
+            console.log('++++++++++++++++')
+            console.log(res);
+            console.log('++++++++++++++++')
+            callback(res)
+        })
     }
 }
 

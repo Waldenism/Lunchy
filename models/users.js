@@ -4,7 +4,12 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema ({
     username: String,
     password: String,
+    name: {
+        first: String,
+        last: String
+    },
     group:  {
+        id: String,
         name: String,
         admin: Boolean
     }

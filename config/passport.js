@@ -1,6 +1,8 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var User = require('../models/users');
+var Group = require('../models/group');
 var bCrypt = require('bcrypt-nodejs');
+var Users = require('./users');
 
 module.exports = function(passport){
 
@@ -15,7 +17,7 @@ module.exports = function(passport){
         function(req, username, password, done) {
 
 
-            const { group, admin } = req.body;
+            const { group, admin, first, last } = req.body;
 
             // find a user in Mongo with provided username
             User.findOne({ 'username' :  username }, function(err, user) {
@@ -35,20 +37,58 @@ module.exports = function(passport){
                     var newUser = new User();
 
                     // set the user's local credentials
-                    newUser.userid = 0;
                     newUser.username = username;
                     newUser.password = createHash(password);
+                    newUser.name.first = first;
+                    newUser.name.last = last;
                     newUser.group.name = group;
                     newUser.group.admin = admin;
 
                     // save the user
-                    newUser.save(function(err) {
+                    newUser.save(function(err, res) {
                         if (err){
                             console.log('Error in Saving user: '+err);
                             throw err;
                         }
+
                         console.log('User Registration succesful');
-                        return done(null, newUser);
+                    }).then(() => {
+
+                        Group.findOne({ 'groupname': group }, function(err, grp) {
+                            if (err) {
+                                console.log('Error in Find Group: '+err);
+                                return done(err);
+                            }
+
+                            if (grp) {
+                                Users.addGroupId(newUser._id, grp._id)
+                                console.log('User Added to Group: ' +group);
+                                return done(null, newUser);
+
+                            } else {
+                                var newGroup = new Group();
+
+                                newGroup.groupname = group;
+                                newGroup.groupbalance = 0;
+                                newGroup.paid = true;
+                                newGroup.adminid = newUser._id;
+
+                                newGroup.save(function(err, res) {
+                                    if (err) {
+                                        console.log('Error in Saving group: ' +err);
+                                        throw err;
+                                    }
+
+                                    console.log('Group Registration Successful');
+                                    console.log('---------------------------------');
+                                    console.log(newGroup);
+                                }).then(() => {
+
+                                    Users.addGroupId(newUser._id, newGroup._id)
+                                    return done(null, newUser);
+                                })
+                            }
+                        })
                     });
                 }
             });

@@ -18,7 +18,6 @@ router.get('/', function(req, res) {
 
 
 //API routes
-
 router.use("/api", apiRoutes);
 
 //Login
@@ -34,12 +33,10 @@ router.post('/login', passport.authenticate('login', {
 router.post('/signup', passport.authenticate('signup', {
     failureRedirect: '/signup'
 }), function(req, res) {
-      let { admin, name } = req.user.group;
-      console.log('signup: ', req.body);
 
-      if (admin) {
-        group.newGroup(req.user, name);
-      }
+      console.log('---------------------------');
+      console.log('signup: ', req.body);
+      console.log('---------------------------');
 
       res.redirect('/');
     }
