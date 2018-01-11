@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import './Login.css'
 
 class Login extends React.Component {
   constructor(props) {
@@ -57,20 +58,23 @@ class Login extends React.Component {
                 <hr />
 
                 <form onSubmit={this.handleSubmit}>
+
                   <div className="field">
                     <div className="control">
-                      <label for="inputUsername">Username
+                      <label>Username <span> </span>
 
 
                         <input name="username" type="text" className="" onChange={this.handleChange} value={this.state.username}></input>
 
 
+
                       </label>
                     </div>
                   </div>
+
                   <div className="field">
                     <div className="control">
-                      <label for="inputPassword">Password
+                      <label>Password <span> </span>
 
                         <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
 
@@ -80,19 +84,27 @@ class Login extends React.Component {
                   </div>
 
                   <div className="field">
-                      <label>Group</label>
-                      <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
+                    <div className="control">
+                      <label>Group <span>       </span>
+
+                        <input name="" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
+                      
+                      </label>
+                    </div>
                   </div>
 
-                  <div className='field'>
-                    <label className='checkbox'></label>
-                      <input type="checkbox" id="rememberCheckbox"/>
-                      <span> </span>
-                      Remember me
+                  <div className="field">
+                    <div className="control">
+                      <label> Remember me <span> </span>
+                        <input type="checkbox" />
+                      </label>
+                    </div>
+                      
+                      
                     
                   </div>
 
-                  <input type="submit" value='Submit' className=""></input>
+                  <input type="submit" value='Submit' className="" ></input>
 
                 </form>
 
