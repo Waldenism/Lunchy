@@ -61,7 +61,9 @@ class Login extends React.Component {
 
                   <div className="field">
                     <div className="control">
-                      <label>Username <span> </span>
+
+                      <label >Username
+
 
 
                         <input name="username" type="text" className="" onChange={this.handleChange} value={this.state.username}></input>
@@ -74,7 +76,9 @@ class Login extends React.Component {
 
                   <div className="field">
                     <div className="control">
-                      <label>Password <span> </span>
+
+                      <label>Password
+
 
                         <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
 

@@ -40,6 +40,8 @@ const scraper = function(selection) {
                 //make object of menu item name and link to image
                 couple.name = $(element).text();
                 couple.image = $(image).find('img').attr(attr);
+                couple.id = i;
+                console.log(i)
 
                 //specificy scraping based on restaurant
                 if (selection === 'subway') {

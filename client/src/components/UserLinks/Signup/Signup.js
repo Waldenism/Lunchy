@@ -72,7 +72,9 @@ class Signup extends React.Component {
                     <div className="field">
                       <div className="control">
                         <label>Username
+
                           <input name="username" type="text" className="form-control" onChange={this.handleChange} value={this.state.username}></input>
+
                         </label>
                       </div>
                     </div>
@@ -81,14 +83,18 @@ class Signup extends React.Component {
                     <div className="field">
                       <div className="control">
                         <label>Password
+
                           <input name="password" type="password" className="form-control" onChange={this.handleChange} value={this.state.password}></input>
+
                         </label>
                       </div>
                     </div>
 
                     <div className="field">
                       <div className="control">
+
                         <label >First Name
+
                           <input type="text" className="form-control" name="first" onChange={this.handleChange} value={this.state.first}></input>
                         </label>
                       </div>
@@ -105,6 +111,7 @@ class Signup extends React.Component {
                     <div className="field">
                       <div className="control">
                         <label>Group
+
 
                           <input name="group" type="text" className="form-control" onChange={this.handleChange} value={this.state.group}></input>
 

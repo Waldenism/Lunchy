@@ -20,7 +20,7 @@ export default {
                 test: /.jsx?$/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'react'],
+                    presets: ['env', 'react'],
                     compact: false
                 }
             },
