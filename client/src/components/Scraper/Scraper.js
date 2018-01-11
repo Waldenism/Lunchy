@@ -74,7 +74,6 @@ menus()
   };
 
 
-
   deleteItem(event) {
     event.preventDefault()
 
@@ -84,7 +83,7 @@ menus()
     .then(() => {
       for (let i=0; i<this.state.cart.length; i++) {
         let { balance, item } = this.state.cart[i]
-        console.log()
+
         if (item === value) {
           this.state.cart.splice(i, 1);
           this.setState({ cart: this.state.cart })
@@ -96,8 +95,6 @@ menus()
       console.log(er)
     })
   }
-
-
 
 
   addItem(event) {
