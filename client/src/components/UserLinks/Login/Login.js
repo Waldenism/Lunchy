@@ -9,7 +9,7 @@ class Login extends React.Component {
       username: '',
       password: '',
       group: '',
-      
+
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,8 +38,8 @@ class Login extends React.Component {
       password: this.state.password,
       group: this.state.group
     })
-    .then((res) => {
-      handler()
+    .then(res => {
+      res.data.username ? handler(true) : handler(false)
     })
     .catch((er) => {
       console.log(er)
@@ -87,8 +87,8 @@ class Login extends React.Component {
                     <div className="control">
                       <label>Group <span>       </span>
 
-                        <input name="" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
-                      
+                        <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
+
                       </label>
                     </div>
                   </div>
@@ -99,9 +99,9 @@ class Login extends React.Component {
                         <input type="checkbox" />
                       </label>
                     </div>
-                      
-                      
-                    
+
+
+
                   </div>
 
                   <input type="submit" value='Submit' className="" ></input>
@@ -111,9 +111,9 @@ class Login extends React.Component {
                 <hr />
 
 
-                
+
                   <div>Not a registered?</div>
-                    
+
                   <input type="submit" value='signup' onClick={ this.props.action }></input>
 
               </div>

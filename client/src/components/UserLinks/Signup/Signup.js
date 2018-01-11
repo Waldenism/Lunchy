@@ -43,8 +43,8 @@ class Signup extends React.Component {
       group: this.state.group,
       admin: this.state.admin
     })
-    .then((res) => {
-      handler();
+    .then(res => {
+      res.data.username ? handler(true) : handler(false)
     })
     .catch((er) => {
       console.log('ERROR!');
@@ -104,15 +104,15 @@ class Signup extends React.Component {
                     <div className="field">
                       <div className="control">
                         <label>Group
-                          
+
                           <input name="group" type="text" className="form-control" onChange={this.handleChange} value={this.state.group}></input>
-                          
+
                           <hr />
 
                           <span className='adminLabel' style={styles.adminLabelStyle}>Are you registerting as an admin?</span> <span>     </span>
 
                           <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input>
-                          
+
                         </label>
                       </div>
                     </div>

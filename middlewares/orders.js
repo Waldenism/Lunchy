@@ -26,7 +26,6 @@ const Order = {
                     console.log('Error in Saving item: '+err);
                     throw err;
                 }
-                console.log('');
                 console.log("**** Item added to Database *****");
                 console.log(addItem);
 
@@ -38,9 +37,6 @@ const Order = {
     getOrders: (id, callback) => {
         Orders.find({ 'group': id, 'paid': false }, function(err, res) {
             if (err) { console.log(err) };
-            console.log('++++++++++++++++')
-            console.log(res);
-            console.log('++++++++++++++++')
             callback(res)
         })
     }
