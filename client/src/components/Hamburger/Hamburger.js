@@ -62,9 +62,6 @@ class Hamburger extends React.Component {
 
   render () {
     let links;
-    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-    console.log(this.state.isLoggedIn)
-    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 
     if (this.state.isLoggedIn) {
       links = <Links handler={ this.removeLinks } />
