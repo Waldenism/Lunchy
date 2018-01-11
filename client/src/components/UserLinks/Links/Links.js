@@ -40,6 +40,13 @@ class Links extends React.Component {
       <div>
         <ul className="nav navbar-nav">
 
+        <li
+            className={window.location.pathname === "" ? "active" : ""}
+          >
+            <Link to="/"> Home </Link>
+          </li>
+
+
           <li
             className={
               window.location.pathname === "/" ||
