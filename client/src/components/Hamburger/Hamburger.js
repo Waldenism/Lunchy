@@ -32,7 +32,7 @@ class Hamburger extends React.Component {
         if (username) {
           this.setState({
             isLoggedIn: true,
-            name: name.first
+            // name: name
           })
         }
 
@@ -94,7 +94,7 @@ class Hamburger extends React.Component {
     let greeting;
 
     if (this.state.isLoggedIn) {
-      greeting = <h2> Hi {this.state.name}! </h2>
+      // greeting = <h2> Hi {this.state.name}! </h2>
       links = <Links handler={ this.removeLinks } />
     } else {
         greeting = <h2> Welcome to Lunchy! </h2>

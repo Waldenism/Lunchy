@@ -30,9 +30,7 @@ class Home extends React.Component {
     return(
       <div>
         
-          <h1>Lunchy</h1>
-          <h2> Please Select the Restaurant and menu item you would like to order </h2>
-        
+          <h1>Lunchy</h1>        
 
         <Scraper 
           handler = { this.handleScraper }

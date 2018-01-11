@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom';
+import './Links.css'
 
 class Links extends React.Component {
     constructor (props) {
@@ -37,44 +38,47 @@ class Links extends React.Component {
     }
 
     return (
-      <div>
-        <ul className="nav navbar-nav">
+      <div>        
 
-        <li
-            className={window.location.pathname === "" ? "active" : ""}
-          >
-            <Link to="/"> Home </Link>
-          </li>
+        <div className='container'>
+          <ul className="burgerNav">
 
+            <li
+              className={
+                window.location.pathname === "/" ||
+                window.location.pathname === ""
+                  ? "active"
+                  : ""
+              }
+            >
+              <Link to="/"> My Order </Link>
+            </li>
 
-          <li
-            className={
-              window.location.pathname === "/" ||
-              window.location.pathname === ""
-                ? "active"
-                : ""
-            }
-          >
-            <Link to="/"> Order </Link>
-          </li>
+            <li
+              className={window.location.pathname === "" ? "active" : ""}
+            >
+              <Link to="/balance"> Account Balance </Link>
+            </li>
 
-          <li
-            className={window.location.pathname === "" ? "active" : ""}
-          >
-            <Link to="/balance"> Account Balance </Link>
-          </li>
+            {link} 
 
-          {link}
+          </ul>
+        </div>
 
-          <li
-            className={window.location.pathname === "" ? "active" : ""}
-          >
-            <form onSubmit={this.Logout}>
-              <input type="submit" value='Logout'></input>
+        <br /><br /><br />
+
+        <div className='container'>
+          <div className='logoutHero'>       
+
+            <form className='clear' onSubmit={this.Logout}>
+              <div className='logoutButton'>
+                <input type="submit" value='Logout' className='button is-large is-success'></input>
+              </div>
             </form>
-          </li>
+            
+          </div>
+        </div>
 
-        </ul>
       </div>
     )
   }
