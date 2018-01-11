@@ -34,12 +34,12 @@ class Hamburger extends React.Component {
             isLoggedIn: true,
             name: name.first
           })
-        }
 
-        if (group.admin) {
-          this.setState({
-            admin: true
-          })
+          if (group.admin) {
+            this.setState({
+              admin: true
+            })
+          }
         }
 
       })

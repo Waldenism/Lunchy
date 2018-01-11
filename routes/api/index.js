@@ -16,6 +16,12 @@ router.post("/add", function(req, res) {
     });
 });
 
+router.post("/delete", function(req, res) {
+    order.deleteOrder(req.user, req.body, function(data) {
+        res.send(data);
+    });
+});
+
 
 //User API routes
 router.use("/user", userRoutes);
