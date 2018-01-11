@@ -8,20 +8,44 @@ class Links extends React.Component {
         this.state = {
           admin: false
         }
+
+        this.Logout = this.Logout.bind(this);
+    }
+
+    componentDidMount() {
+      axios.get('/api/user/current').then(res => {
+        let { admin } = res.data.group;
+        if (admin) {
+          this.setState({
+            admin: true
+          })
+        }
+      })
+    }
+
+    Logout(e) {
+      e.preventDefault()
+      axios.get('/logout').then(() => this.props.handler())
     }
 
   render() {
     let link;
 
-    // if (admin) {
-    //   let link = <li className={window.location.pathname === "" ? "active" : ""}>
-    //     <Link to="/group-order"> Group's Order </Link>
-    //   </li>
-    // }
+    if (this.state.admin) {
+      link = <li className={window.location.pathname === "" ? "active" : ""}>
+      <Link to="/group-order"> Group's Order </Link></li>;
+    }
 
     return (
-      <div> 
+      <div>
         <ul className="nav navbar-nav">
+
+        <li
+            className={window.location.pathname === "" ? "active" : ""}
+          >
+            <Link to="/"> Home </Link>
+          </li>
+
 
           <li
             className={
@@ -33,7 +57,7 @@ class Links extends React.Component {
           >
             <Link to="/"> Order </Link>
           </li>
-          
+
           <li
             className={window.location.pathname === "" ? "active" : ""}
           >
@@ -41,6 +65,14 @@ class Links extends React.Component {
           </li>
 
           {link}
+
+          <li
+            className={window.location.pathname === "" ? "active" : ""}
+          >
+            <form onSubmit={this.Logout}>
+              <input type="submit" value='Logout'></input>
+            </form>
+          </li>
 
         </ul>
       </div>
