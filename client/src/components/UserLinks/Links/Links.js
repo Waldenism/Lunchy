@@ -8,6 +8,8 @@ class Links extends React.Component {
         this.state = {
           admin: false
         }
+
+        this.Logout = this.Logout.bind(this);
     }
 
     componentDidMount() {
@@ -21,12 +23,13 @@ class Links extends React.Component {
       })
     }
 
+    Logout(e) {
+      e.preventDefault()
+      axios.get('/logout').then(() => this.props.handler())
+    }
+
   render() {
     let link;
-
-    console.log("*******************************")
-    console.log(this.state.admin)
-    console.log("*******************************")
 
     if (this.state.admin) {
       link = <li className={window.location.pathname === "" ? "active" : ""}>
@@ -55,6 +58,14 @@ class Links extends React.Component {
           </li>
 
           {link}
+
+          <li
+            className={window.location.pathname === "" ? "active" : ""}
+          >
+            <form onSubmit={this.Logout}>
+              <input type="submit" value='Logout'></input>
+            </form>
+          </li>
 
         </ul>
       </div>

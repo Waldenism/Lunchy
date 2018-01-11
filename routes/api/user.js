@@ -5,7 +5,7 @@ const order = require("../../middlewares/orders.js");
 // Check Login Status
 router.get("/current", function(req, res) {
     res.send(req.user);
-    console.log('body: ' + req.user)
+    console.log('current: ' + req.user)
 });
 
 

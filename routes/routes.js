@@ -42,5 +42,10 @@ router.post('/signup', passport.authenticate('signup', {
     }
 );
 
+router.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+});
+
 
 module.exports = router;
