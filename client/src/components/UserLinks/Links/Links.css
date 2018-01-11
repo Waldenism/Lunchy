@@ -1,0 +1,35 @@
+.clear {
+  all: none;
+}
+
+.logoutHero {
+  background: none;
+  background-color: none;
+  display: flex;
+  flex-direction: row;
+  align-items: right;
+  /*width: 252px;*/
+}
+
+.logoutButton {
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*align-items: right;*/
+  padding-left: 110px;
+}
+
+.burgerNav {
+  display: block !important;
+  /*float:left;*/
+}
+
+.burgerNav li {
+  padding: 15px;
+  font-size: 132.5%;
+  /*border: solid green 2px;*/
+  max-width: 215px;
+}
+
+.burgerContainer {
+  /*border: solid red 2px;*/
+}

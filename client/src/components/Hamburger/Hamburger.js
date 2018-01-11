@@ -4,6 +4,9 @@ import Login from '../UserLinks/Login'
 import Signup from '../UserLinks/Signup'
 import Links from '../UserLinks/Links'
 
+import axios from 'axios'
+
+
 import './Hamburger.css'
 
 
@@ -15,17 +18,46 @@ class Hamburger extends React.Component {
       menuOpen: false,
       isLoggedIn: false,
       admin: false,
-      auth: 'login'
+      auth: 'login',
+      name: ''
     }
 
     this.openLinks = this.openLinks.bind(this)
     this.removeLinks = this.removeLinks.bind(this)
-    this.handleAuth = this.handleAuth.bind(this)
+    this.handleSignup = this.handleSignup.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
-  handleAuth( ) {
+  componentDidMount() {
+      axios.get('/api/user/current').then(res => {
+        let { group, username, name } = res.data;
+        if (username) {
+          this.setState({
+            isLoggedIn: true,
+            // name: name
+          })
+
+          if (group.admin) {
+            this.setState({
+              admin: true
+            })
+          }
+        }
+
+      })
+  }
+
+  handleSignup( ) {
     this.setState({
-      auth: 'signup'
+      auth: 'signup',
+      isLoggedIn: false
+    })
+  }
+
+  handleLogin( ) {
+    this.setState({
+      auth: 'login',
+      isLoggedIn: false
     })
   }
 
@@ -41,42 +73,50 @@ class Hamburger extends React.Component {
     this.setState({menuOpen: !this.state.menuOpen})
   }
 
-  openLinks() {
-    this.setState({
-      isLoggedIn: true
-    })
+  openLinks(conf) {
+    if (conf) {
+      this.setState({
+        isLoggedIn: true,
+        auth: null
+      })
+    }
   }
 
-  removeLinks() {
-    this.setState({
-      isLoggedIn: false
-    })
-  } 
+  removeLinks(conf) {
+    if (conf) {
+      this.setState({
+        isLoggedIn: false,
+        auth: 'login'
+      })
+    }
+  }
 
   render () {
     let links;
+    let greeting;
 
     if (this.state.isLoggedIn) {
+      // greeting = <h2> Hi {this.state.name}! </h2>
       links = <Links handler={ this.removeLinks } />
     } else {
+        greeting = <h2> Welcome to Lunchy! </h2>
         if(this.state.auth === 'login') {
-          links = <Login handler={ this.openLinks } action={ this.handleAuth } />
+          links = <Login handler={ this.openLinks } action={ this.handleSignup } />
         } else {
-          links = <Signup handler={ this.openLinks } />
+          links = <Signup handler={ this.openLinks } action={ this.handleLogin } />
         }
-
-       
 
     }
 
 
     return (
       <div>
-        <Menu
-          right
-        >
+        <Menu right>
 
-          {links}
+        {greeting}
+
+
+        {links}
 
 
         </Menu>

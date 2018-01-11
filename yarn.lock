@@ -2165,6 +2165,10 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
+hamburger@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/hamburger/-/hamburger-0.1.1.tgz#07687ff1e6bad87b0354caae4e59f4169e229a27"
+
 har-schema@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-1.0.5.tgz#d263135f43307c02c602afc8fe95970c0151369e"

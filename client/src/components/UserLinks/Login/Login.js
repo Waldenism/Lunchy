@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import './Login.css'
 
 class Login extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class Login extends React.Component {
       username: '',
       password: '',
       group: '',
-      
+
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,8 +38,8 @@ class Login extends React.Component {
       password: this.state.password,
       group: this.state.group
     })
-    .then((res) => {
-      handler()
+    .then(res => {
+      res.data.username ? handler(true) : handler(false)
     })
     .catch((er) => {
       console.log(er)
@@ -57,20 +58,27 @@ class Login extends React.Component {
                 <hr />
 
                 <form onSubmit={this.handleSubmit}>
+
                   <div className="field">
                     <div className="control">
+
                       <label >Username
+
 
 
                         <input name="username" type="text" className="" onChange={this.handleChange} value={this.state.username}></input>
 
 
+
                       </label>
                     </div>
                   </div>
+
                   <div className="field">
                     <div className="control">
+
                       <label>Password
+
 
                         <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
 
@@ -80,29 +88,40 @@ class Login extends React.Component {
                   </div>
 
                   <div className="field">
-                      <label>Group</label>
-                      <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
+                    <div className="control">
+                      <label>Group <span>       </span>
+
+                        <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
+
+
+                      </label>
+                      
+                    </div>
                   </div>
 
-                  <div className='field'>
-                    <label className='checkbox'></label>
-                      <input type="checkbox" id="rememberCheckbox"/>
-                      <span> </span>
-                      Remember me
-                    
+                  <div className="field">
+                    <div className="control">
+                      <label> Remember me <span> </span>
+                        <input type="checkbox" />
+                      </label>
+                    </div>
+
+
+
                   </div>
 
-                  <input type="submit" value='Submit' className=""></input>
-
+                  <input type="submit" value='Submit' className="button is-large is-info" ></input>
+                
                 </form>
 
                 <hr />
 
 
+
                 
-                  <div>Not a registered?</div>
+                  <h6>Not a registered?</h6>
                     
-                  <input type="submit" value='signup' onClick={ this.props.action }></input>
+                  <input type="submit" value='signup' className='button is-normal' onClick={ this.props.action }></input>
 
               </div>
 

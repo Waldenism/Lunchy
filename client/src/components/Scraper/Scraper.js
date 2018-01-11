@@ -17,8 +17,10 @@ class Scraper extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleItem = this.toggleItem.bind(this);
+
   }
  componentDidMount() {
     this.menus();
@@ -50,7 +52,6 @@ menus()
       this.setState({
         menu: res.data
       })
-      console.log(res.data)
     })
     .catch((er) => {
       console.log(er)
@@ -71,7 +72,6 @@ menus()
       this.setState({
         menu: res.data
       })
-      console.log(res.data)
     })
     .catch((er) => {
       console.log(er)
@@ -92,7 +92,33 @@ menus()
         [...toggled, index]
     })
 
+
+  deleteItem(event) {
+    event.preventDefault()
+
+    const {value} = event.target.item;
+
+    axios.post('/api/delete', {value})
+    .then(() => {
+      for (let i=0; i<this.state.cart.length; i++) {
+        let { balance, item } = this.state.cart[i]
+
+        if (item === value) {
+          this.state.cart.splice(i, 1);
+          this.setState({ cart: this.state.cart })
+          this.setState({ balance: this.state.balance - balance })
+        }
+      }
+    })
+    .catch((er) => {
+      console.log(er)
+    })
   }
+
+
+  addItem(event) {
+    event.preventDefault()
+
 
     /*const value = itemName;
     let restaurant = this.state.value;
@@ -140,31 +166,40 @@ menus()
 
 
   render() {
+
     console.log(this.state.menu)
     console.log(this.state.cart)
 
-
     return (
       <div>
-
         <ol>
           {this.state.cart.map(item =>
+
             <div key={_.uniqueId()} >
               <li key={_.uniqueId()} >{item.item}</li>
+
             </div>
           )}
           <b>Balance: {this.state.balance}</b>
         </ol>
 
+        <div className='columns'>
 
-        <select value={this.state.value}  onClick={this.handleClick} onChange={this.handleChange} className="menu-selection">
-          <option onClick={this.handleClick} value='subway'>Subway</option>
-          <option value='dairyqueen'>Dairy Queen</option>
-        </select>
+          <div className='column'>
+            <h5> Please Select the Restaurant and menu item you would like to order </h5>
+          </div>
 
+          <div className='column'>
+            <select value={this.state.value}  onClick={this.handleClick} onChange={this.handleChange} className="menu-selection">
+              <option onClick={this.handleClick} value='subway'>Subway</option>
+              <option value='dairyqueen'>Dairy Queen</option>
+            </select>
+          </div>
 
+        </div>
 
         <ul>
+
           {this.state.menu.map((item,index) =>
             <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
             
@@ -177,6 +212,7 @@ menus()
           )}
         </ul>     
         <button onClick={() => this.handleSubmit()}>Submit</button>
+
       </div>
     )
   }

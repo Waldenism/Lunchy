@@ -16,11 +16,10 @@ router.post("/add", function(req, res) {
     });
 });
 
-// Check Login Status
-router.use("/status", function(req, res) {
-    res.send(req.body);
-
-    console.log('body ' + req.body)
+router.post("/delete", function(req, res) {
+    order.deleteOrder(req.user, req.body, function(data) {
+        res.send(data);
+    });
 });
 
 

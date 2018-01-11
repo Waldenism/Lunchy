@@ -21,6 +21,8 @@
     "express": "^4.16.2",
     "express-react-views": "^0.10.4",
     "express-session": "^1.15.6",
+    "hamburger": "^0.1.1",
+    "lodash": "^4.17.4",
     "mongoose": "^4.13.6",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
