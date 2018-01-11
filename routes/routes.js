@@ -37,8 +37,7 @@ router.post('/signup', passport.authenticate('signup', {
       console.log('---------------------------');
       console.log('signup: ', req.body);
       console.log('---------------------------');
-
-      res.redirect('/');
+      res.send(req.user)
     }
 );
 
