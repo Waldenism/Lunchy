@@ -109,13 +109,20 @@ menus()
           <b>Balance: {this.state.balance}</b>
         </ol>
 
+        <div className='columns'>
 
-        <select value={this.state.value}  onClick={this.handleClick} onChange={this.handleChange} className="menu-selection">
-          <option onClick={this.handleClick} value='subway'>Subway</option>
-          <option value='dairyqueen'>Dairy Queen</option>
-        </select>
+          <div className='column'>
+            <h5> Please Select the Restaurant and menu item you would like to order </h5>
+          </div>
 
+          <div className='column'>
+            <select value={this.state.value}  onClick={this.handleClick} onChange={this.handleChange} className="menu-selection">
+              <option onClick={this.handleClick} value='subway'>Subway</option>
+              <option value='dairyqueen'>Dairy Queen</option>
+            </select>
+          </div>
 
+        </div>
 
         <ul>
           {this.state.menu.map(item =>
