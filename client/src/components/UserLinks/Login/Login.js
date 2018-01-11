@@ -59,7 +59,7 @@ class Login extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                   <div className="field">
                     <div className="control">
-                      <label for="inputUsername">Username
+                      <label >Username
 
 
                         <input name="username" type="text" className="" onChange={this.handleChange} value={this.state.username}></input>
@@ -70,7 +70,7 @@ class Login extends React.Component {
                   </div>
                   <div className="field">
                     <div className="control">
-                      <label for="inputPassword">Password
+                      <label>Password
 
                         <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
 

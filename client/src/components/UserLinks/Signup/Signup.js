@@ -64,7 +64,7 @@ class Signup extends React.Component {
                     
                     <div className="field">
                       <div className="control">
-                        <label for="inputPassword">Username
+                        <label>Username
                           <input name="username" type="text" className="" onChange={this.handleChange} value={this.state.username}></input>
                         </label>
                       </div>
@@ -73,7 +73,7 @@ class Signup extends React.Component {
                     
                     <div className="field">
                       <div className="control">
-                        <label for="inputPassword">Password
+                        <label>Password
                           <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
                         </label>
                       </div>
@@ -81,7 +81,7 @@ class Signup extends React.Component {
 
                     <div className="field">
                       <div className="control">
-                        <label for="firstName">First Name
+                        <label>First Name
                           <input type="text" className="form-control" name="first" onChange={this.handleChange} value={this.state.first}></input>
                         </label>
                       </div>
@@ -89,7 +89,7 @@ class Signup extends React.Component {
 
                     <div className="field">
                       <div className="control">
-                        <label for="group">Last Name
+                        <label>Last Name
                           <input type="text" className="form-control" name="last" onChange={this.handleChange} value={this.state.last}></input>
                         </label>
                       </div>
@@ -97,7 +97,7 @@ class Signup extends React.Component {
 
                     <div className="field">
                       <div className="control">
-                        <label for="group">Group
+                        <label>Group
                         <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
                         <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input> Group Admin
                         </label>

@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import lodash from 'lodash'
 import MenuList from '../MenuList'
 import MenuListItem from '../MenuList'
+import './Scraper.css'
 
 class Scraper extends React.Component {
   constructor(props) {
@@ -10,11 +12,13 @@ class Scraper extends React.Component {
       menu: [],
       value: '',
       cart: [],
-      balance: 0
+      balance: 0,
+      toggled: []
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.addItem = this.addItem.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleItem = this.toggleItem.bind(this);
   }
  componentDidMount() {
     this.menus();
@@ -74,11 +78,23 @@ menus()
     })
   };
 
+     /*                      */ 
+    //                        \\
+   //*\\\\\\\\\\\\////////////*\\
+  //***\TOGGLES HIGHLIGHTING/***\\
+  toggleItem(index, itemName, event) {  
 
-  addItem(event) {
-    event.preventDefault()
+    const { toggled } = this.state
+    
+    this.setState({
+      toggled: toggled.indexOf(index) > -1 ? 
+        [...toggled.filter(item => item != index)] : 
+        [...toggled, index]
+    })
 
-    const {value} = event.target.item;
+  }
+
+    /*const value = itemName;
     let restaurant = this.state.value;
 
     axios.post('/api/add', {value, restaurant})
@@ -96,11 +112,36 @@ menus()
       console.log(er)
     })
   }
+  */
+
+  handleSubmit(event) {
+
+    const { menu, toggled } = this.state
+    
+    const theOrder = menu
+      .filter((val, index) => 
+        toggled.indexOf(index) > -1 
+      )
+
+    console.log("THE ORDER: ".concat(JSON.stringify(theOrder)))
+
+   /* axios.post('/api/add', {theOrders})
+      .then(res => 
+          const { paid, balance} = res.data
+          this.setState({
+
+          })
+        )
+  */
+
+
+
+  }
 
 
   render() {
     console.log(this.state.menu)
-    console.log(this.state.car)
+    console.log(this.state.cart)
 
 
     return (
@@ -108,8 +149,8 @@ menus()
 
         <ol>
           {this.state.cart.map(item =>
-            <div>
-              <li>{item.item}</li>
+            <div key={_.uniqueId()} >
+              <li key={_.uniqueId()} >{item.item}</li>
             </div>
           )}
           <b>Balance: {this.state.balance}</b>
@@ -125,22 +166,17 @@ menus()
 
         <ul>
           {this.state.menu.map((item,index) =>
-            <div>
+            <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
             
-              <img key={index} src={item.image} />
+              <img key={_.uniqueId()} src={item.image} />
             
-              <li key={index}>{item.name}</li>
-              <form onSubmit={this.addItem}>
-                <div className="form-group">
-                  <input type="hidden" className="form-control" name="item" value={item.name}></input>
-                  <input type="submit" value='Add Item' className="btn btn-warning btn-md"></input>
-                </div>
-              </form>
+              <li key={_.uniqueId()} >{item.name}</li>
+             
 
             </div>
           )}
         </ul>     
-
+        <button onClick={() => this.handleSubmit()}>Submit</button>
       </div>
     )
   }

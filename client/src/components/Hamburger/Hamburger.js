@@ -3,7 +3,6 @@ import { slide as Menu } from 'react-burger-menu'
 import Login from '../UserLinks/Login'
 import Signup from '../UserLinks/Signup'
 import Links from '../UserLinks/Links'
-import MyOrder from '../MyOrder'
 
 import './Hamburger.css'
 
@@ -79,7 +78,6 @@ class Hamburger extends React.Component {
 
           {links}
 
-          <MyOrder />
 
         </Menu>
 
