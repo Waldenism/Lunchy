@@ -89,7 +89,9 @@ class Login extends React.Component {
 
                         <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
 
+
                       </label>
+                      
                     </div>
                   </div>
 
@@ -104,17 +106,18 @@ class Login extends React.Component {
 
                   </div>
 
-                  <input type="submit" value='Submit' className="" ></input>
-
+                  <input type="submit" value='Submit' className="button is-large is-info" ></input>
+                
                 </form>
 
                 <hr />
 
 
 
-                  <div>Not a registered?</div>
-
-                  <input type="submit" value='signup' onClick={ this.props.action }></input>
+                
+                  <h6>Not a registered?</h6>
+                    
+                  <input type="submit" value='signup' className='button is-normal' onClick={ this.props.action }></input>
 
               </div>
 
