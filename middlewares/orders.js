@@ -34,6 +34,22 @@ const Order = {
         }
     },
 
+    deleteOrder: (user, data, callback) => {
+
+        if (!user) {
+            console.log('not logged in');
+
+        } else {
+            let { _id, group } = user;
+            let { value, restaurant } = data;
+
+            Orders.remove({ userid: _id, group: group.id, item: value}, function(err) {
+                if (err) return handleError(err);
+                callback();
+            });
+        };
+    },
+
     getOrders: (id, callback) => {
         Orders.find({ 'group': id, 'paid': false }, function(err, res) {
             if (err) { console.log(err) };

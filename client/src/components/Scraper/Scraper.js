@@ -15,6 +15,7 @@ class Scraper extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
  componentDidMount() {
     this.menus();
@@ -73,6 +74,29 @@ menus()
   };
 
 
+  deleteItem(event) {
+    event.preventDefault()
+
+    const {value} = event.target.item;
+
+    axios.post('/api/delete', {value})
+    .then(() => {
+      for (let i=0; i<this.state.cart.length; i++) {
+        let { balance, item } = this.state.cart[i]
+
+        if (item === value) {
+          this.state.cart.splice(i, 1);
+          this.setState({ cart: this.state.cart })
+          this.setState({ balance: this.state.balance - balance })
+        }
+      }
+    })
+    .catch((er) => {
+      console.log(er)
+    })
+  }
+
+
   addItem(event) {
     event.preventDefault()
 
@@ -99,11 +123,16 @@ menus()
   render() {
     return (
       <div>
-
         <ol>
           {this.state.cart.map(item =>
             <div>
               <li>{item.item}</li>
+              <form onSubmit={this.deleteItem}>
+                <div className="form-group">
+                  <input type="hidden" className="form-control" name="item" value={item.item}></input>
+                  <input type="submit" value='Delete Item' className="btn btn-warning btn-md"></input>
+                </div>
+              </form>
             </div>
           )}
           <b>Balance: {this.state.balance}</b>
@@ -127,7 +156,7 @@ menus()
         <ul>
           {this.state.menu.map(item =>
             <div>
-           
+
               <img src={item.image} />
 
               <li >{item.name}</li>

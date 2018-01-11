@@ -35,7 +35,7 @@ class GroupOrder extends React.Component {
   }
 
   // deleteOrder = id => {
-  //   axios.post('', {id: id})
+  //   axios.post('/api/delete', {id: id})
   //   .then(res => this.setState({orders: res}))
   // }
 
