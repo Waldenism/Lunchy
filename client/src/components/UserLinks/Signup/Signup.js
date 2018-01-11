@@ -1,6 +1,12 @@
 import React from 'react'
 import axios from 'axios'
 
+const styles = {
+  adminLabelStyle: {
+    fontSize: 12
+  }
+};
+
 class Signup extends React.Component {
   constructor(props) {
     super(props)
@@ -64,8 +70,8 @@ class Signup extends React.Component {
                     
                     <div className="field">
                       <div className="control">
-                        <label for="inputPassword">Username
-                          <input name="username" type="text" className="" onChange={this.handleChange} value={this.state.username}></input>
+                        <label>Username
+                          <input name="username" type="text" className="form-control" onChange={this.handleChange} value={this.state.username}></input>
                         </label>
                       </div>
                     </div>
@@ -73,15 +79,15 @@ class Signup extends React.Component {
                     
                     <div className="field">
                       <div className="control">
-                        <label for="inputPassword">Password
-                          <input name="password" type="password" className="" onChange={this.handleChange} value={this.state.password}></input>
+                        <label>Password
+                          <input name="password" type="password" className="form-control" onChange={this.handleChange} value={this.state.password}></input>
                         </label>
                       </div>
                     </div>
 
                     <div className="field">
                       <div className="control">
-                        <label for="firstName">First Name
+                        <label >First Name
                           <input type="text" className="form-control" name="first" onChange={this.handleChange} value={this.state.first}></input>
                         </label>
                       </div>
@@ -89,7 +95,7 @@ class Signup extends React.Component {
 
                     <div className="field">
                       <div className="control">
-                        <label for="group">Last Name
+                        <label>Last Name
                           <input type="text" className="form-control" name="last" onChange={this.handleChange} value={this.state.last}></input>
                         </label>
                       </div>
@@ -97,9 +103,16 @@ class Signup extends React.Component {
 
                     <div className="field">
                       <div className="control">
-                        <label for="group">Group
-                        <input name="group" type="text" className="" onChange={this.handleChange} value={this.state.group}></input>
-                        <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input> Group Admin
+                        <label>Group
+                          
+                          <input name="group" type="text" className="form-control" onChange={this.handleChange} value={this.state.group}></input>
+                          
+                          <hr />
+
+                          <span className='adminLabel' style={styles.adminLabelStyle}>Are you registerting as an admin?</span> <span>     </span>
+
+                          <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input>
+                          
                         </label>
                       </div>
                     </div>

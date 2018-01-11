@@ -124,12 +124,12 @@ menus()
 
 
         <ul>
-          {this.state.menu.map((item,index) =>
+          {this.state.menu.map(item =>
             <div>
             
-              <img key={index} src={item.image} />
+              <img src={item.image} />
             
-              <li key={index}>{item.name}</li>
+              <li>{item.name}</li>
               <form onSubmit={this.addItem}>
                 <div className="form-group">
                   <input type="hidden" className="form-control" name="item" value={item.name}></input>

@@ -1,23 +1,4 @@
-/*.line {
-  width: 48px;
-  height: 6px;
-  margin: 6px 0;
-  background: black;
-  border-radius: 4px;
-  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
-}
 
-.hamburger {
-  
-  background-color: #eceff1;
-}
-
-.hamburger.active > .line {
-  background-color: teal;
-  transform: rotateZ(-30deg);
-}
-
-*/
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
@@ -48,6 +29,7 @@
   background: #373a47;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
+  /*width: 50%;*/
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -58,7 +40,7 @@
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 0.8em;
+  padding: 1.55em;
 }
 
 /* Styling of overlay */
