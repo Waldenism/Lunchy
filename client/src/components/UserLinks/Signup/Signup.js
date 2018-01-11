@@ -56,7 +56,7 @@ class Signup extends React.Component {
     return (
       <div>
         <h3>Sign Up!</h3>
-        
+
 
 
         <section>
@@ -65,9 +65,9 @@ class Signup extends React.Component {
                   <h3 className="title has-text-grey">Lunchy</h3>
                   <p className="subtitle has-text-grey">Create Account</p>
                   <hr />
-                  
+
                   <form onSubmit={this.handleSubmit}>
-                    
+
                     <div className="field">
                       <div className="control">
                         <label>Username
@@ -76,7 +76,7 @@ class Signup extends React.Component {
                       </div>
                     </div>
 
-                    
+
                     <div className="field">
                       <div className="control">
                         <label>Password
@@ -123,6 +123,9 @@ class Signup extends React.Component {
                       </div>
                     </div>
                   </form>
+
+                  <div>Already a Member?</div>
+                  <input type="submit" value='Login' onClick={ this.props.action }></input>
 
             </div>
           </div>
