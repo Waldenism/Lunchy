@@ -25,4 +25,11 @@
 
 .burgerNav li {
   padding: 15px;
+  font-size: 132.5%;
+  /*border: solid green 2px;*/
+  max-width: 215px;
+}
+
+.burgerContainer {
+  /*border: solid red 2px;*/
 }

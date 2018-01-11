@@ -40,7 +40,7 @@ class Links extends React.Component {
     return (
       <div>        
 
-        <div className='container'>
+        <div className='container burgerContainer'>
           <ul className="burgerNav">
 
             <li
