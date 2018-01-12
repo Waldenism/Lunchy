@@ -2,13 +2,12 @@
   display:inline-block;
   background-color: white;
   margin: 10px;
-  z-index: 1000;
   
 }
 
-img {z-index: 1;}
-
 .toggled {
-  background-color: #2f70e1 !important;
-  color: #fff;
+    background: rgba(39,62,84,0.82);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
 }
