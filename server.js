@@ -5,17 +5,22 @@ import webpack from 'webpack';
 import config from './webpack.config';
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-//const flash    = require('connect-flash');
 
-const port = 3000;
 const app = express();
 const compiler = webpack(config);
-
+let port;
 
 //mongoose config
 import mongoose from 'mongoose';
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/lunchy');
+if (MONGODB_URI) {
+  port = process.env.PORT || 3000
+  mongoose.connect("mongodb://heroku_92bdwqcz:c0s9guctbb50f899t3c0dqjtru@ds255347.mlab.com:55347/heroku_92bdwqcz")
+} else {
+  port = 3000;
+  mongoose.connect('mongodb://localhost/lunchy');
+}
+
 
 
 //passport config
