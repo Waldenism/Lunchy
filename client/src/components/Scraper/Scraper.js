@@ -1,26 +1,29 @@
 import React from 'react'
 import axios from 'axios'
+import lodash from 'lodash'
+import MenuList from '../MenuList'
+import MenuListItem from '../MenuList'
+import './Scraper.css'
 import Modal from '../Modal/Modal'
 import _ from 'lodash'
-import './Scraper.css'
 
 class Scraper extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       menu: [],
       restaurant: '',
       cart: [],
       balance: 0,
+      toggled: [],
+      isModalOpen: false
+    }
 
-      toggled: []
-    };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.toggleItem = this.toggleItem.bind(this)
+    }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.toggleItem = this.toggleItem.bind(this);
-
-  }
 
   componentWillMount() {
     this.setState({
@@ -40,9 +43,14 @@ class Scraper extends React.Component {
       this.setState({
         menu: res.data
       })
+    })
+    .catch((er) => {
+      console.log(er)
+    })
   }
 
-  handleChange (event) {
+
+  handleChange(event) {
     event.preventDefault()
 
     const { toggled, restaurant } = this.state;
@@ -55,7 +63,6 @@ class Scraper extends React.Component {
       cart: []
     });
 
-
     axios.post('/api/scraper', { restaurant: value })
     .then((res) => {
       handler(res.data)
@@ -66,7 +73,7 @@ class Scraper extends React.Component {
     .catch((er) => {
       console.log(er)
     })
-  }
+  };
 
 
   toggleItem(index, itemName, event) {
@@ -103,9 +110,7 @@ class Scraper extends React.Component {
   };
 
 
-  handleSubmit (event) {
-    const { menu, toggled, balance } = this.state
-
+  handleSubmit(event) {
 
     const { menu, toggled } = this.state
     const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
@@ -118,35 +123,47 @@ class Scraper extends React.Component {
         cart: []
       })
     })
+
+    this.setState({ isModalOpen: true })
+    this.setState({ cart: theOrder })
+    this.setState({ balance: balance + 10 * theOrder.length})
   }
 
 
   render() {
     return (
       <div>
+        <ol>
+          {this.state.cart.map(item =>
+
+            <div key={_.uniqueId()} >
+              <li key={_.uniqueId()} >{item.item}</li>
+
+            </div>
+          )}
+          <b>Balance: {this.state.balance}</b>
+        </ol>
 
         <div className='columns'>
+
           <div className='column'>
             <h5> Please Select the Restaurant and menu item you would like to order </h5>
           </div>
 
           <div className='column'>
-
             <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
               <option value='subway'>Subway</option>
-
               <option value='dairyqueen'>Dairy Queen</option>
             </select>
           </div>
+
         </div>
 
         <ul>
-          {this.state.menu.map((item, index) =>
-            <div
-              key={_.uniqueId()}
-              className={this.state.toggled.indexOf(index) > -1 ? 'menu toggled' : 'menu'}
-              onClick={(e) => this.toggleItem(index, item.name, e)}
-            >
+
+          {this.state.menu.map((item,index) =>
+            <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
+
               <img key={_.uniqueId()} src={item.image} />
               <li key={_.uniqueId()} >{item.name}</li>
 
@@ -155,6 +172,7 @@ class Scraper extends React.Component {
           )}
         </ul>
         <button onClick={() => this.handleSubmit()}>Submit</button>
+
         <Modal
           isOpen={this.state.isModalOpen}
           onClose={() => { this.setState({ isModalOpen: false }) }}
@@ -173,6 +191,7 @@ class Scraper extends React.Component {
           <button onClick={() => { this.setState({ isModalOpen: false }) }}>Edit Order</button>
           <button onClick={() => { this.setState({ isModalOpen: false }) }}>Place Order</button>
         </Modal>
+
       </div>
     )
   }

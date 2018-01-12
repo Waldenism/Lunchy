@@ -53,11 +53,11 @@ class App extends Component {
     return (
       <Router>
         <div>
-        
-          <WrapperSmall>
-            <Navbar />
-          </WrapperSmall>
 
+          {/*<WrapperSmall>
+
+          </WrapperSmall>*/}
+          <Navbar />
           <WrapperBig>
             <Route exact path="/" component={Home} />
             <Route path="/balance" component={Balance} />
