@@ -3,17 +3,16 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
-//components
-import WrapperSmall from './components/WrapperSmall'
-import WrapperBig from './components/WrapperBig'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+//style sheet
 import './App.css'
 
 //pages
 import Home from './pages/Home'
 import Balance from './pages/Balance'
 import GroupOrder from './pages/GroupOrder'
+
+//sidebar
+import Hamburger from './components/Hamburger'
 
 
 class App extends Component {
@@ -52,20 +51,27 @@ class App extends Component {
 
     return (
       <Router>
-        <div>
+        <div className='toot'>
 
-          {/*<WrapperSmall>
+          <div className='header'>
+            <div className=''>
+              <h1> LunchTime </h1>
+              <Hamburger />
+            </div>
+          </div>
 
-          </WrapperSmall>*/}
-          <Navbar />
-          <WrapperBig>
+          <div className='main'>
             <Route exact path="/" component={Home} />
             <Route path="/balance" component={Balance} />
             <Route path="/group-order" component={GroupOrder} />
+          </div>
 
-          </WrapperBig>
 
-          <Footer />
+          <div className='footerCustom'>
+            <span> LunchTime </span>
+          </div>
+
+          
 
         </div>
       </Router>

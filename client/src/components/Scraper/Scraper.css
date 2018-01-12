@@ -1,4 +1,4 @@
-.menu {
+/*.menu {
   display:inline-block;
   background-color: white;
   margin: 10px;
@@ -10,4 +10,42 @@
     overflow: hidden;
     height: 100%;
     z-index: 2;
+}
+*/
+.menu {
+  display:inline-block;
+  background-color: white;
+  margin: 10px;
+  z-index: 1000;
+  padding: 20px;
+  border-radius: 4px; 
+  color: #B88E8D;
+  /*color: #34435E;*/
+  font-family: 'Shrikhand', cursive;
+  font-size: 1em;
+}
+
+img {z-index: 1;}
+
+.toggled {
+  background-color: #2f70e1 !important;
+  color: #fff;
+}
+
+.restaurantSelector {
+  /*border: solid red 3px;*/
+  padding: 10px 5px 0px 5px;
+}
+
+.restaurant {
+  font-size: 2em;
+  color: #6369D1;
+  /*margin-left: -8px; */
+}
+
+.submitOrderButton {
+  margin-top: 10px;
+  padding-left: 8px;
+  margin-bottom: 10px;
+  /*background-color: #209cee;*/
 }

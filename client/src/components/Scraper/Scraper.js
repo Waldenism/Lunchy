@@ -84,7 +84,7 @@ class Scraper extends React.Component {
         [...toggled.filter(item => item != index)] :
         [...toggled, index]
     })
-};
+  };
 
 
   deleteItem(event) {
@@ -133,6 +133,8 @@ class Scraper extends React.Component {
   render() {
     return (
       <div>
+
+        {/*
         <ol>
           {this.state.cart.map(item =>
 
@@ -143,22 +145,15 @@ class Scraper extends React.Component {
           )}
           <b>Balance: {this.state.balance}</b>
         </ol>
+        */}
 
-        <div className='columns'>
-
-          <div className='column'>
-            <h5> Please Select the Restaurant and menu item you would like to order </h5>
-          </div>
-
-          <div className='column'>
-            <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
-              <option value='subway'>Subway</option>
-              <option value='dairyqueen'>Dairy Queen</option>
-            </select>
-          </div>
-
-        </div>
-
+        <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
+          <option value='subway'>Subway</option>
+          <option value='dairyqueen'>Dairy Queen</option>
+        </select>
+        
+        <button onClick={() => this.handleSubmit()}>Submit</button>
+        
         <ul>
 
           {this.state.menu.map((item,index) =>
@@ -171,13 +166,14 @@ class Scraper extends React.Component {
 
           )}
         </ul>
-        <button onClick={() => this.handleSubmit()}>Submit</button>
+        
 
         <Modal
           isOpen={this.state.isModalOpen}
           onClose={() => { this.setState({ isModalOpen: false }) }}
         >
           <h1>Your Order</h1>
+
           <ol>
             {
               this.state.cart.map(item => (
@@ -188,8 +184,10 @@ class Scraper extends React.Component {
             }
             <strong>Balance: {this.state.balance}</strong>
           </ol>
+
           <button onClick={() => { this.setState({ isModalOpen: false }) }}>Edit Order</button>
           <button onClick={() => { this.setState({ isModalOpen: false }) }}>Place Order</button>
+
         </Modal>
 
       </div>

@@ -113,11 +113,10 @@ class Hamburger extends React.Component {
       <div>
         <Menu right>
 
-        {greeting}
+          {greeting}
 
 
-        {links}
-
+          {links}
 
         </Menu>
 

@@ -2,11 +2,8 @@
 import React from 'react'
 
 //components
-import Hero from '../components/Hero'
-import Container from '../components/Container'
-import Row from '../components/Row'
-import Col from '../components/Col'
-import DeleteBtn from '../components/DeleteBtn'
+
+// import DeleteBtn from '../components/DeleteBtn'
 import { MenuList, MenuListItem } from '../components/MenuList'
 import axios from 'axios'
 
@@ -60,16 +57,14 @@ class GroupOrder extends React.Component {
     console.log(this.state.orders);
     return(
 
-      <div>
+      <div className='pageWrap'>
 
-        <h1> Final Group Order </h1>
-        <h2> every users order compiled </h2>
+        <h2> Final Group Order </h2>
 
-        <br /><br /><br /><br /><br />
 
-        <MenuList>
+        <ul>
           {this.state.orders.map(item =>
-            <MenuListItem key={item.userid}>
+            <li key={item.userid}>
 
             
                 <p> item         {item.item} </p>
@@ -77,10 +72,14 @@ class GroupOrder extends React.Component {
                 <p> ID           {item._id} </p>
                  <br />
                 <p> Paid          {item.paid} </p>
+
+              <span >
+                ✗
+              </span>
                 
-            </MenuListItem>
+            </li>
           )}
-        </MenuList>
+        </ul>
 
       </div>
     )

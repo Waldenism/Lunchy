@@ -2,12 +2,6 @@
 import React from 'react'
 
 //components
-import Hero from '../components/Hero'
-import Container from '../components/Container'
-import Row from '../components/Row'
-import Col from '../components/Col'
-// import MenuList from '../components/MenuList'
-// import MenuListItem from '../components/MenuList '
 import { MenuList, MenuListItem } from "../components/MenuList"
 
 class Balance extends React.Component {
@@ -39,24 +33,20 @@ class Balance extends React.Component {
 
   render() {
     return(
-      <div>
+      <div className='pageWrap'>
         
-          <h1> Balance of all my orders </h1>
-
-          <br /><br />BALANCE BREAK<br /><br />
-
-
+          <h2> Balance of all my orders </h2>
 
           {this.state.balance.length ? (
-            <MenuList>
+            <ul>
               {this.state.balance.map(balance => (
-                <MenuListItem key={balance._id}>
+                <li key={balance._id}>
                   <a href={'' + balance._id}>
-                    {/* LODASH function to add all the items in the array together*/}
+                    
                   </a>
-                </MenuListItem>
+                </li>
               ))}  
-            </MenuList>
+            </ul>
           ) : (
             <h3> No Results to Display</h3>
           )}        
