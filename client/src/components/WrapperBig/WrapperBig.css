@@ -1,12 +1,15 @@
 .wrapperBig {
-  padding-top: 50px;
-  /*background: #ECEFF1;*/
-  background: #f4f8ff;
+  /*padding-top: 50px;*/
+  background: #ECEFF1;
+  /*background: #f4f8ff;
   height: 100%;
   display: flex;
   flex-flow: row wrap;
   padding: 20px;
   justify-content: space-around;
   align-content: flex-start;
-  overflow: auto;
+  overflow: auto;*/
+
+  margin-top: 60px;
+  min-height: calc(100vh - 100px);
 }
