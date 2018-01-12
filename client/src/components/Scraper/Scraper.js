@@ -165,10 +165,6 @@ menus()
 
 
   render() {
-
-    console.log(this.state.menu)
-    console.log(this.state.cart)
-
     return (
       <div>
         <ol>
