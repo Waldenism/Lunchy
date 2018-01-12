@@ -53,6 +53,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+        
           <WrapperSmall>
             <Navbar />
           </WrapperSmall>
@@ -63,6 +64,7 @@ class App extends Component {
             <Route path="/group-order" component={GroupOrder} />
 
           </WrapperBig>
+
           <Footer />
 
         </div>
