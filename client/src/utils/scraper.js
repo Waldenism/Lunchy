@@ -47,11 +47,9 @@ const scraper = function(selection) {
 
             $(image).find('img').each((index, picture) => {
                 let pic = $(picture).attr(imgattr);
-                console.log(homepage + pic);
                 results[index].image = homepage + pic
             });
 
-            console.log(results);
             resolve(results);
         });
     })

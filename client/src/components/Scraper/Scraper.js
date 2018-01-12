@@ -13,9 +13,8 @@ class Scraper extends React.Component {
       restaurant: '',
       cart: [],
       balance: 0,
-      toggled: {}
+      toggled: []
     };
-    //this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,13 +23,9 @@ class Scraper extends React.Component {
   }
 
   componentWillMount() {
-    const { toggled, restaurant } = this.state
-    this.setState({ restaurant: 'dairyqueen' });
-
-    if (!toggled[restaurant]) {
-      toggled[restaurant] = [];
-    };
-
+    this.setState({
+      restaurant: 'subway'
+    });
   }
 
   componentDidMount() {
@@ -55,10 +50,15 @@ class Scraper extends React.Component {
   handleChange(event) {
     event.preventDefault()
 
+    const { toggled, restaurant } = this.state;
     const { handler } = this.props;
     const { value } = event.target;
 
-    this.setState({ restaurant: value });
+    this.setState({
+      restaurant: value,
+      toggle: [],
+      cart: []
+    });
 
     axios.post('/api/scraper', { restaurant: value })
     .then((res) => {
@@ -72,55 +72,15 @@ class Scraper extends React.Component {
     })
   };
 
-  // handleClick(event) {
-  //  event.preventDefault()
 
-  //   const { handler } = this.props;
-  //   const { value } = event.target;
-
-  //   this.setState({value});
-
-  //   console.log("==============================")
-  //   console.log(value);
-  //   console.log("==============================")
-
-  //   axios.post('/api/scraper', {value})
-  //   .then((res) => {
-  //     handler(res.data)
-  //     this.setState({
-  //       menu: res.data,
-  //     })
-  //   })
-  //   .catch((er) => {
-  //     console.log(er)
-  //   })
-  // };
-
-     /*                      */
-    //                        \\
-   //*\\\\\\\\\\\\////////////*\\
-  //***\TOGGLES HIGHLIGHTING/***\\
   toggleItem(index, itemName, event) {
     const { toggled, restaurant } = this.state
 
-    let currentCart = toggled[restaurant].indexOf(index) > -1 ?
-        [...toggled[restaurant].filter(item => item != index)] :
-        [...toggled[restaurant], index]
-
-    // let updateCart = Object.assign({}, this.state.toggled[restaurant]);   //creating copy of object
-
-    console.log("*************************");
-    console.log(currentCart);
-    console.log("*************************");
-    //updateCart.name = currentCart;                        //updating value
-    // this.setState({jasper});
-
-    // this.setState(prevState => ({
-    // toggled: {
-    //     ...prevState.toggled,
-    //     [restaurant]: currentCart
-    // }
-
+    this.setState({
+      toggled: toggled.indexOf(index) > -1 ?
+        [...toggled.filter(item => item != index)] :
+        [...toggled, index]
+    })
 };
 
 
@@ -185,8 +145,8 @@ class Scraper extends React.Component {
 
           <div className='column'>
             <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
-              <option value='dairyqueen'>Dairy Queen</option>
               <option value='subway'>Subway</option>
+              <option value='dairyqueen'>Dairy Queen</option>
             </select>
           </div>
 
@@ -195,15 +155,13 @@ class Scraper extends React.Component {
         <ul>
 
           {this.state.menu.map((item,index) =>
-            // <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
-            <div key={_.uniqueId()} className="menu" onClick={(e) => this.toggleItem(index, item.name, e) }>
+            <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
 
               <img key={_.uniqueId()} src={item.image} />
-
               <li key={_.uniqueId()} >{item.name}</li>
 
-
             </div>
+
           )}
         </ul>
         <button onClick={() => this.handleSubmit()}>Submit</button>
