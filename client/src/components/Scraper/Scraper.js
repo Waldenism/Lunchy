@@ -10,7 +10,7 @@ class Scraper extends React.Component {
     super(props);
     this.state = {
       menu: [],
-      value: '',
+      restaurant: '',
       cart: [],
       balance: 0,
       toggled: []
@@ -22,11 +22,13 @@ class Scraper extends React.Component {
     this.toggleItem = this.toggleItem.bind(this);
 
   }
- componentDidMount() {
+
+  componentDidMount() {
     this.menus();
   }
-menus()
-{ axios.post('/api/scraper', {value: 'subway'})
+
+  menus() {
+    axios.post('/api/scraper', {restaurant: 'subway'})
     .then((res) => {
       this.setState({
         menu: res.data
@@ -44,7 +46,7 @@ menus()
     const { handler } = this.props;
     const { value } = event.target;
 
-    this.setState({value});
+    this.setState({ restaurant: value });
 
     axios.post('/api/scraper', {value})
     .then((res) => {
@@ -86,10 +88,12 @@ menus()
 
     const { toggled } = this.state
 
-    this.setState({
-      toggled: toggled.indexOf(index) > -1 ?
+    let currentCart = toggled.indexOf(index) > -1 ?
         [...toggled.filter(item => item != index)] :
         [...toggled, index]
+
+    this.setState({
+      toggled: currentCart
     })
   };
 
@@ -146,21 +150,17 @@ menus()
 
     const { menu, toggled } = this.state
 
-    const theOrder = menu
-      .filter((val, index) =>
-        toggled.indexOf(index) > -1
-      )
+    const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
 
-    console.log("THE ORDER: ".concat(JSON.stringify(theOrder)))
+    //console.log("THE ORDER: ".concat(JSON.stringify(theOrder)))
 
-   /* axios.post('/api/add', {theOrders})
-      .then(res =>
-          const { paid, balance} = res.data
-          this.setState({
+    axios.post('/api/add', {theOrder})
+      .then(res => console.log(res))
+          // const { paid, balance} = res.data
+          // this.setState({
 
-          })
-        )
-  */
+          // })
+
   }
 
 
@@ -185,9 +185,9 @@ menus()
           </div>
 
           <div className='column'>
-            <select value={this.state.value}  onClick={this.handleClick} onChange={this.handleChange} className="menu-selection">
+            <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
               <option onClick={this.handleClick} value='subway'>Subway</option>
-              <option value='dairyqueen'>Dairy Queen</option>
+              <option onClick={this.handleClick} value='dairyqueen'>Dairy Queen</option>
             </select>
           </div>
 
