@@ -70,7 +70,14 @@ class GroupOrder extends React.Component {
         <MenuList>
           {this.state.orders.map(item =>
             <MenuListItem key={item.userid}>
-                {item.item}
+
+            
+                <p> item         {item.item} </p>
+                <br />
+                <p> ID           {item._id} </p>
+                 <br />
+                <p> Paid          {item.paid} </p>
+                
             </MenuListItem>
           )}
         </MenuList>

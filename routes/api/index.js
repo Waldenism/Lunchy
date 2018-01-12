@@ -5,14 +5,25 @@ const userRoutes = require("./user.js");
 
 // Scraper route
 router.use("/scraper", function(req, res) {
-    scraper(req.body.value).then(data => res.send(data)
-    );
+    scraper(req.body.restaurant).then(data => {
+        res.send(data);
+    });
 });
 
 // Add Item route
 router.post("/add", function(req, res) {
-    order.newOrder(req.user, req.body, function(data) {
+    const { _id, group } = req.user;
+    const { theOrder } = req.body;
+
+    let userOrder = {
+        userid: _id,
+        groupid: group.id,
+        theOrder: theOrder
+    }
+
+    order.newOrder(userOrder, function(data) {
         res.send(data);
+        console.log(data);
     });
 });
 

@@ -2,20 +2,18 @@ var Orders = require('../models/orders');
 var Users = require('../models/users');
 
 const Order = {
-    newOrder: (user, data, callback) => {
+    newOrder: (user, callback) => {
+        let { userid, groupid, theOrder, restaurant } = user;
 
-        if (!user) {
+        if (!userid) {
             console.log('not logged in');
 
         } else {
 
-            let { _id, group } = user;
-            let { value, restaurant } = data;
-
             let addItem = new Orders()
-            addItem.userid = _id;
-            addItem.group = group.id;
-            addItem.item = value;
+            addItem.userid = userid;
+            addItem.group = groupid;
+            addItem.item = theOrder.name;
             addItem.restaurant = restaurant;
             addItem.balance = 10;
             addItem.paid = false;
