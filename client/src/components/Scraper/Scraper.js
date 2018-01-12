@@ -78,19 +78,20 @@ menus()
     })
   };
 
-     /*                      */ 
+     /*                      */
     //                        \\
    //*\\\\\\\\\\\\////////////*\\
   //***\TOGGLES HIGHLIGHTING/***\\
-  toggleItem(index, itemName, event) {  
+  toggleItem(index, itemName, event) {
 
     const { toggled } = this.state
-    
+
     this.setState({
-      toggled: toggled.indexOf(index) > -1 ? 
-        [...toggled.filter(item => item != index)] : 
+      toggled: toggled.indexOf(index) > -1 ?
+        [...toggled.filter(item => item != index)] :
         [...toggled, index]
     })
+  };
 
 
   deleteItem(event) {
@@ -113,7 +114,7 @@ menus()
     .catch((er) => {
       console.log(er)
     })
-  }
+  };
 
 
   addItem(event) {
@@ -139,29 +140,27 @@ menus()
     })
   }
   */
+  }
 
   handleSubmit(event) {
 
     const { menu, toggled } = this.state
-    
+
     const theOrder = menu
-      .filter((val, index) => 
-        toggled.indexOf(index) > -1 
+      .filter((val, index) =>
+        toggled.indexOf(index) > -1
       )
 
     console.log("THE ORDER: ".concat(JSON.stringify(theOrder)))
 
    /* axios.post('/api/add', {theOrders})
-      .then(res => 
+      .then(res =>
           const { paid, balance} = res.data
           this.setState({
 
           })
         )
   */
-
-
-
   }
 
 
@@ -202,15 +201,15 @@ menus()
 
           {this.state.menu.map((item,index) =>
             <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
-            
+
               <img key={_.uniqueId()} src={item.image} />
-            
+
               <li key={_.uniqueId()} >{item.name}</li>
-             
+
 
             </div>
           )}
-        </ul>     
+        </ul>
         <button onClick={() => this.handleSubmit()}>Submit</button>
 
       </div>

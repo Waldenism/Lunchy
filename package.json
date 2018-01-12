@@ -18,6 +18,7 @@
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.7",
+    "env": "^0.0.2",
     "express": "^4.16.2",
     "express-react-views": "^0.10.4",
     "express-session": "^1.15.6",
