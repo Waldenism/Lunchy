@@ -5,26 +5,25 @@ const restaurants = {
     subway: {
         menu: 'http://www.subway.com/en-us/menunutrition/menu/all',
         item:'.menu-cat-prod-title',
+        titleattr: null,
         image: '.menu-item-title',
-        attr: 'src'
+        imgattr: 'src',
+        homepage: 'http://www.subway.com/'
     },
-    burgerking: {
-        menu: 'http://www.bk.com/menu/burgers',
-        item:'.title',
-        image: '.imgWrap',
-        attr: 'data-cfsrc'
-    },
+
     dairyqueen: {
         menu: 'https://www.dairyqueen.com/us-en/Menu/Food/',
         item: '.menu-list',
+        titleattr: 'title',
         image: '.item-container',
-        attr: 'src'
+        imgattr: 'src',
+        homepage: 'http://www.dairyqueen.com'
     }
 }
 
 const scraper = function(selection) {
 
-    const { menu, item, image, attr } = restaurants[selection]
+    const { menu, item, titleattr, image, imgattr, homepage } = restaurants[selection];
 
     return new Promise(function(resolve, reject) {
 
@@ -32,28 +31,27 @@ const scraper = function(selection) {
             const $ = cheerio.load(body);
             let results = [];
 
-            let menu = $(item).each(function(i, element) {
-                let couple = {};
-                let name = $(element).text();
-                let pic = $(image).find('img').attr(attr);
+            if (selection === 'subway') {
+                $(item).each(function(i, element) {
+                    let menuItem = {};
+                    menuItem.name = $(element).text();
+                    results.push(menuItem);
+                });
+            } else if (selection === 'dairyqueen') {
+                $(item).find('a').each(function(i, element) {
+                    let menuItem = {};
+                    menuItem.name = $(element).attr('title');
+                    results.push(menuItem);
+                });
+            }
 
-                //make object of menu item name and link to image
-                couple.name = $(element).text();
-                couple.image = $(image).find('img').attr(attr);
-                couple.id = i;
-                console.log(i)
-
-                //specificy scraping based on restaurant
-                if (selection === 'subway') {
-                    couple.image = 'http://www.subway.com/' + couple.image
-                } else if (selection === 'dairyqueen') {
-                    couple.name = $(element).find('a').attr('title');
-                    couple.image = 'http://www.dairyqueen.com' + couple.image
-                }
-
-                //push object to array
-                results.push(couple);
+            $(image).find('img').each((index, picture) => {
+                let pic = $(picture).attr(imgattr);
+                console.log(homepage + pic);
+                results[index].image = homepage + pic
             });
+
+            console.log(results);
             resolve(results);
         });
     })

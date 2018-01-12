@@ -13,13 +13,23 @@ class Scraper extends React.Component {
       restaurant: '',
       cart: [],
       balance: 0,
-      toggled: []
+      toggled: {}
     };
-    this.handleClick = this.handleClick.bind(this);
+    //this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.toggleItem = this.toggleItem.bind(this);
+
+  }
+
+  componentWillMount() {
+    const { toggled, restaurant } = this.state
+    this.setState({ restaurant: 'dairyqueen' });
+
+    if (!toggled[restaurant]) {
+      toggled[restaurant] = [];
+    };
 
   }
 
@@ -28,7 +38,9 @@ class Scraper extends React.Component {
   }
 
   menus() {
-    axios.post('/api/scraper', {restaurant: 'subway'})
+    let { restaurant } = this.state
+
+    axios.post('/api/scraper', { restaurant: restaurant })
     .then((res) => {
       this.setState({
         menu: res.data
@@ -48,7 +60,7 @@ class Scraper extends React.Component {
 
     this.setState({ restaurant: value });
 
-    axios.post('/api/scraper', {value})
+    axios.post('/api/scraper', { restaurant: value })
     .then((res) => {
       handler(res.data)
       this.setState({
@@ -60,42 +72,56 @@ class Scraper extends React.Component {
     })
   };
 
-  handleClick(event) {
-   event.preventDefault()
+  // handleClick(event) {
+  //  event.preventDefault()
 
-    const { handler } = this.props;
-    const { value } = event.target;
+  //   const { handler } = this.props;
+  //   const { value } = event.target;
 
-    this.setState({value});
+  //   this.setState({value});
 
-    axios.post('/api/scraper', {value})
-    .then((res) => {
-      handler(res.data)
-      this.setState({
-        menu: res.data
-      })
-    })
-    .catch((er) => {
-      console.log(er)
-    })
-  };
+  //   console.log("==============================")
+  //   console.log(value);
+  //   console.log("==============================")
+
+  //   axios.post('/api/scraper', {value})
+  //   .then((res) => {
+  //     handler(res.data)
+  //     this.setState({
+  //       menu: res.data,
+  //     })
+  //   })
+  //   .catch((er) => {
+  //     console.log(er)
+  //   })
+  // };
 
      /*                      */
     //                        \\
    //*\\\\\\\\\\\\////////////*\\
   //***\TOGGLES HIGHLIGHTING/***\\
   toggleItem(index, itemName, event) {
+    const { toggled, restaurant } = this.state
 
-    const { toggled } = this.state
+    let currentCart = toggled[restaurant].indexOf(index) > -1 ?
+        [...toggled[restaurant].filter(item => item != index)] :
+        [...toggled[restaurant], index]
 
-    let currentCart = toggled.indexOf(index) > -1 ?
-        [...toggled.filter(item => item != index)] :
-        [...toggled, index]
+    // let updateCart = Object.assign({}, this.state.toggled[restaurant]);   //creating copy of object
 
-    this.setState({
-      toggled: currentCart
-    })
-  };
+    console.log("*************************");
+    console.log(currentCart);
+    console.log("*************************");
+    //updateCart.name = currentCart;                        //updating value
+    // this.setState({jasper});
+
+    // this.setState(prevState => ({
+    // toggled: {
+    //     ...prevState.toggled,
+    //     [restaurant]: currentCart
+    // }
+
+};
 
 
   deleteItem(event) {
@@ -121,46 +147,19 @@ class Scraper extends React.Component {
   };
 
 
-  addItem(event) {
-    event.preventDefault()
-
-
-    /*const value = itemName;
-    let restaurant = this.state.value;
-
-    axios.post('/api/add', {value, restaurant})
-    .then((res) => {
-      let { paid, balance } = res.data;
-
-      this.state.cart.push(res.data)
-      this.setState({ cart: this.state.cart });
-
-      if (!paid) {
-        this.setState({ balance: this.state.balance + balance })
-      }
-    })
-    .catch((er) => {
-      console.log(er)
-    })
-  }
-  */
-  }
-
   handleSubmit(event) {
 
     const { menu, toggled } = this.state
-
     const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
 
-    //console.log("THE ORDER: ".concat(JSON.stringify(theOrder)))
-
     axios.post('/api/add', {theOrder})
-      .then(res => console.log(res))
-          // const { paid, balance} = res.data
-          // this.setState({
-
-          // })
-
+    .then(res => {
+      const { paid, balance} = res.data
+      this.setState({
+        toggled: [],
+        cart: []
+      })
+    })
   }
 
 
@@ -186,8 +185,8 @@ class Scraper extends React.Component {
 
           <div className='column'>
             <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
-              <option onClick={this.handleClick} value='subway'>Subway</option>
-              <option onClick={this.handleClick} value='dairyqueen'>Dairy Queen</option>
+              <option value='dairyqueen'>Dairy Queen</option>
+              <option value='subway'>Subway</option>
             </select>
           </div>
 
@@ -196,7 +195,8 @@ class Scraper extends React.Component {
         <ul>
 
           {this.state.menu.map((item,index) =>
-            <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
+            // <div key={_.uniqueId()} className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } onClick={(e) => this.toggleItem(index, item.name, e) }>
+            <div key={_.uniqueId()} className="menu" onClick={(e) => this.toggleItem(index, item.name, e) }>
 
               <img key={_.uniqueId()} src={item.image} />
 
