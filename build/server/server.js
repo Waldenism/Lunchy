@@ -8,10 +8,6 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _open = require('open');
-
-var _open2 = _interopRequireDefault(_open);
-
 var _webpack = require('webpack');
 
 var _webpack2 = _interopRequireDefault(_webpack);
