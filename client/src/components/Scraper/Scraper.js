@@ -124,7 +124,7 @@ class Scraper extends React.Component {
       isModalOpen: true,
       toggled: [],
       cart: theOrder,
-      balance: balance + 10 * (theOrder.length - 1)
+      balance: balance + 10 * (theOrder.length + 1)
 
     })    
 

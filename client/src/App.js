@@ -62,10 +62,6 @@ class App extends Component {
             <Route path="/group-order" component={GroupOrder} />
           </div>
 
-          <div className='footerCustom'>
-            <span> LunchTime </span>
-          </div>
-
         </div>
       </Router>
     )
