@@ -17,17 +17,17 @@ import mongoose from 'mongoose';
 mongoose.Promise = global.Promise;
 
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/lunchy', {
-  useMongoClient: true
-});
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/lunchy', {
+//   useMongoClient: true
+// });
 
-// if (process.env.MONGODB_URI) {
-//   mongoose.connect('mongodb://heroku_5cq9xdl6:ni4ii1548pq8k463isc4lg6ll7@ds255347.mlab.com:55347/heroku_5cq9xdl6', {
-
-//   })
-// } else {
-//   mongoose.connect();
-// }
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI, {
+    useMongoClient: true
+  })
+} else {
+  mongoose.connect('mongodb://localhost/lunchy');
+}
 
 
 
