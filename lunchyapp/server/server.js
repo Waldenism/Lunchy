@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'path';
-import webpack from 'webpack';
-import config from './webpack.config';
+
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -51,6 +50,8 @@ app.use('/', routes);
 if(process.env.NODE_ENV === 'development') {
   console.log('Running in DEVELOPMENT mode...');
 
+  import webpack from 'webpack';
+  import config from './webpack.config';
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
   const middleware = webpackMiddleware(compiler, {
