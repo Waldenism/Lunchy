@@ -13,7 +13,7 @@ h1 {
 }
 
 h2 {
-  /*font-family: 'Shrikhand', cursive;*/
+  font-family: 'Shrikhand', cursive;
   color: #6369D1;
 }
 
@@ -71,7 +71,7 @@ h2 {
 
 .block {
   display: block;
-  /*font-family: 'Shrikhand', cursive;*/
+  font-family: 'Shrikhand', cursive;
   /*color: #362023;*/
   color: #6361D9;
   font-size: 2em;
