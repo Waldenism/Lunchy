@@ -97,7 +97,6 @@ app.listen(app.get("port"), function (error) {
   if (error) {
     console.log(error);
   } else {
-    (0, _open2.default)('http://localhost:' + app.settings.port);
     console.log('Listening on port 3000');
   }
 });

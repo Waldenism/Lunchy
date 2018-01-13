@@ -83,7 +83,6 @@ app.listen(app.get("port"), function (error) {
     if(error) {
         console.log(error);
     } else {
-        open(`http://localhost:${app.settings.port}`);
         console.log('Listening on port 3000');
     }
 })
