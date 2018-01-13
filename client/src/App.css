@@ -48,9 +48,46 @@ h2 {
 /***************************************************************************************************/
 
 .pageWrap {
-  margin: 75px 25px 75px 25px;
+  margin: 75px 25px 100px 25px;
+}
+
+.ulContainer {
+  padding: 10px 150px 10px 150px;
+}
+
+.liContainer {
+  display: block; 
+  margin: 10px;
+  padding:30px;
+  border: green solid 1px;
+  border-radius: 4px;
+  /*background-color: red;*/
+}
+
+.pageTitle {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.block {
+  display: block;
+  font-family: 'Shrikhand', cursive;
+  /*color: #362023;*/
+  color: #6361D9;
+  font-size: 2em;
+}
+
+.orderLiUser {
+  /*font-size: .8em;*/
+  padding: 10px 0px 10px 0px;
+}
+
+.orderLiOrder {
+  /*font-size: 1.2em;*/
+   padding: 10px 0px 10px 0px; 
 }
 
 .delete-btn {
   color: #e74944;
+  /*float: right;*/
 }

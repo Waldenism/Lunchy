@@ -10,10 +10,13 @@ const Order = {
 
         } else {
 
+        console.log(theOrder[0].name);
+        console.log('================================')
+
             let addItem = new Orders()
             addItem.userid = userid;
             addItem.group = groupid;
-            addItem.item = theOrder.name;
+            addItem.item = theOrder[0].name;
             addItem.restaurant = restaurant;
             addItem.balance = 10;
             addItem.paid = false;
@@ -39,7 +42,7 @@ const Order = {
 
         } else {
             let { _id, group } = user;
-            let { value, restaurant } = data;
+            let { value } = data;
 
             Orders.remove({ userid: _id, group: group.id, item: value}, function(err) {
                 if (err) return handleError(err);

@@ -99,7 +99,7 @@ class Hamburger extends React.Component {
       // greeting = <h2> Hi {this.state.name}! </h2>
       links = <Links handler={ this.removeLinks } />
     } else {
-        greeting = <h2> Welcome to Lunchy! </h2>
+        greeting = <h2> Welcome to LunchTime! </h2>
         if(this.state.auth === 'login') {
           links = <Login handler={ this.openLinks } action={ this.handleSignup } />
         } else {

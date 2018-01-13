@@ -23,13 +23,22 @@ router.post("/add", function(req, res) {
 
     order.newOrder(userOrder, function(data) {
         res.send(data);
-        console.log(data);
     });
 });
 
+
+//delete
 router.post("/delete", function(req, res) {
-    order.deleteOrder(req.user, req.body, function(data) {
-        res.send(data);
+
+    order.deleteOrder(req.user, req.body, function() {
+        order.getOrders(req.user.group.id, function(data) {
+                res.send(data);
+            });
+        
+        // if (req.user.group.admin) {
+            
+            
+        // }
     });
 });
 

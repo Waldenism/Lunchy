@@ -4,7 +4,6 @@ import React from 'react'
 //components
 
 // import DeleteBtn from '../components/DeleteBtn'
-import { MenuList, MenuListItem } from '../components/MenuList'
 import axios from 'axios'
 
 
@@ -16,7 +15,7 @@ class GroupOrder extends React.Component {
     this.state = {
       orders: []
     }
-
+    this.deleteOrder = this.deleteOrder.bind(this)
   }
 
   componentWillMount() {
@@ -31,16 +30,26 @@ class GroupOrder extends React.Component {
     })
   }
 
-  // deleteOrder = id => {
-  //   axios.post('/api/delete', {id: id})
-  //   .then(res => this.setState({orders: res}))
-  // }
+  deleteOrder(id) {
+    const { value } = id.target
+    console.log(this.state.orders)
+
+    axios.post('/api/delete', { value: value })
+    .then(res => {
+      this.setState({ orders: res.data });
+      console.log('+++++++++++++++++++++++++++++++++++++++++')
+      console.log(this.state.orders)
+    }
+
+    )
+
+  }
 
   // componentDidMount() {
   //   this.loadOrders()
   // }
 
-  // loadOrders = () => {
+  // loadOrders() {
   //   //get orders
 
   //   axios.get('/api/delete')
@@ -54,32 +63,42 @@ class GroupOrder extends React.Component {
   // }
 
   render() {
-    console.log(this.state.orders);
     return(
 
       <div className='pageWrap'>
 
-        <h2> Final Group Order </h2>
+        <div className='container'>
+          <h2 className='pageTitle'> Final Group Order </h2>
+        </div>
 
+        <div className='ulContainer'>
+          <ul>
+            {this.state.orders.map(item =>
+              <li className='liContainer' key={item._id}>
+                <nav className='level'>
 
-        <ul>
-          {this.state.orders.map(item =>
-            <li key={item.userid}>
+                  <div className='level-item'>
+                    <div className='block'>
 
-            
-                <p> item         {item.item} </p>
-                <br />
-                <p> ID           {item._id} </p>
-                 <br />
-                <p> Paid          {item.paid} </p>
+                      <p className='orderLi'> User ID: {item._id} </p>
+                      <p className='orderLi'> Lunch Order: {item.item} </p>
 
-              <span >
-                ✗
-              </span>
-                
-            </li>
-          )}
-        </ul>
+                    </div>
+                    
+                  </div>                  
+
+                  <div className='level-item'>
+                    <button type='submit' value={item.item} className='delete-btn button is-danger' onClick={this.deleteOrder}>
+                      ✗
+                    </button>
+                  </div>
+
+                </nav>
+              </li>
+            )}
+          </ul>
+
+        </div>
 
       </div>
     )

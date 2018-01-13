@@ -63,7 +63,6 @@ class Signup extends React.Component {
         <section>
           <div>
                 <div className='box'>
-                  <h3 className="title has-text-grey">Lunchy</h3>
                   <p className="subtitle has-text-grey">Create Account</p>
                   <hr />
 
@@ -117,8 +116,6 @@ class Signup extends React.Component {
 
                           <hr />
 
-                          <br /><br />
-
                           <span className='adminLabel' style={styles.adminLabelStyle}>Are you registerting as an admin?</span> <span>     </span>
                           
                           
@@ -131,7 +128,7 @@ class Signup extends React.Component {
 
                     <div className="field is-grouped">
                       <div className="control">
-                          <input type="submit" value='Submit' className="button is-large is-info"></input>
+                          <input type="submit" value='Submit' className="button is-normal is-info"></input>
                       </div>
                     </div>
                   </form>

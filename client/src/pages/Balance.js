@@ -2,7 +2,6 @@
 import React from 'react'
 
 //components
-import { MenuList, MenuListItem } from "../components/MenuList"
 
 class Balance extends React.Component {
 
@@ -34,22 +33,31 @@ class Balance extends React.Component {
   render() {
     return(
       <div className='pageWrap'>
-        
-          <h2> Balance of all my orders </h2>
+          
+          <div className='container'>
+            <h2 className='pageTitle'> Balance for USERNAME:{/* USERNAME */} </h2>
+          </div>
 
-          {this.state.balance.length ? (
-            <ul>
-              {this.state.balance.map(balance => (
-                <li key={balance._id}>
-                  <a href={'' + balance._id}>
-                    
-                  </a>
-                </li>
-              ))}  
-            </ul>
-          ) : (
-            <h3> No Results to Display</h3>
-          )}        
+          
+          
+          <div className='ulContainer'>
+            {this.state.balance.length ? (
+              <ul>
+                {this.state.balance.map(balance => (
+                  <li className='liContainer' key={balance._id}>
+                    <nav className='level'>
+
+                      <a href={'' + balance._id}>
+                      
+                      </a>
+                    </nav>
+                  </li>
+                ))}  
+              </ul>
+            ) : (
+              <h3> No Results to Display</h3>
+            )}
+          </div>        
 
       </div>
     )

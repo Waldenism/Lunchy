@@ -1,11 +1,14 @@
+
+import './Scraper.css'
+
 import React from 'react'
 import axios from 'axios'
+
 import lodash from 'lodash'
-import MenuList from '../MenuList'
-import MenuListItem from '../MenuList'
-import './Scraper.css'
-import Modal from '../Modal/Modal'
 import _ from 'lodash'
+
+import Modal from '../Modal/Modal'
+
 
 class Scraper extends React.Component {
   constructor(props) {
@@ -115,6 +118,9 @@ class Scraper extends React.Component {
     const { menu, toggled } = this.state
     const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
 
+    console.log("---------------------------------")
+    console.log(theOrder);
+
     axios.post('/api/add', {theOrder})
     .then(res => {
       const { paid, balance} = res.data
@@ -126,7 +132,7 @@ class Scraper extends React.Component {
 
     this.setState({ isModalOpen: true })
     this.setState({ cart: theOrder })
-    this.setState({ balance: balance + 10 * theOrder.length})
+    // this.setState({ balance: balance + 10 * theOrder.length})
   }
 
 

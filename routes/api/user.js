@@ -11,12 +11,14 @@ router.get("/current", function(req, res) {
 
 // Matches with "/api/scraper/subway"
 router.get('/group-orders', function(req, res) {
-    let { admin, id } = req.user.group
+    if (req.user) {
+      let { admin, id } = req.user.group
 
-    if (admin) {
+      if (admin) {
         order.getOrders(id, function(data) {
             res.send(data);
-        });
+      });
+      }
     }
 });
 
