@@ -119,12 +119,13 @@ class Scraper extends React.Component {
     const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
 
     // console.log("---------------------------------")
+    // console.log(theOrder)
     
     this.setState({
       isModalOpen: true,
       toggled: [],
       cart: theOrder,
-      balance: balance + 10 * (theOrder.length + 1)
+      balance: (10 * (theOrder.length))
 
     })    
 
@@ -186,12 +187,12 @@ class Scraper extends React.Component {
           isOpen={this.state.isModalOpen}
           onClose={() => { this.setState({ isModalOpen: false }) }}
         >
-          <h4>Confirm Order</h4>
+          <h2>Confirm Order</h2>
 
           <ol>
             {
               this.state.cart.map(item => (
-                <div key={_.uniqueId()}>
+                <div className='liContainer' key={_.uniqueId()}>
                   <li key={_.uniqueId()}>{item.name}</li>
                 </div>
               ))
