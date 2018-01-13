@@ -1,12 +1,8 @@
 //dependencies
 import React from 'react'
 
-//components
-
 // import DeleteBtn from '../components/DeleteBtn'
 import axios from 'axios'
-
-
 
 class GroupOrder extends React.Component {
 
@@ -48,29 +44,12 @@ class GroupOrder extends React.Component {
     console.log(this.state.orders)
   }
 
-  // componentDidMount() {
-  //   this.loadOrders()
-  // }
-
-  // loadOrders() {
-  //   //get orders
-
-  //   axios.get('/api/delete')
-  //     .then((res) => {
-  //       console.log(res)
-  //       this.setState({ orders: res.data })
-  //     })
-  //     .catch((er) => {
-  //       console.log(er)
-  //     })
-  // }
-
   render() {
     return(
 
-      <div className='pageWrap'>
+      <div className='pageWrap main'>
 
-        <div className='container'>
+        <div className=''>
           <h2 className='pageTitle'> Final Group Order </h2>
         </div>
 
@@ -81,6 +60,15 @@ class GroupOrder extends React.Component {
                 <nav className='level'>
 
                   <div className='level-item'>
+                    <button 
+                      type='submit' value={item.item} 
+                      className='delete-btn' 
+                      onClick={(e) => this.deleteOrder(item.item, e)}>
+                      ✗
+                    </button>
+                  </div>
+
+                  <div className='level-item'>
                     <div className='block'>
 
                       <p className='orderLi'> User ID: {item._id} </p>
@@ -89,15 +77,6 @@ class GroupOrder extends React.Component {
                     </div>
                     
                   </div>                  
-
-                  <div className='level-item'>
-                    <button 
-                      type='submit' value={item.item} 
-                      className='delete-btn button is-danger' 
-                      onClick={(e) => this.deleteOrder(item.item, e)}>
-                      ✗
-                    </button>
-                  </div>
 
                 </nav>
               </li>

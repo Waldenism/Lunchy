@@ -14,7 +14,6 @@ import GroupOrder from './pages/GroupOrder'
 //sidebar
 import Hamburger from './components/Hamburger'
 
-
 class App extends Component {
 
   constructor(props) {
@@ -35,15 +34,12 @@ class App extends Component {
     })
   }
 
-
   handleLogIn(user) {
     this.setState({
       user,
       loggedIn: true
     })
   }
-
-
 
   render() {
 
@@ -66,12 +62,9 @@ class App extends Component {
             <Route path="/group-order" component={GroupOrder} />
           </div>
 
-
           <div className='footerCustom'>
             <span> LunchTime </span>
           </div>
-
-          
 
         </div>
       </Router>
