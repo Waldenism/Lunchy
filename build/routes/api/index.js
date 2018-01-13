@@ -14,9 +14,13 @@ router.use("/scraper", function (req, res) {
 
 // Add Item route
 router.post("/add", function (req, res) {
+    // console.log(req.user)
+
     var _req$user = req.user,
         _id = _req$user._id,
         group = _req$user.group;
+    // console.log(req.user)
+
     var theOrder = req.body.theOrder;
 
 
@@ -28,13 +32,21 @@ router.post("/add", function (req, res) {
 
     order.newOrder(userOrder, function (data) {
         res.send(data);
-        console.log(data);
     });
 });
 
+//delete
 router.post("/delete", function (req, res) {
-    order.deleteOrder(req.user, req.body, function (data) {
-        res.send(data);
+
+    order.deleteOrder(req.user, req.body, function () {
+        order.getOrders(req.user.group.id, function (data) {
+            res.send(data);
+        });
+
+        // if (req.user.group.admin) {
+
+
+        // }
     });
 });
 
