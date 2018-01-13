@@ -1,12 +1,5 @@
 //dependencies
 import React from 'react'
-
-//components
-import Hero from '../components/Hero'
-import Container from '../components/Container'
-import Row from '../components/Row'
-import Col from '../components/Col'
-
 import Scraper from '../components/Scraper'
 
 class Home extends React.Component {
@@ -29,13 +22,11 @@ class Home extends React.Component {
   render() {
     return(
       <div>
-        
-          <h1>Lunchy</h1>        
+        <div className='pageWrap'>        
 
-        <Scraper 
-          handler = { this.handleScraper }
-        />
-        
+          <Scraper handler = { this.handleScraper } />
+
+        </div>
       </div>
     )
   }

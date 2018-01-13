@@ -1,14 +1,4 @@
-//dependencies
 import React from 'react'
-
-//components
-import Hero from '../components/Hero'
-import Container from '../components/Container'
-import Row from '../components/Row'
-import Col from '../components/Col'
-// import MenuList from '../components/MenuList'
-// import MenuListItem from '../components/MenuList '
-import { MenuList, MenuListItem } from "../components/MenuList"
 
 class Balance extends React.Component {
 
@@ -17,49 +7,34 @@ class Balance extends React.Component {
     this.state = {
       balance: []
     }
-
   }
-
-  // componentDidMount() {
-  //   this.loadBalance()
-  // }
-
-  // loadBalance = () => {
-  //   //get balance
-  //   axios.get('./balance')
-
-  //    .then((res) => {
-  //      console.log(res)
-  //      this.setState({ balance: res.data })
-  //    })
-  //    .catch((er) => {
-  //      console.log(er)
-  //    })
-  // }
 
   render() {
     return(
-      <div>
-        
-          <h1> Balance of all my orders </h1>
+      <div className='pageWrap'>
+          
+          <div>
+            <h2 className='pageTitle'> Balance for USERNAME:{/* USERNAME */} </h2>
+          </div>
 
-          <br /><br />BALANCE BREAK<br /><br />
+          <div className='ulContainer'>
+            {this.state.balance.length ? (
+              <ul>
+                {this.state.balance.map(balance => (
+                  <li className='liContainer' key={balance._id}>
+                    <nav className='level'>
 
-
-
-          {this.state.balance.length ? (
-            <MenuList>
-              {this.state.balance.map(balance => (
-                <MenuListItem key={balance._id}>
-                  <a href={'' + balance._id}>
-                    {/* LODASH function to add all the items in the array together*/}
-                  </a>
-                </MenuListItem>
-              ))}  
-            </MenuList>
-          ) : (
-            <h3> No Results to Display</h3>
-          )}        
+                      <a href={'' + balance._id}>
+                      
+                      </a>
+                    </nav>
+                  </li>
+                ))}  
+              </ul>
+            ) : (
+              <h3> No Results to Display</h3>
+            )}
+          </div>        
 
       </div>
     )

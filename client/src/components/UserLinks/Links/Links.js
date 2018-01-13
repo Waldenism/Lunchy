@@ -72,7 +72,7 @@ class Links extends React.Component {
 
             <form className='clear' onSubmit={this.Logout}>
               <div className='logoutButton'>
-                <input type="submit" value='Logout' className='button is-large is-success'></input>
+                <input type="submit" value='Logout' className='button is-normal is-success'></input>
               </div>
             </form>
             

@@ -1,16 +1,8 @@
 //dependencies
 import React from 'react'
 
-//components
-import Hero from '../components/Hero'
-import Container from '../components/Container'
-import Row from '../components/Row'
-import Col from '../components/Col'
-import DeleteBtn from '../components/DeleteBtn'
-import { MenuList, MenuListItem } from '../components/MenuList'
+// import DeleteBtn from '../components/DeleteBtn'
 import axios from 'axios'
-
-
 
 class GroupOrder extends React.Component {
 
@@ -19,7 +11,7 @@ class GroupOrder extends React.Component {
     this.state = {
       orders: []
     }
-
+    this.deleteOrder = this.deleteOrder.bind(this)
   }
 
   componentWillMount() {
@@ -32,55 +24,66 @@ class GroupOrder extends React.Component {
     .catch((er) => {
       console.log(er)
     })
+    // console.log("orders +++++++++++++++++++++++" + this.state.orders)
   }
 
-  // deleteOrder = id => {
-  //   axios.post('/api/delete', {id: id})
-  //   .then(res => this.setState({orders: res}))
-  // }
+  deleteOrder(item, e) {
+    e.preventDefault()
+    // console.log(e.currentTarget)
+    const value  = item
+    // console.log(thi s.state.orders)
 
-  // componentDidMount() {
-  //   this.loadOrders()
-  // }
+    axios.post('/api/delete', { value: value })
+    .then(res => {
+      this.setState({ orders: res.data });
+      // console.log('+++++++++++++++++++++++++++++++++++++++++')
+      // console.log(this.state.orders)
+    }
 
-  // loadOrders = () => {
-  //   //get orders
-
-  //   axios.get('/api/delete')
-  //     .then((res) => {
-  //       console.log(res)
-  //       this.setState({ orders: res.data })
-  //     })
-  //     .catch((er) => {
-  //       console.log(er)
-  //     })
-  // }
+    )
+    console.log(this.state.orders)
+  }
 
   render() {
-    console.log(this.state.orders);
     return(
 
-      <div>
+      <div className='pageWrap main'>
 
-        <h1> Final Group Order </h1>
-        <h2> every users order compiled </h2>
+        <div className=''>
+          <h2 className='pageTitle'> Final Group Order </h2>
+        </div>
 
-        <br /><br /><br /><br /><br />
+        <div className='ulContainer'>
+          <ul>
+            {this.state.orders.map(item =>
+              <li className='liContainer' key={item._id}>
+                <nav className='level'>
 
-        <MenuList>
-          {this.state.orders.map(item =>
-            <MenuListItem key={item.userid}>
+                  <div className='level-item'>
+                    <button 
+                      type='submit' value={item.item} 
+                      className='delete-btn' 
+                      onClick={(e) => this.deleteOrder(item.item, e)}>
+                      ✗
+                    </button>
+                  </div>
 
-            
-                <p> item         {item.item} </p>
-                <br />
-                <p> ID           {item._id} </p>
-                 <br />
-                <p> Paid          {item.paid} </p>
-                
-            </MenuListItem>
-          )}
-        </MenuList>
+                  <div className='level-item'>
+                    <div className='block'>
+
+                      <p className='orderLi'> User ID: {item._id} </p>
+                      <p className='orderLi'> Lunch Order: {item.item} </p>
+
+                    </div>
+                    
+                  </div>                  
+
+                </nav>
+              </li>
+            )}
+          </ul>
+
+        </div>
 
       </div>
     )

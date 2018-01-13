@@ -3,6 +3,7 @@ var Users = require('../models/users');
 
 const Order = {
     newOrder: (user, callback) => {
+        console.log(user)
         let { userid, groupid, theOrder, restaurant } = user;
 
         if (!userid) {
@@ -10,25 +11,28 @@ const Order = {
 
         } else {
 
-            let addItem = new Orders()
-            addItem.userid = userid;
-            addItem.group = groupid;
-            addItem.item = theOrder.name;
-            addItem.restaurant = restaurant;
-            addItem.balance = 10;
-            addItem.paid = false;
+            for (let i=0; i < theOrder.length; i++) {
+                let addItem = new Orders()
+                addItem.userid = userid;
+                addItem.group = groupid;
+                addItem.item = theOrder[i].name;
+                addItem.restaurant = restaurant;
+                addItem.balance = 10;
+                addItem.paid = false;
 
-            //save the user
-            addItem.save(function(err) {
-                if (err){
-                    console.log('Error in Saving item: '+err);
-                    throw err;
-                }
-                console.log("**** Item added to Database *****");
-                console.log(addItem);
+                //save the user
+                addItem.save(function(err) {
+                    if (err){
+                        console.log('Error in Saving item: '+err);
+                        throw err;
+                    }
+                    console.log("**** Item added to Database *****");
+                    console.log(addItem);
 
-                callback(addItem);
-            });
+                    // callback(addItem);
+                });
+            }
+            
         }
     },
 
@@ -39,7 +43,7 @@ const Order = {
 
         } else {
             let { _id, group } = user;
-            let { value, restaurant } = data;
+            let { value } = data;
 
             Orders.remove({ userid: _id, group: group.id, item: value}, function(err) {
                 if (err) return handleError(err);

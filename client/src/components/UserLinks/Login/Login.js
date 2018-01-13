@@ -53,7 +53,6 @@ class Login extends React.Component {
           <section className="">
             <div className="">
               <div className='box'>
-                <h3 className="title has-text-grey">Lunchy</h3>
                 <p className="subtitle has-text-grey">Please login to proceed.</p>
                 <hr />
 
@@ -110,7 +109,7 @@ class Login extends React.Component {
 
                   </div>
 
-                  <input type="submit" value='Submit' className="button is-large is-info" ></input>
+                  <input type="submit" value='Submit' className="button is-normal is-info" ></input>
                 
                 </form>
 
