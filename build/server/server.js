@@ -37,7 +37,12 @@ app.set("port", process.env.PORT || DEFAULT_PORT);
 //mongoose config
 
 _mongoose2.default.Promise = global.Promise;
-_mongoose2.default.connect('mongodb://localhost/lunchy');
+
+if (MONGODB_URI) {
+  _mongoose2.default.connect('mongodb://heroku_5cq9xdl6:ni4ii1548pq8k463isc4lg6ll7@ds255347.mlab.com:55347/heroku_5cq9xdl6');
+} else {
+  _mongoose2.default.connect('mongodb://localhost/lunchy');
+}
 
 //passport config
 var passport = require('passport');
