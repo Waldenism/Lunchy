@@ -3,6 +3,7 @@ var Users = require('../models/users');
 
 const Order = {
     newOrder: (user, callback) => {
+        console.log(user)
         let { userid, groupid, theOrder, restaurant } = user;
 
         if (!userid) {
@@ -10,28 +11,28 @@ const Order = {
 
         } else {
 
-        console.log(theOrder[0].name);
-        console.log('================================')
+            for (let i=0; i < theOrder.length; i++) {
+                let addItem = new Orders()
+                addItem.userid = userid;
+                addItem.group = groupid;
+                addItem.item = theOrder[i].name;
+                addItem.restaurant = restaurant;
+                addItem.balance = 10;
+                addItem.paid = false;
 
-            let addItem = new Orders()
-            addItem.userid = userid;
-            addItem.group = groupid;
-            addItem.item = theOrder[0].name;
-            addItem.restaurant = restaurant;
-            addItem.balance = 10;
-            addItem.paid = false;
+                //save the user
+                addItem.save(function(err) {
+                    if (err){
+                        console.log('Error in Saving item: '+err);
+                        throw err;
+                    }
+                    console.log("**** Item added to Database *****");
+                    console.log(addItem);
 
-            //save the user
-            addItem.save(function(err) {
-                if (err){
-                    console.log('Error in Saving item: '+err);
-                    throw err;
-                }
-                console.log("**** Item added to Database *****");
-                console.log(addItem);
-
-                callback(addItem);
-            });
+                    // callback(addItem);
+                });
+            }
+            
         }
     },
 

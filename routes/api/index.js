@@ -12,7 +12,10 @@ router.use("/scraper", function(req, res) {
 
 // Add Item route
 router.post("/add", function(req, res) {
+    // console.log(req.user)
+
     const { _id, group } = req.user;
+    // console.log(req.user)
     const { theOrder } = req.body;
 
     let userOrder = {

@@ -28,21 +28,24 @@ class GroupOrder extends React.Component {
     .catch((er) => {
       console.log(er)
     })
+    // console.log("orders +++++++++++++++++++++++" + this.state.orders)
   }
 
-  deleteOrder(id) {
-    const { value } = id.target
-    console.log(this.state.orders)
+  deleteOrder(item, e) {
+    e.preventDefault()
+    // console.log(e.currentTarget)
+    const value  = item
+    // console.log(thi s.state.orders)
 
     axios.post('/api/delete', { value: value })
     .then(res => {
       this.setState({ orders: res.data });
-      console.log('+++++++++++++++++++++++++++++++++++++++++')
-      console.log(this.state.orders)
+      // console.log('+++++++++++++++++++++++++++++++++++++++++')
+      // console.log(this.state.orders)
     }
 
     )
-
+    console.log(this.state.orders)
   }
 
   // componentDidMount() {
@@ -88,7 +91,10 @@ class GroupOrder extends React.Component {
                   </div>                  
 
                   <div className='level-item'>
-                    <button type='submit' value={item.item} className='delete-btn button is-danger' onClick={this.deleteOrder}>
+                    <button 
+                      type='submit' value={item.item} 
+                      className='delete-btn button is-danger' 
+                      onClick={(e) => this.deleteOrder(item.item, e)}>
                       ✗
                     </button>
                   </div>
