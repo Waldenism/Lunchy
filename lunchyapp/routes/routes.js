@@ -8,8 +8,6 @@ import path from 'path';
 
 //homepage
 router.get('/', function(req, res) {
-  // Display flash message, if any
-
   let { body, user } = req;
   console.log('home: ', body, ', user: ', user);
 

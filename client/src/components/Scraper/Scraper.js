@@ -25,6 +25,7 @@ class Scraper extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleItem = this.toggleItem.bind(this)
+    this.handleModal = this.handleModal.bind(this)
 
   }
 
@@ -112,33 +113,32 @@ class Scraper extends React.Component {
   //   })
   // };
 
+  handleModal(event) {
+    const { isModalOpen, menu, toggled } = this.state;
 
-  handleSubmit(event) {
-
-    const { menu, toggled, balance } = this.state
     const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
 
-    // console.log("---------------------------------")
-    // console.log(theOrder)
-    
     this.setState({
-      isModalOpen: true,
-      toggled: [],
       cart: theOrder,
       balance: (10 * (theOrder.length))
+    });
 
-    })    
+    isModalOpen ? this.setState({ isModalOpen: false}) : this.setState({ isModalOpen: true})
+  }
 
-    axios.post('/api/add', {theOrder: theOrder})
+
+  handleSubmit(event) {
+    const { cart } = this.state
+
+    axios.post('/api/add', {theOrder: cart})
     .then(res => {
-      const { paid, balance} = res.data
-      
-
+      this.setState({
+        cart: [],
+        balance: 0,
+        toggled: [],
+        isModalOpen: false
+      });
     })
-
-
-
-    console.log(this.state.isModalOpen)
   }
 
 
@@ -163,14 +163,14 @@ class Scraper extends React.Component {
           <option value='subway'>Subway</option>
           <option value='dairyqueen'>Dairy Queen</option>
         </select>
-        
-        <button onClick={() => this.handleSubmit()}>Submit</button>
-        
+
+        <button onClick={() => this.handleModal() }>Submit</button>
+
         <ul>
 
           {this.state.menu.map((item,index) =>
-            <div key={_.uniqueId()} 
-              className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" } 
+            <div key={_.uniqueId()}
+              className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" }
               onClick={(e) => this.toggleItem(index, item.name, e) }
             >
 
@@ -181,11 +181,10 @@ class Scraper extends React.Component {
 
           )}
         </ul>
-        
+
 
         <Modal
           isOpen={this.state.isModalOpen}
-          onClose={() => { this.setState({ isModalOpen: false }) }}
         >
           <h2>Confirm Order</h2>
 
@@ -200,8 +199,8 @@ class Scraper extends React.Component {
             <strong>Balance: {this.state.balance}</strong>
           </ol>
 
-          <button onClick={() => { this.setState({ isModalOpen: false }) }}>Edit Order</button>
-          <button onClick={() => { this.setState({ isModalOpen: false }) }}>Place Order</button>
+          <button onClick={() => { this.handleModal }}>Edit Order</button>
+          <button onClick={() => { this.handleSubmit() }}>Place Order</button>
 
         </Modal>
 
