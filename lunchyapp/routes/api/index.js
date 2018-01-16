@@ -36,8 +36,8 @@ router.post("/delete", function(req, res) {
 
     order.deleteOrder(req.user, req.body, function() {
         order.getOrders(req.user.group.id, function(data) {
-                res.send(data);
-            });
+            res.send(data);
+        });
     });
 });
 

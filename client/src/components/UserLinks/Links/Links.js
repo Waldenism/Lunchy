@@ -38,7 +38,7 @@ class Links extends React.Component {
     }
 
     return (
-      <div>        
+      <div>
 
         <div className='container burgerContainer'>
           <ul className="burgerNav">
@@ -60,7 +60,13 @@ class Links extends React.Component {
               <Link to="/balance"> Account Balance </Link>
             </li>
 
-            {link} 
+            {link}
+
+            <li
+              className={window.location.pathname === "" ? "active" : ""}
+            >
+              <Link to="/account-settings"> Account Settings </Link>
+            </li>
 
           </ul>
         </div>
@@ -68,14 +74,14 @@ class Links extends React.Component {
         <br /><br /><br />
 
         <div className='container'>
-          <div className='logoutHero'>       
+          <div className='logoutHero'>
 
             <form className='clear' onSubmit={this.Logout}>
               <div className='logoutButton'>
                 <input type="submit" value='Logout' className='button is-normal is-success'></input>
               </div>
             </form>
-            
+
           </div>
         </div>
 
