@@ -31,10 +31,11 @@ class Hamburger extends React.Component {
   componentDidMount() {
       axios.get('/api/user/current').then(res => {
         let { group, username, name } = res.data;
+
         if (username) {
           this.setState({
             isLoggedIn: true,
-            // name: name
+            name: name.first
           })
 
           if (group.admin) {
@@ -59,18 +60,6 @@ class Hamburger extends React.Component {
       auth: 'login',
       isLoggedIn: false
     })
-  }
-
-  handleMenuStateChange (state) {
-    this.setState({menuOpen: state.isOpen})
-  }
-
-  closeMenu () {
-    this.setState({menuOpen: false})
-  }
-
-  toggleMenu () {
-    this.setState({menuOpen: !this.state.menuOpen})
   }
 
   openLinks(conf) {
@@ -111,7 +100,7 @@ class Hamburger extends React.Component {
 
     return (
       <div>
-        <Menu right>
+        <Menu right isOpen={ this.state.menuOpen } >
 
           {greeting}
 

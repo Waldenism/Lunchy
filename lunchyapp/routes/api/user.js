@@ -17,7 +17,12 @@ router.get('/group-orders', function(req, res) {
 
       if (admin) {
         order.getOrders(id, function(data) {
-            res.send(data);
+            let groupData = {
+              name: req.user.group.name,
+              data: data
+            }
+
+            res.send(groupData);
         });
       }
     }

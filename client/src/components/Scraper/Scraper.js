@@ -62,15 +62,15 @@ class Scraper extends React.Component {
     const { value } = event.target;
 
     this.setState({
-      restaurant: value,
-      toggle: [],
-      cart: []
+      restaurant: value
     });
 
     axios.post('/api/scraper', { restaurant: value })
     .then((res) => {
       this.setState({
-        menu: res.data
+        menu: res.data,
+        toggled: [],
+        cart: []
       })
     })
     .catch((er) => {

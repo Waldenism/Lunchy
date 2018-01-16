@@ -39,10 +39,10 @@ const Order = {
             console.log('not logged in');
 
         } else {
-            let { _id, group } = user;
-            let { value } = data;
+            let { group } = user;
+            let { value, userid } = data;
 
-            Orders.remove({ userid: _id, group: group.id, item: value}, function(err) {
+            Orders.remove({ userid: userid, group: group.id, item: value}, function(err) {
                 if (err) return handleError(err);
                 callback();
             });

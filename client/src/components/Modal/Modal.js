@@ -31,7 +31,12 @@ class Modal extends React.Component {
   modalMessage() {
 
     if (!this.props.isLoggedIn) {
-      return (<h2> You are not logged in! </h2>)
+      return (
+        <div>
+        <h2> You are not logged in! </h2>
+        <button onClick={() => { this.props.clearSelection() }}>Close</button>
+        </div>
+      )
 
     } else {
       if (this.state.submitted) {
@@ -73,7 +78,6 @@ class Modal extends React.Component {
     return (
       <div className={'modal-container' + (this.props.isModalOpen ? ' open' : '')}>
         <div className='modal-body'>
-          <button onClick={() => { this.props.clearSelection() }}>Close</button>
           <div className='modal-clear' />
 
           { this.modalMessage() }
