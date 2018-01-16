@@ -65,9 +65,10 @@ h2 {
   border: green solid 1px;
   border-radius: 4px;
   color: #d81e58;
-  background-color: #5FAD56;
+  background-color: #C0C0C0;
   /*opacity:.2;*/
   min-width: 200px;
+  position: relative;
 }
 
 .pageTitle {
@@ -95,17 +96,21 @@ h2 {
 
 .delete-btn {
   /*color: #4CAF50;*/
-  color: #60E1E0;
-  background-color: #FF7F50;
+  /*color: #60E1E0;*/
+  /*background-color: #FF7F50;*/
   border: none;
-  border-radius: 12px;
-  /*color: white;*/
-  padding: 8px 16px;
+  border-radius: 6px;
+  color: #d81e58;
+  /*padding: 8px 16px;*/
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
-  margin: 4px 2px;
+  position: absolute;
+  top:5px;
+  right:5px;
+  background-color: #4d9078;
+  /*margin: 4px 2px;*/
 }
 
 @media screen and (max-width: 980px) {

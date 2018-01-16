@@ -54,28 +54,22 @@ class GroupOrder extends React.Component {
           <ul>
             {this.state.orders.map(item =>
               <li className='liContainer' key={item._id}>
-                <nav className='level'>
 
-                  <div className='level-item'>
-                    <button
-                      type='submit' value={item.item}
-                      className='delete-btn'
-                      onClick={() => this.deleteOrder(item.item, item.userid)}>
-                      ✗
-                    </button>
-                  </div>
+                <button
+                  type='submit' value={item.item}
+                  className='delete-btn'
+                  onClick={() => this.deleteOrder(item.item, item.userid)}>
+                  <b>✗</b>
+                </button>
 
-                  <div className='level-item'>
-                    <div className='block'>
 
-                      <p className='orderLi'> User: {item.name.first} {item.name.last} </p>
-                      <p className='orderLi'> Lunch Order: {item.item} </p>
+                <div className='block'>
 
-                    </div>
+                  <p className='orderLi'> User: {item.name.first} {item.name.last} </p>
+                  <p className='orderLi'> Lunch Order: {item.item} </p>
 
-                  </div>
+                </div>
 
-                </nav>
               </li>
             )}
           </ul>

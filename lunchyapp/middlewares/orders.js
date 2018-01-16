@@ -54,6 +54,13 @@ const Order = {
             if (err) { console.log(err) };
             callback(res)
         })
+    },
+
+    getMyOrders: (id, cb) => {
+        Orders.find({ 'userid': id }, function(err, res) {
+            if (err) { console.log(err) };
+            cb(res)
+        })
     }
 }
 

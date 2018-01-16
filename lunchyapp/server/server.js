@@ -26,7 +26,9 @@ if (process.env.MONGODB_URI) {
     useMongoClient: true
   })
 } else {
-  mongoose.connect('mongodb://localhost/lunchy');
+  mongoose.connect('mongodb://localhost/lunchy', {
+    useMongoClient: true
+  });
 }
 
 
