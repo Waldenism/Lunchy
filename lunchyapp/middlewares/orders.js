@@ -2,9 +2,8 @@ var Orders = require('../models/orders');
 var Users = require('../models/users');
 
 const Order = {
-    newOrder: (user, callback) => {
-        console.log(user)
-        let { userid, groupid, theOrder, restaurant } = user;
+    newOrder: (user) => {
+        let { userid, groupid, theOrder, name } = user;
 
         if (!userid) {
             console.log('not logged in');
@@ -14,9 +13,9 @@ const Order = {
             for (let i=0; i < theOrder.length; i++) {
                 let addItem = new Orders()
                 addItem.userid = userid;
+                addItem.name = name;
                 addItem.group = groupid;
                 addItem.item = theOrder[i].name;
-                addItem.restaurant = restaurant;
                 addItem.balance = 10;
                 addItem.paid = false;
 
@@ -28,11 +27,9 @@ const Order = {
                     }
                     console.log("**** Item added to Database *****");
                     console.log(addItem);
-
-                    // callback(addItem);
                 });
             }
-            
+
         }
     },
 

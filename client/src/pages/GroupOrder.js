@@ -24,24 +24,16 @@ class GroupOrder extends React.Component {
     .catch((er) => {
       console.log(er)
     })
-    // console.log("orders +++++++++++++++++++++++" + this.state.orders)
   }
 
   deleteOrder(item, e) {
     e.preventDefault()
-    // console.log(e.currentTarget)
-    const value  = item
-    // console.log(thi s.state.orders)
+    const { value }  = item
 
     axios.post('/api/delete', { value: value })
     .then(res => {
       this.setState({ orders: res.data });
-      // console.log('+++++++++++++++++++++++++++++++++++++++++')
-      // console.log(this.state.orders)
-    }
-
-    )
-    console.log(this.state.orders)
+    })
   }
 
   render() {
@@ -60,9 +52,9 @@ class GroupOrder extends React.Component {
                 <nav className='level'>
 
                   <div className='level-item'>
-                    <button 
-                      type='submit' value={item.item} 
-                      className='delete-btn' 
+                    <button
+                      type='submit' value={item.item}
+                      className='delete-btn'
                       onClick={(e) => this.deleteOrder(item.item, e)}>
                       ✗
                     </button>
@@ -71,12 +63,12 @@ class GroupOrder extends React.Component {
                   <div className='level-item'>
                     <div className='block'>
 
-                      <p className='orderLi'> User ID: {item._id} </p>
+                      <p className='orderLi'> User: {item.name.first} {item.name.last} </p>
                       <p className='orderLi'> Lunch Order: {item.item} </p>
 
                     </div>
-                    
-                  </div>                  
+
+                  </div>
 
                 </nav>
               </li>

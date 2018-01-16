@@ -12,21 +12,22 @@ router.use("/scraper", function(req, res) {
 
 // Add Item route
 router.post("/add", function(req, res) {
-    // console.log(req.user)
+    if (!req.user) {
+        res.send('You are not logged in!')
+    }
 
-    const { _id, group } = req.user;
-    // console.log(req.user)
+    const { _id, group, name } = req.user;
     const { theOrder } = req.body;
 
     let userOrder = {
         userid: _id,
+        name: name,
         groupid: group.id,
         theOrder: theOrder
     }
 
-    order.newOrder(userOrder, function(data) {
-        res.send(data);
-    });
+    order.newOrder(userOrder);
+    res.send(userOrder);
 });
 
 
@@ -37,11 +38,6 @@ router.post("/delete", function(req, res) {
         order.getOrders(req.user.group.id, function(data) {
                 res.send(data);
             });
-        
-        // if (req.user.group.admin) {
-            
-            
-        // }
     });
 });
 
