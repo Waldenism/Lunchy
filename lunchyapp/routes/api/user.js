@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const order = require("../../middlewares/orders.js");
+const user = require("../../config/users.js");
 
 
 // Check Login Status
@@ -28,7 +29,6 @@ router.get('/group-orders', function(req, res) {
   }
 });
 
-// route
 router.get('/my-orders', function(req, res) {
 
   if (req.user) {
@@ -38,5 +38,16 @@ router.get('/my-orders', function(req, res) {
     })
   }
 })
+
+router.post('/update-account', function(req, res) {
+  let info = {
+    userid: req.user._id,
+    newInfo: req.body
+  };
+
+  user.updateInfo(info, function(data) {
+    res.send(data)
+  })
+});
 
 module.exports = router;

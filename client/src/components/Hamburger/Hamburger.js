@@ -29,23 +29,22 @@ class Hamburger extends React.Component {
   }
 
   componentDidMount() {
-      axios.get('/api/user/current').then(res => {
-        let { group, username, name } = res.data;
+    axios.get('/api/user/current').then(res => {
+      let { group, username, name } = res.data;
 
-        if (username) {
+      if (username) {
+        this.setState({
+          isLoggedIn: true,
+          name: name.first
+        })
+
+        if (group.admin) {
           this.setState({
-            isLoggedIn: true,
-            name: name.first
+            admin: true
           })
-
-          if (group.admin) {
-            this.setState({
-              admin: true
-            })
-          }
         }
-
-      })
+      }
+    })
   }
 
   handleSignup( ) {

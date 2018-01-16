@@ -10,6 +10,7 @@ import './assets/App.css'
 import Home from './pages/Home'
 import Balance from './pages/Balance'
 import GroupOrder from './pages/GroupOrder'
+import AccountSettings from './pages/AccountSettings'
 
 //sidebar
 import Hamburger from './components/Hamburger'
@@ -60,6 +61,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/balance" component={Balance} />
             <Route path="/group-order" component={GroupOrder} />
+            <Route path="/account-settings" component={AccountSettings} />
           </div>
 
         </div>
