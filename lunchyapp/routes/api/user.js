@@ -12,20 +12,31 @@ router.get("/current", function(req, res) {
 // Matches with "/api/scraper/subway"
 router.get('/group-orders', function(req, res) {
 
-    if (req.user) {
-      let { admin, id } = req.user.group
+  if (req.user) {
+    let { admin, id } = req.user.group
 
-      if (admin) {
-        order.getOrders(id, function(data) {
-            let groupData = {
-              name: req.user.group.name,
-              data: data
-            }
+    if (admin) {
+      order.getOrders(id, function(data) {
+          let groupData = {
+            name: req.user.group.name,
+            data: data
+          }
 
-            res.send(groupData);
-        });
-      }
+          res.send(groupData);
+      });
     }
+  }
 });
+
+// route
+router.get('/my-orders', function(req, res) {
+
+  if (req.user) {
+    let { _id } = req.user
+    order.getMyOrders(_id, function(data) {
+      res.send(data)
+    })
+  }
+})
 
 module.exports = router;
