@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
 //style sheet
-import './App.css'
+import './assets/App.css'
 
 //pages
 import Home from './pages/Home'

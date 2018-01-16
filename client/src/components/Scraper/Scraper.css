@@ -30,6 +30,7 @@ img {z-index: 1;}
 .toggled {
   background-color: #2f70e1 !important;
   color: #fff;
+  transition: all .3s ease-out;
 }
 
 .restaurantSelector {
