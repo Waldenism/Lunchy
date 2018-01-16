@@ -12,6 +12,9 @@ router.use("/scraper", function(req, res) {
 
 // Add Item route
 router.post("/add", function(req, res) {
+    if (!req.user) {
+        res.send('You are not logged in!')
+    }
 
     const { _id, group, name } = req.user;
     const { theOrder } = req.body;

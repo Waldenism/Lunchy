@@ -4,9 +4,6 @@ import './Scraper.css'
 import React from 'react'
 import axios from 'axios'
 
-import lodash from 'lodash'
-import _ from 'lodash'
-
 import Modal from '../Modal/Modal'
 
 
@@ -19,14 +16,14 @@ class Scraper extends React.Component {
       cart: [],
       balance: 0,
       toggled: [],
-      isModalOpen: false
+      isModalOpen: false,
+      isLoggedIn: false
     }
 
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.toggleItem = this.toggleItem.bind(this)
+    this.clearSelection = this.clearSelection.bind(this)
     this.handleModal = this.handleModal.bind(this)
-
   }
 
 
@@ -40,6 +37,8 @@ class Scraper extends React.Component {
     this.menus();
   }
 
+
+//get menu from scraper
   menus() {
     let { restaurant } = this.state
 
@@ -55,11 +54,11 @@ class Scraper extends React.Component {
   }
 
 
+//change scraped menu based on selection
   handleChange(event) {
     event.preventDefault()
 
     const { toggled, restaurant } = this.state;
-    const { handler } = this.props;
     const { value } = event.target;
 
     this.setState({
@@ -70,7 +69,6 @@ class Scraper extends React.Component {
 
     axios.post('/api/scraper', { restaurant: value })
     .then((res) => {
-      handler(res.data)
       this.setState({
         menu: res.data
       })
@@ -81,6 +79,8 @@ class Scraper extends React.Component {
   };
 
 
+
+//change color of items selected
   toggleItem(index, itemName, event) {
     const { toggled, restaurant } = this.state
 
@@ -113,31 +113,35 @@ class Scraper extends React.Component {
   //   })
   // };
 
-  handleModal(event) {
-    const { isModalOpen, menu, toggled } = this.state;
 
-    const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
-
+//clear cart, balance, and close modal
+  clearSelection() {
     this.setState({
-      cart: theOrder,
-      balance: (10 * (theOrder.length))
-    });
-
-    isModalOpen ? this.setState({ isModalOpen: false}) : this.setState({ isModalOpen: true})
+      isModalOpen: false,
+      cart: [],
+      balance: 0
+    })
   }
 
 
-  handleSubmit(event) {
-    const { cart } = this.state
+//get toggled info and send to modal
+  handleModal() {
+    axios.get('/api/user/current').then(res => {
+      if (res.data.username) {
+        const { menu, toggled } = this.state
+        const theOrder = menu.filter((val, index) => toggled.indexOf(index) > -1)
 
-    axios.post('/api/add', {theOrder: cart})
-    .then(res => {
-      this.setState({
-        cart: [],
-        balance: 0,
-        toggled: [],
-        isModalOpen: false
-      });
+          this.setState({
+            isLoggedIn: true,
+            cart: theOrder,
+            balance: (10 * (theOrder.length)),
+            isModalOpen: true
+        })
+      } else {
+        this.setState({
+          isModalOpen: true,
+          isLoggedIn: false })
+      }
     })
   }
 
@@ -145,29 +149,14 @@ class Scraper extends React.Component {
   render() {
     return (
       <div>
-
-        {/*
-        <ol>
-          {this.state.cart.map(item =>
-
-            <div key={_.uniqueId()} >
-              <li key={_.uniqueId()} >{item.item}</li>
-
-            </div>
-          )}
-          <b>Balance: {this.state.balance}</b>
-        </ol>
-        */}
-
         <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
           <option value='subway'>Subway</option>
           <option value='dairyqueen'>Dairy Queen</option>
         </select>
 
-        <button onClick={() => this.handleModal() }>Submit</button>
+        <button onClick={() => this.handleModal() } >Submit</button>
 
         <ul>
-
           {this.state.menu.map((item,index) =>
             <div key={_.uniqueId()}
               className={ this.state.toggled.indexOf(index) > -1 ? "menu toggled" : "menu" }
@@ -178,32 +167,11 @@ class Scraper extends React.Component {
               <li key={_.uniqueId()} >{item.name}</li>
 
             </div>
-
           )}
         </ul>
 
-
-        <Modal
-          isOpen={this.state.isModalOpen}
-        >
-          <h2>Confirm Order</h2>
-
-          <ol>
-            {
-              this.state.cart.map(item => (
-                <div className='liContainer' key={_.uniqueId()}>
-                  <li key={_.uniqueId()}>{item.name}</li>
-                </div>
-              ))
-            }
-            <strong>Balance: {this.state.balance}</strong>
-          </ol>
-
-          <button onClick={() => { this.handleModal }}>Edit Order</button>
-          <button onClick={() => { this.handleSubmit() }}>Place Order</button>
-
-        </Modal>
-
+        <Modal {...this.state}
+          clearSelection={ this.clearSelection } />
       </div>
     )
   }
