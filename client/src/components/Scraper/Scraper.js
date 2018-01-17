@@ -31,6 +31,8 @@ class Scraper extends React.Component {
     this.setState({
       restaurant: 'subway'
     });
+
+    console.log(this.props.test)
   }
 
   componentDidMount() {

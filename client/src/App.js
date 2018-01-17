@@ -2,6 +2,7 @@
 //dependencies
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import axios from 'axios'
 
 //style sheet
 import './assets/App.css'
@@ -16,52 +17,82 @@ import AccountSettings from './pages/AccountSettings'
 import Hamburger from './components/Hamburger'
 
 class App extends Component {
-
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
-      user: null,
-      loggedIn: false,
-      menu: []
+      menuOpen: false,
+      isLoggedIn: false,
+      admin: false,
+      name: ''
     }
-
-    this.handleLogIn = this.handleLogIn.bind(this)
+    this.handleLogin = this.handleLogin.bind(this);
+    this.openMenu = this.openMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
-  handleSignUp(user) {
-    this.setState({
-      user,
-      loggedIn: true
+  handleLogin() {
+    axios.get('/api/user/current').then(res => {
+      if (!res.data.username) {
+        this.setState({
+          isLoggedIn: false,
+          admin: false,
+          name: ''
+        })
+
+      } else {
+        let { group, username, name } = res.data;
+
+        if (username) {
+          this.setState({
+            isLoggedIn: true,
+            name: name.first,
+            menuOpen: false
+          })
+
+          if (group.admin) {
+            this.setState({
+              admin: true
+            })
+          }
+        }
+
+      }
     })
   }
 
-  handleLogIn(user) {
-    this.setState({
-      user,
-      loggedIn: true
-    })
+  openMenu(){
+    this.setState({ menuOpen: true })
   }
+
+  closeMenu(){
+    this.setState({ menuOpen: false })
+  }
+
 
   render() {
-
-    let { loggedIn, user } = this.state
-
     return (
-      <Router>
+      <Router >
         <div className='toot'>
 
           <div className='header'>
             <div className=''>
               <h1> LunchTime </h1>
-              <Hamburger />
+
+              <Hamburger
+                {...this.state}
+                handleLogin={ this.handleLogin }
+                closeMenu={ this.closeMenu }
+                openMenu={ this.openMenu }
+              />
+
             </div>
           </div>
 
           <div className='main'>
-            <Route exact path="/" component={Home} />
-            <Route path="/balance" component={Balance} />
-            <Route path="/group-order" component={GroupOrder} />
-            <Route path="/account-settings" component={AccountSettings} />
+            <Route exact path="/" render={() => (<Home {...this.state} />)} />
+            <Route path="/balance" render={() => (<Balance {...this.state} />)} />
+            <Route path="/group-order" render={() => (<GroupOrder {...this.state} />)} />
+            <Route path="/account-settings" render={() => (<AccountSettings {...this.state} />)} />
           </div>
 
         </div>

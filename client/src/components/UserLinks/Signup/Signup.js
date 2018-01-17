@@ -2,12 +2,6 @@ import React from 'react'
 import axios from 'axios'
 import './Signup.css'
 
-const styles = {
-  adminLabelStyle: {
-    fontSize: 12
-  }
-};
-
 class Signup extends React.Component {
   constructor(props) {
     super(props)
@@ -34,18 +28,19 @@ class Signup extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
 
-    const { handler } = this.props
+    const { handleLinks } = this.props
+    const { username, password, first, last, group, admin } = this.state
 
     axios.post('/signup', {
-      username: this.state.username,
-      password: this.state.password,
-      first: this.state.first,
-      last: this.state.last,
-      group: this.state.group,
-      admin: this.state.admin
+      username: username,
+      password: password,
+      first: first,
+      last: last,
+      group: group,
+      admin: admin
     })
     .then(res => {
-      res.data.username ? handler(true) : handler(false)
+      res.data.username ? handleLinks(true) : handleLinks(false)
     })
     .catch((er) => {
       console.log('ERROR!');
@@ -53,103 +48,89 @@ class Signup extends React.Component {
     })
   }
 
+
   render() {
     return (
       <div>
         <h3>Sign Up!</h3>
 
-
-
         <section>
           <div>
-                <div className='box'>
-                  <p className="subtitle has-text-grey">Create Account</p>
-                  <hr />
+            <div className='box'>
+              <p className="subtitle has-text-grey">Create Account</p>
+              <hr />
 
-                  <form onSubmit={this.handleSubmit}>
 
-                    <div className="field">
-                      <div className="control">
-                        <label>Username
+              <form onSubmit={this.handleSubmit}>
 
-                          <input name="username" type="text" className="form-control" onChange={this.handleChange} value={this.state.username}></input>
+                <div className="field">
+                  <div className="control">
+                    <label>Username
+                      <input name="username" type="text" className="form-control" onChange={this.handleChange} value={this.state.username}></input>
+                    </label>
+                  </div>
+                </div>
 
-                        </label>
-                      </div>
+
+                <div className="field">
+                  <div className="control">
+                    <label>Password
+                      <input name="password" type="password" className="form-control" onChange={this.handleChange} value={this.state.password}></input>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="field">
+                  <div className="control">
+                    <label >First Name
+                      <input type="text" className="form-control" name="first" onChange={this.handleChange} value={this.state.first}></input>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="field">
+                  <div className="control">
+                    <label>Last Name
+                      <input type="text" className="form-control" name="last" onChange={this.handleChange} value={this.state.last}></input>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="field">
+                  <div className="control">
+                    <label>Group
+
+                      <input name="group" type="text" className="form-control" onChange={this.handleChange} value={this.state.group}></input>
+                      <hr />
+                      <span className='admin-label'>Are you registerting as an admin?</span>
+                      <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input>
+
+                    </label>
+                  </div>
+                </div>
+
+
+                <div className="field is-grouped">
+                  <div className="control">
+                      <input type="submit" value='Submit' className="button is-normal is-info"></input>
+                  </div>
+                </div>
+              </form>
+              <hr />
+
+              <form >
+                <div className="feild">
+                  <div className="control">
+                    <div>Already a Member?
+                      <input type="submit" value='Login' className="" onClick={ this.props.action }></input>
                     </div>
+                  </div>
+                </div>
+              </form>
 
-
-                    <div className="field">
-                      <div className="control">
-                        <label>Password
-
-                          <input name="password" type="password" className="form-control" onChange={this.handleChange} value={this.state.password}></input>
-
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <div className="control">
-
-                        <label >First Name
-
-                          <input type="text" className="form-control" name="first" onChange={this.handleChange} value={this.state.first}></input>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <div className="control">
-                        <label>Last Name
-                          <input type="text" className="form-control" name="last" onChange={this.handleChange} value={this.state.last}></input>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="field">
-                      <div className="control">
-                        <label>Group
-
-
-                          <input name="group" type="text" className="form-control" onChange={this.handleChange} value={this.state.group}></input>
-
-                          <hr />
-
-                          <span className='adminLabel' style={styles.adminLabelStyle}>Are you registerting as an admin?</span> <span>     </span>
-                          
-                          
-                          
-                          <input type="checkbox" id="groupadmin" name="admin" onChange={this.handleChange} value='true'></input>
-
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className="field is-grouped">
-                      <div className="control">
-                          <input type="submit" value='Submit' className="button is-normal is-info"></input>
-                      </div>
-                    </div>
-                  </form>
-
-                  <hr />
-
-                  <form >
-                    <div className="feild">
-                      <div className="control"> 
-                        <div>Already a Member?
-                          <input type="submit" value='Login' className="" onClick={ this.props.action }></input>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
             </div>
           </div>
-
         </section>
-
-
       </div>
     )
   }

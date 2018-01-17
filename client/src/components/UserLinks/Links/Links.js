@@ -26,7 +26,9 @@ class Links extends React.Component {
 
     Logout(e) {
       e.preventDefault()
-      axios.get('/logout').then(data => this.props.handler(data))
+      axios.get('/logout').then(() => {
+        this.props.handleLinks(false)
+      })
     }
 
   render() {
