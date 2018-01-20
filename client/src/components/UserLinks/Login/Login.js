@@ -11,12 +11,11 @@ class Login extends React.Component {
       group: '',
 
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
+  //sets state for User information
   handleChange(e) {
     const { name, value } = e.target
     this.setState({
@@ -24,7 +23,7 @@ class Login extends React.Component {
     })
   }
 
-
+  //post request for user login
   handleSubmit(e) {
     e.preventDefault()
 
@@ -40,7 +39,7 @@ class Login extends React.Component {
       res.data.username ? handleLinks(true) : handleLinks(false)
     })
     .catch((er) => {
-      console.log(er)
+      console.debug(er)
     })
   }
 

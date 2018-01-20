@@ -18,6 +18,7 @@ class Signup extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  //changes state values based on user information
   handleChange(e) {
     const { name, value } = e.target
     this.setState({
@@ -25,6 +26,7 @@ class Signup extends React.Component {
     })
   }
 
+  //Post request for user signup
   handleSubmit(e) {
     e.preventDefault()
 
@@ -44,7 +46,7 @@ class Signup extends React.Component {
     })
     .catch((er) => {
       console.log('ERROR!');
-      console.log(er);
+      console.debug(er);
     })
   }
 
@@ -118,18 +120,12 @@ class Signup extends React.Component {
               </form>
               <hr />
 
-              <form >
-                <div className="feild">
-                  <div className="control">
-                    <div>Already a Member?
-                      <input type="submit" value='Login' className="" onClick={ this.props.action }></input>
-                    </div>
-                  </div>
-                </div>
-              </form>
 
+                <h6>Already a Member?</h6>
+                <input type="submit" value='login' className='button is-normal' onClick={ this.props.action }></input>
+
+              </div>
             </div>
-          </div>
         </section>
       </div>
     )

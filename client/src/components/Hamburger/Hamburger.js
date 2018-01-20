@@ -17,12 +17,11 @@ class Hamburger extends React.Component {
     this.state = {
       auth: 'login'
     }
-
     this.toggleAuth = this.toggleAuth.bind(this)
     this.handleLinks = this.handleLinks.bind(this)
-
   }
 
+  //sets state for displaying Login or Signup page
   toggleAuth( ) {
     this.state.auth === 'signup' ?
     this.setState({ auth: 'login' }) :
@@ -30,15 +29,16 @@ class Hamburger extends React.Component {
     this.props.openMenu();
   }
 
+  //sets state for displaying User links if logged in
   handleLinks(conf) {
     if (conf) {
-      this.setState({ auth: null });
       this.props.handleLogin();
+      this.setState({ auth: null });
 
     } else {
-      this.setState({ auth: 'login' });
       this.props.openMenu();
       this.props.handleLogin();
+      this.setState({ auth: 'login' });
     }
   }
 
@@ -46,9 +46,10 @@ class Hamburger extends React.Component {
     let links;
     let greeting;
 
+    //displays User links, Login, or Signup depending on state
     if (this.props.isLoggedIn) {
       greeting = <h2> Hi {this.props.name}! </h2>
-      links = <Links handleLinks={ this.handleLinks } />
+      links = <Links handleLinks={ this.handleLinks } {...this.props} />
 
     } else {
         greeting = <h2> Welcome to LunchTime! </h2>
@@ -56,7 +57,7 @@ class Hamburger extends React.Component {
         if(this.state.auth === 'login') {
           links = <Login handleLinks={ this.handleLinks } action={ this.toggleAuth } />
         } else {
-          links = <Signup handleLinks={ this.handleLinks } action={ this.handleAuth } />
+          links = <Signup handleLinks={ this.handleLinks } action={ this.toggleAuth } />
         }
     }
 
@@ -67,16 +68,12 @@ class Hamburger extends React.Component {
 
           {greeting}
 
-
           {links}
 
         </Menu>
-
       </div>
-
     )
   }
-
 }
 
 export default Hamburger

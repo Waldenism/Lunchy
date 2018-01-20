@@ -13,13 +13,12 @@ class Modal extends React.Component {
     this.state = {
       submitted: false
     };
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.modalMessage = this.modalMessage.bind(this);
   }
 
 
-
+  //send order to database
   handleSubmit(event) {
     axios.post('/api/add', {theOrder: this.props.cart})
     .then(res => {
@@ -28,8 +27,10 @@ class Modal extends React.Component {
     })
   }
 
+  //displays message on modal
   modalMessage() {
 
+    //tells user if they aren't logged in (can't place an order)
     if (!this.props.isLoggedIn) {
       return (
         <div>
@@ -39,6 +40,8 @@ class Modal extends React.Component {
       )
 
     } else {
+
+      //order submitted message
       if (this.state.submitted) {
         return (
           <div>
@@ -50,6 +53,7 @@ class Modal extends React.Component {
           </div>
         )
 
+        //confirm order message
       } else {
         return (
           <div>
@@ -70,9 +74,7 @@ class Modal extends React.Component {
         )
       }
     }
-
   }
-
 
   render() {
     return (

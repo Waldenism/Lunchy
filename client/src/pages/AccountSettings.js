@@ -6,22 +6,18 @@ class AccountSettings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
       submitted: false
     }
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderInfo = this.renderInfo.bind(this);
   }
 
 
-  componentWillMount() {
-    axios.get('/api/user/current').then(res => {
-      this.setState({ user: res.data });
-      this.renderInfo();
-    })
+  componentDidMount() {
+    this.renderInfo();
   }
 
+  //submit account information changes
   handleSubmit(e) {
     e.preventDefault()
     const { first, last, username, group } = e.target;
@@ -38,35 +34,32 @@ class AccountSettings extends React.Component {
         submitted: true })
     })
     .catch((er) => {
-      console.log(er)
+      console.debug(er)
     })
   }
 
+  //gets information from state
   renderInfo() {
-    let info = ''
-    const { name, username, group, password } = this.state.user;
+    const { name, username, group, password } = this.props.user;
 
-    if (Object.keys(this.state.user).length) {
+    if (Object.keys(this.props.user).length) {
       if (this.state.submitted) {
-        info = "Your account has been updated"
+        return ("Your account has been updated")
 
       } else {
-        info = <div>
-          <form onSubmit={this.handleSubmit}>
-            First Name: <input type="text" name="first" defaultValue={ name.first } /><br />
-            Last Name: <input type="text" name="last" defaultValue={ name.last } /><br />
-            Username: <input type="text" name="username" defaultValue={ username } /><br />
-            Group name: <input type="text" name="group" defaultValue={ group.name } /><br />
-            <input type="submit" value='Submit' className="button is-normal" ></input>
-          </form>
-        </div>
+        return (
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              First Name: <input type="text" name="first" defaultValue={ name.first } /><br />
+              Last Name: <input type="text" name="last" defaultValue={ name.last } /><br />
+              Username: <input type="text" name="username" defaultValue={ username } /><br />
+              Group name: <input type="text" name="group" defaultValue={ group.name } /><br />
+              <input type="submit" value='Submit' className="button is-normal" ></input>
+            </form>
+          </div>
+        )
       }
-
     }
-
-    return (
-      info
-    )
   }
 
 
@@ -74,9 +67,7 @@ class AccountSettings extends React.Component {
     return(
       <div className='pageWrap'>
         <div> <h2 className='pageTitle'> Account Settings </h2> </div>
-
-        { this.renderInfo() }
-
+        {this.renderInfo()}
       </div>
     )
   }

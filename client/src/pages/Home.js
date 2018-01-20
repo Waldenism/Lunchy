@@ -7,7 +7,7 @@ class Home extends React.Component {
         return(
             <div>
                 <div className='pageWrap'>
-                <Scraper {...this.props} />
+                    <Scraper {...this.props} />
                 </div>
             </div>
         )

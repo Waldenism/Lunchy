@@ -1,4 +1,3 @@
-
 //dependencies
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
@@ -7,14 +6,14 @@ import axios from 'axios'
 //style sheet
 import './assets/App.css'
 
-//pages
-import Home from './pages/Home'
-import Balance from './pages/Balance'
-import GroupOrder from './pages/GroupOrder'
-import AccountSettings from './pages/AccountSettings'
-
-//sidebar
+//components
 import Hamburger from './components/Hamburger'
+
+//pages
+import AccountSettings from './pages/AccountSettings'
+import GroupOrder from './pages/GroupOrder'
+import Home from './pages/Home'
+import MyOrders from './pages/MyOrders'
 
 class App extends Component {
   constructor (props) {
@@ -23,30 +22,39 @@ class App extends Component {
       menuOpen: false,
       isLoggedIn: false,
       admin: false,
-      name: ''
+      user: {}
     }
     this.handleLogin = this.handleLogin.bind(this);
     this.openMenu = this.openMenu.bind(this);
     this.closeMenu = this.closeMenu.bind(this);
   }
 
+  //checks login status before rendering
+  componentDidMount() {
+    this.handleLogin();
+  }
+
+  //Sets state for login status
   handleLogin() {
     axios.get('/api/user/current').then(res => {
+
+      //if no user logged in, initialize state
       if (!res.data.username) {
         this.setState({
           isLoggedIn: false,
           admin: false,
-          name: ''
+          user: {}
         })
 
+      //if logged in, set state based on login information
       } else {
-        let { group, username, name } = res.data;
+        let { group, username } = res.data;
 
         if (username) {
           this.setState({
+            menuOpen: false,
             isLoggedIn: true,
-            name: name.first,
-            menuOpen: false
+            user: res.data,
           })
 
           if (group.admin) {
@@ -55,15 +63,15 @@ class App extends Component {
             })
           }
         }
-
       }
     })
   }
 
+  //sets hamburger sidebar to open
   openMenu(){
     this.setState({ menuOpen: true })
   }
-
+  //sets hamburger sidebar to closed
   closeMenu(){
     this.setState({ menuOpen: false })
   }
@@ -84,15 +92,14 @@ class App extends Component {
                 closeMenu={ this.closeMenu }
                 openMenu={ this.openMenu }
               />
-
             </div>
           </div>
 
           <div className='main'>
-            <Route exact path="/" render={() => (<Home {...this.state} />)} />
-            <Route path="/balance" render={() => (<Balance {...this.state} />)} />
-            <Route path="/group-order" render={() => (<GroupOrder {...this.state} />)} />
-            <Route path="/account-settings" render={() => (<AccountSettings {...this.state} />)} />
+            <Route path="/account-settings" render={() => (<AccountSettings user={this.state.user} />)} />
+            <Route path="/group-order" render={() => (<GroupOrder user={this.state.user} />)} />
+            <Route exact path="/" render={() => (<Home user={this.state.user} />)} />
+            <Route path="/my-orders" render={() => (<MyOrders user={this.state.user} />)} />
           </div>
 
         </div>
