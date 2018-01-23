@@ -72,7 +72,7 @@ runes node in production
     
 -- lunchyapp: holds all Express files (written in ES6)
 
------- config: holds functions for making database calls regarding users, as well as configuring user authentication via Passport
+------ config: functions for db calls regarding users, as well as configuring user authentication via Passport
     
 ------ middlewares: holds functions for making database calls for CRUD-ing orders
     
