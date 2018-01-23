@@ -39,29 +39,29 @@ Passport and bCrypt are used for user authentication. Session stores have not be
 
 
 ## Yarn Commands
-Run "yarn install" upon cloning
+Run `yarn install` upon cloning
 
 
-"~/pathway/Lunchy$ yarn dev"
-### runs babel-node in a development environment and uses webpack hot reloading
+`~/pathway/Lunchy$ yarn dev`
+runs babel-node in a development environment and uses webpack hot reloading
 
-"~/pathway/Lunchy$ yarn build"
-### transpiles express files from ./lunchyapp into ./build
+`~/pathway/Lunchy$ yarn build`
+transpiles express files from ./lunchyapp into ./build
 
-"~/pathway/Lunchy$ yarn bundle"
-### transpiles and minifies jsx from ./client/src/index.js to ./client/public/bundle.js
+`~/pathway/Lunchy$ yarn bundle`
+transpiles and minifies jsx from ./client/src/index.js to ./client/public/bundle.js
 
-"~/pathway/Lunchy$ yarn start"
-### runes node in production
+`~/pathway/Lunchy$ yarn start`
+runes node in production
 
 
 
 
 ## Directory Structure
---build: Currently holds all of the transpiled ES6 jS from the "lunchyapp" directory, created and populated via "yarn build"
+-- build: Currently holds all of the transpiled ES6 jS from the "lunchyapp" directory, created and populated via "yarn build"
          This folder will not be in the GitHub repo once Jenkins is properly configured to run build commands on its own
          
---client: holds all static files and React components
+-- client: holds all static files and React components
     -- public: holds the index.html page and the bundled React (as bundle.js)
     -- src: holds all images, React components, and React pages
     
