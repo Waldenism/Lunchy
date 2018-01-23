@@ -1,4 +1,4 @@
-### LunchTime ###
+# LunchTime #
 
 An app for easy group catering and ordering.
 Upon signing up and resgistering with a group, a designated admin can take
@@ -29,7 +29,7 @@ submit button to send the order to the admin.
 
 
 ## Under the Hood
-Our app was not created using the standard create-react-app boilerplate. Rather, we configured babel and webpack ourselves in order for us to meet our specific needs.
+Our app was NOT created using the standard create-react-app boilerplate. Rather, we configured babel and webpack ourselves in order for us to meet our specific needs.
 
 Our MongoDB currently uses Mongoose to make CRUD calls, and our query methods are currently in the process of optimization.
 Our React UI is designed so that all pages and components lead to the index.js in client/src
