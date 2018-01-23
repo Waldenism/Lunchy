@@ -65,10 +65,8 @@ runes node in production
          This folder will not be in the GitHub repo once Jenkins is properly configured to run build commands on its own
          
 -- client: holds all static files and React components
-
-    -- public: holds the index.html page and the bundled React (as bundle.js)
-    
-    -- src: holds all images, React components, and React pages
+------ public: holds the index.html page and the bundled React (as bundle.js)
+------ src: holds all images, React components, and React pages
     
 -- lunchyapp: holds all Express files (written in ES6)
 
