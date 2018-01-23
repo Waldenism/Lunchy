@@ -9,7 +9,7 @@ charge of collecting orders, and tracking payment statuses.
 https://lunchytime.herokuapp.com/
 
 - [Using the App](#using-the-app)
-- [Under the Hood](#how-it-was-made)
+- [Under the Hood](#under-the-hood)
 - [yarn Commands](#yarn-commands)
 - [Directory Structure](#directory-structure)
 
