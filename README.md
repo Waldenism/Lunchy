@@ -61,19 +61,27 @@ runes node in production
 
 
 ### Directory Structure ###
--- ##### build #####: Currently holds all of the transpiled ES6 jS from the "lunchyapp" directory, created and populated via "yarn build"
+-- build: Currently holds all of the transpiled ES6 jS from the "lunchyapp" directory, created and populated via "yarn build"
          This folder will not be in the GitHub repo once Jenkins is properly configured to run build commands on its own
          
--- ##### client #####: holds all static files and React components
+-- client: holds all static files and React components
+
     -- public: holds the index.html page and the bundled React (as bundle.js)
+    
     -- src: holds all images, React components, and React pages
     
--- ##### lunchyapp #####: holds all Express files (written in ES6)
+-- lunchyapp: holds all Express files (written in ES6)
+
     -- config: holds functions for making database calls regarding users, as well as configuring user authentication via Passport
+    
     -- middlewares: holds functions for making database calls for CRUD-ing orders
+    
     -- models: holds MongoDB models (included for visibility)
+    
     -- routes: all routes, including api routes under /api
+    
     -- server: Express server file as well as webpack.config files
+    
     -- utils: scraper function for retrieving restaurant menu data
 
 
