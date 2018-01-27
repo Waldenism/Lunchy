@@ -22,7 +22,7 @@ const Order = {
                 //save the user
                 addItem.save(function(err) {
                     if (err){
-                        console.log('Error in Saving item: '+err);
+                        console.debug('Error in Saving item: '+err);
                         throw err;
                     }
                     console.log("**** Item added to Database *****");
@@ -36,7 +36,7 @@ const Order = {
     deleteOrder: (user, data, callback) => {
 
         if (!user) {
-            console.log('not logged in');
+            console.debug('not logged in');
 
         } else {
             let { group } = user;
@@ -51,15 +51,15 @@ const Order = {
 
     getOrders: (id, callback) => {
         Orders.find({ 'group': id, 'paid': false }, function(err, res) {
-            if (err) { console.log(err) };
+            if (err) { console.debug(err) };
             callback(res)
         })
     },
 
-    getMyOrders: (id, cb) => {
+    getMyOrders: (id, callback) => {
         Orders.find({ 'userid': id }, function(err, res) {
-            if (err) { console.log(err) };
-            cb(res)
+            if (err) { console.debug(err) };
+            callback(res)
         })
     }
 }
