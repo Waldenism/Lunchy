@@ -9,7 +9,7 @@ const restaurants = {
         image: '.item-container',
         imgattr: 'src',
         homepage: 'http://www.dairyqueen.com'
-    }
+    },
 
     subway: {
         menu: 'http://www.subway.com/en-us/menunutrition/menu/all',
@@ -18,7 +18,7 @@ const restaurants = {
         image: '.menu-item-title',
         imgattr: 'src',
         homepage: 'http://www.subway.com/'
-    },
+    }
     
 }
 

@@ -4,12 +4,11 @@ var Orders = require('../models/orders');
 var Users = require('../models/users');
 
 var Order = {
-    newOrder: function newOrder(user, callback) {
-        console.log(user);
+    newOrder: function newOrder(user) {
         var userid = user.userid,
             groupid = user.groupid,
             theOrder = user.theOrder,
-            restaurant = user.restaurant;
+            name = user.name;
 
 
         if (!userid) {
@@ -18,9 +17,9 @@ var Order = {
             var _loop = function _loop(i) {
                 var addItem = new Orders();
                 addItem.userid = userid;
+                addItem.name = name;
                 addItem.group = groupid;
                 addItem.item = theOrder[i].name;
-                addItem.restaurant = restaurant;
                 addItem.balance = 10;
                 addItem.paid = false;
 
@@ -32,8 +31,6 @@ var Order = {
                     }
                     console.log("**** Item added to Database *****");
                     console.log(addItem);
-
-                    // callback(addItem);
                 });
             };
 
@@ -48,12 +45,12 @@ var Order = {
         if (!user) {
             console.log('not logged in');
         } else {
-            var _id = user._id,
-                group = user.group;
-            var value = data.value;
+            var group = user.group;
+            var value = data.value,
+                userid = data.userid;
 
 
-            Orders.remove({ userid: _id, group: group.id, item: value }, function (err) {
+            Orders.remove({ userid: userid, group: group.id, item: value }, function (err) {
                 if (err) return handleError(err);
                 callback();
             });
@@ -66,6 +63,15 @@ var Order = {
                 console.log(err);
             };
             callback(res);
+        });
+    },
+
+    getMyOrders: function getMyOrders(id, cb) {
+        Orders.find({ 'userid': id }, function (err, res) {
+            if (err) {
+                console.log(err);
+            };
+            cb(res);
         });
     }
 };

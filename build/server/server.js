@@ -43,7 +43,9 @@ if (process.env.MONGODB_URI) {
     useMongoClient: true
   });
 } else {
-  _mongoose2.default.connect('mongodb://localhost/lunchy');
+  _mongoose2.default.connect('mongodb://localhost/lunchy', {
+    useMongoClient: true
+  });
 }
 
 //passport config

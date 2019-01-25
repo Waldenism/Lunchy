@@ -14,25 +14,26 @@ router.use("/scraper", function (req, res) {
 
 // Add Item route
 router.post("/add", function (req, res) {
-    // console.log(req.user)
+    if (!req.user) {
+        res.send('You are not logged in!');
+    }
 
     var _req$user = req.user,
         _id = _req$user._id,
-        group = _req$user.group;
-    // console.log(req.user)
-
+        group = _req$user.group,
+        name = _req$user.name;
     var theOrder = req.body.theOrder;
 
 
     var userOrder = {
         userid: _id,
+        name: name,
         groupid: group.id,
         theOrder: theOrder
     };
 
-    order.newOrder(userOrder, function (data) {
-        res.send(data);
-    });
+    order.newOrder(userOrder);
+    res.send(userOrder);
 });
 
 //delete
@@ -42,11 +43,6 @@ router.post("/delete", function (req, res) {
         order.getOrders(req.user.group.id, function (data) {
             res.send(data);
         });
-
-        // if (req.user.group.admin) {
-
-
-        // }
     });
 });
 

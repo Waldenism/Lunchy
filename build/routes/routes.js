@@ -15,8 +15,6 @@ var group = require("../config/groups");
 
 //homepage
 router.get('/', function (req, res) {
-  // Display flash message, if any
-
   var body = req.body,
       user = req.user;
 
