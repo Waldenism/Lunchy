@@ -5,7 +5,10 @@ var Schema = mongoose.Schema;
 
 var OrderSchema = new Schema({
     userid: String,
-    order: Number,
+    name: {
+        first: String,
+        last: String
+    },
     group: String,
     date: {
         type: Date,

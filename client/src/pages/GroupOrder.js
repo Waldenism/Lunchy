@@ -14,6 +14,7 @@ class GroupOrder extends React.Component {
   }
 
   //get all orders for group
+
   componentDidMount() {
     axios.get('/api/user/group-orders')
     .then((res) => {
@@ -38,10 +39,17 @@ class GroupOrder extends React.Component {
   }
 
   render() {
+
+    let orderStatement = this.state.orders[0] ?
+      `${ this.state.group }'s order for ${ this.state.date }` :
+      `No orders have been placed for ${ this.state.group }`
+
     return(
       <div className='pageWrap main'>
         <div className=''>
+
           <h2 className='pageTitle'> { this.state.group }'s order</h2>
+
         </div>
 
         <div className='ulContainer'>
