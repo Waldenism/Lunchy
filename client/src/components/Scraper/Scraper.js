@@ -29,7 +29,7 @@ class Scraper extends React.Component {
 
   componentWillMount() {
     this.setState({
-      restaurant: 'subway'
+      restaurant: 'dairyqueen'
     });
   }
 
@@ -150,8 +150,8 @@ class Scraper extends React.Component {
     return (
       <div>
         <select value={this.state.restaurant} onChange={this.handleChange} className="menu-selection">
-          <option value='subway'>Subway</option>
           <option value='dairyqueen'>Dairy Queen</option>
+          <option value='subway'>Subway</option>
         </select>
 
         <button onClick={() => this.handleModal() } >Submit</button>
