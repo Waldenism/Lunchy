@@ -7,9 +7,7 @@ var GroupSchema = new Schema ({
     datecreated:  {
         type: Date,
         default: Date.now
-    },
-    groupbalance: Number,
-    paid: Boolean
+    }
 });
 
 var Group = mongoose.model('Group', GroupSchema);

@@ -1,67 +1,105 @@
-
 //dependencies
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from "react-router-dom"
+import axios from 'axios'
 
 //style sheet
 import './assets/App.css'
 
-//pages
-import Home from './pages/Home'
-import Balance from './pages/Balance'
-import GroupOrder from './pages/GroupOrder'
-import AccountSettings from './pages/AccountSettings'
-
-//sidebar
+//components
 import Hamburger from './components/Hamburger'
 
-class App extends Component {
+//pages
+import AccountSettings from './pages/AccountSettings'
+import GroupOrder from './pages/GroupOrder'
+import Home from './pages/Home'
+import MyOrders from './pages/MyOrders'
 
-  constructor(props) {
+class App extends Component {
+  constructor (props) {
     super(props)
     this.state = {
-      user: null,
-      loggedIn: false,
-      menu: []
+      menuOpen: false,
+      isLoggedIn: false,
+      admin: false,
+      user: {}
     }
-
-    this.handleLogIn = this.handleLogIn.bind(this)
+    this.handleLogin = this.handleLogin.bind(this);
+    this.openMenu = this.openMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
   }
 
-  handleSignUp(user) {
-    this.setState({
-      user,
-      loggedIn: true
+  //checks login status before rendering
+  componentDidMount() {
+    this.handleLogin();
+  }
+
+  //Sets state for login status
+  handleLogin() {
+    axios.get('/api/user/current').then(res => {
+
+      //if no user logged in, initialize state
+      if (!res.data.username) {
+        this.setState({
+          isLoggedIn: false,
+          admin: false,
+          user: {}
+        })
+
+      //if logged in, set state based on login information
+      } else {
+        let { group, username } = res.data;
+
+        if (username) {
+          this.setState({
+            menuOpen: false,
+            isLoggedIn: true,
+            user: res.data,
+          })
+
+          if (group.admin) {
+            this.setState({
+              admin: true
+            })
+          }
+        }
+      }
     })
   }
 
-  handleLogIn(user) {
-    this.setState({
-      user,
-      loggedIn: true
-    })
+  //sets hamburger sidebar to open
+  openMenu(){
+    this.setState({ menuOpen: true })
   }
+  //sets hamburger sidebar to closed
+  closeMenu(){
+    this.setState({ menuOpen: false })
+  }
+
 
   render() {
-
-    let { loggedIn, user } = this.state
-
     return (
-      <Router>
+      <Router >
         <div className='toot'>
 
           <div className='header'>
             <div className=''>
               <h1> LunchTime </h1>
-              <Hamburger />
+
+              <Hamburger
+                {...this.state}
+                handleLogin={ this.handleLogin }
+                closeMenu={ this.closeMenu }
+                openMenu={ this.openMenu }
+              />
             </div>
           </div>
 
           <div className='main'>
-            <Route exact path="/" component={Home} />
-            <Route path="/balance" component={Balance} />
-            <Route path="/group-order" component={GroupOrder} />
-            <Route path="/account-settings" component={AccountSettings} />
+            <Route path="/account-settings" render={() => (<AccountSettings user={this.state.user} />)} />
+            <Route path="/group-order" render={() => (<GroupOrder user={this.state.user} />)} />
+            <Route exact path="/" render={() => (<Home user={this.state.user} />)} />
+            <Route path="/my-orders" render={() => (<MyOrders user={this.state.user} />)} />
           </div>
 
         </div>

@@ -1,9 +1,11 @@
-
+//stylesheet
 import './Scraper.css'
 
+//dependencies
 import React from 'react'
 import axios from 'axios'
 
+//components
 import Modal from '../Modal/Modal'
 
 
@@ -19,7 +21,6 @@ class Scraper extends React.Component {
       isModalOpen: false,
       isLoggedIn: false
     }
-
     this.handleChange = this.handleChange.bind(this)
     this.toggleItem = this.toggleItem.bind(this)
     this.clearSelection = this.clearSelection.bind(this)
@@ -33,12 +34,12 @@ class Scraper extends React.Component {
     });
   }
 
+  //pull menu
   componentDidMount() {
     this.menus();
   }
 
-
-//get menu from scraper
+  //get menu using scraper
   menus() {
     let { restaurant } = this.state
 
@@ -48,18 +49,18 @@ class Scraper extends React.Component {
         menu: res.data
       })
     })
-    .catch((er) => {
-      console.log(er)
+    .catch((err) => {
+      console.debug(err)
     })
   }
 
 
-//change scraped menu based on selection
-  handleChange(event) {
-    event.preventDefault()
+  //change scraped menu based on selection
+  handleChange(e) {
+    e.preventDefault()
 
     const { toggled, restaurant } = this.state;
-    const { value } = event.target;
+    const { value } = e.target;
 
     this.setState({
       restaurant: value
@@ -73,14 +74,12 @@ class Scraper extends React.Component {
         cart: []
       })
     })
-    .catch((er) => {
-      console.log(er)
+    .catch((err) => {
+      console.ldebug(err)
     })
   };
 
-
-
-//change color of items selected
+  //change color of item if selected
   toggleItem(index, itemName, event) {
     const { toggled, restaurant } = this.state
 
@@ -91,30 +90,7 @@ class Scraper extends React.Component {
     })
   };
 
-  // deleteItem(event) {
-  //   event.preventDefault()
-
-  //   const {value} = event.target.item;
-
-  //   axios.post('/api/delete', {value})
-  //   .then(() => {
-  //     for (let i=0; i<this.state.cart.length; i++) {
-  //       let { balance, item } = this.state.cart[i]
-
-  //       if (item === value) {
-  //         this.state.cart.splice(i, 1);
-  //         this.setState({ cart: this.state.cart })
-  //         this.setState({ balance: this.state.balance - balance })
-  //       }
-  //     }
-  //   })
-  //   .catch((er) => {
-  //     console.log(er)
-  //   })
-  // };
-
-
-//clear cart, balance, and close modal
+  //clear cart, balance, and close modal
   clearSelection() {
     this.setState({
       isModalOpen: false,
@@ -124,7 +100,7 @@ class Scraper extends React.Component {
   }
 
 
-//get toggled info and send to modal
+  //get toggled info and send to modal
   handleModal() {
     axios.get('/api/user/current').then(res => {
       if (res.data.username) {
